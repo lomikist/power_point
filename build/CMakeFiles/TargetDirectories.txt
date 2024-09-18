@@ -1,0 +1,3 @@
+/home/weasel/Desktop/repos/power_point/build/CMakeFiles/power.dir
+/home/weasel/Desktop/repos/power_point/build/CMakeFiles/edit_cache.dir
+/home/weasel/Desktop/repos/power_point/build/CMakeFiles/rebuild_cache.dir

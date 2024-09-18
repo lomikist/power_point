@@ -1,7 +1,9 @@
-#include "inc/parser.hpp"
+#include "controller.hpp"
+#include <memory>
+
 int main (int argc, char *argv[])
 {
-    Parser *parser = new Parser();
-    parser->start();
+    std::shared_ptr<Controller> controller= std::make_shared<Controller>();
+    controller->start();
     return 0;
 }

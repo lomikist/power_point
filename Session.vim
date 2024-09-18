@@ -13,13 +13,14 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +7 ~/Desktop/repos/power_point/main.cpp
-badd +18 inc/parser.hpp
-badd +26 ~/Desktop/repos/power_point/src/parser.cpp
+badd +18 ~/Desktop/repos/power_point/cli/inc/parser.hpp
+badd +9 ~/Desktop/repos/power_point/cli/src/factory/add_shape_command.cpp
+badd +7 ~/Desktop/repos/power_point/.clangd
 argglobal
 %argdel
-edit ~/Desktop/repos/power_point/src/parser.cpp
+edit ~/Desktop/repos/power_point/cli/src/factory/add_shape_command.cpp
 argglobal
+balt ~/Desktop/repos/power_point/cli/inc/parser.hpp
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -30,12 +31,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 20 - ((19 * winheight(0) + 17) / 35)
+let s:l = 1 - ((0 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 20
-normal! 05|
+keepjumps 1
+normal! 014|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -49,7 +50,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 let g:this_session = v:this_session
 let g:this_obsession = v:this_session
 doautoall SessionLoadPost

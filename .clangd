@@ -1,0 +1,8 @@
+CompileFlags:
+  Add: 
+    - -Icli/inc
+    - -Icli/inc/factory
+    - -Icontroller/inc
+    - -Imodel/inc
+    - -Imodel/inc/factory
+    - -Iview/inc
