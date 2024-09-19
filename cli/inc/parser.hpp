@@ -9,7 +9,7 @@
 #include <iostream>
 #include "add_slide_command.hpp"
 #include "command_factory.hpp"
-namespace CLI {
+namespace cli{
 class Parser
 {
 public:

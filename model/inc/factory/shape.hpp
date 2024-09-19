@@ -1,6 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
-namespace Model {
+namespace model
+{
 class Shape
 {
 

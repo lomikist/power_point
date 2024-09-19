@@ -13,14 +13,22 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +18 ~/Desktop/repos/power_point/cli/inc/parser.hpp
-badd +9 ~/Desktop/repos/power_point/cli/src/factory/add_shape_command.cpp
-badd +7 ~/Desktop/repos/power_point/.clangd
+badd +1 ~/Desktop/repos/power_point/CLI/inc/parser.hpp
+badd +1 ~/Desktop/repos/power_point/CLI/src/factory/add_shape_command.cpp
+badd +5 ~/Desktop/repos/power_point/controller/inc/controller.hpp
+badd +8 ~/Desktop/repos/power_point/cli/src/parser.cpp
+badd +2 ~/Desktop/repos/power_point/cli/inc/parser.hpp
+badd +1 ~/Desktop/repos/power_point/CMakeLists.txt
+badd +1 ~/Desktop/repos/power_point/model/inc/model.hpp
+badd +1 ~/Desktop/repos/power_point/model/inc/factory/circle_shape.hpp
+badd +7 ~/Desktop/repos/power_point/model/inc/factory/shape_factory.hpp
+badd +2 ~/Desktop/repos/power_point/model/inc/factory/shape.hpp
+badd +1 ~/Desktop/repos/power_point/model/inc/factory/rect_shape.hpp
 argglobal
 %argdel
-edit ~/Desktop/repos/power_point/cli/src/factory/add_shape_command.cpp
+edit ~/Desktop/repos/power_point/model/inc/factory/shape_factory.hpp
 argglobal
-balt ~/Desktop/repos/power_point/cli/inc/parser.hpp
+balt ~/Desktop/repos/power_point/model/inc/factory/circle_shape.hpp
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -31,12 +39,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 17) / 35)
+let s:l = 7 - ((6 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 014|
+keepjumps 7
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

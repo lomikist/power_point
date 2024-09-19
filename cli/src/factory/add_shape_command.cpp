@@ -20,7 +20,7 @@ void AddShapeCommand::execute(const std::vector<std::string>& tokens)
             _opotions[tokens[0]](args);
         } else 
         {
-            std::cout << "shape not added" << std::endl;
+            std::cout << "SHAPE NOT FOUND: "<< tokens[0] << std::endl;
         }
     }
 };

@@ -17,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/power.dir/model/src/factory/rect_shape.cpp.o.d"
   "CMakeFiles/power.dir/model/src/factory/shape_factory.cpp.o"
   "CMakeFiles/power.dir/model/src/factory/shape_factory.cpp.o.d"
+  "CMakeFiles/power.dir/model/src/model.cpp.o"
+  "CMakeFiles/power.dir/model/src/model.cpp.o.d"
   "power"
   "power.pdb"
 )

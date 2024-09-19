@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/weasel/Desktop/repos/power_point/model/src/factory/circle_shape.cpp" "CMakeFiles/power.dir/model/src/factory/circle_shape.cpp.o" "gcc" "CMakeFiles/power.dir/model/src/factory/circle_shape.cpp.o.d"
   "/home/weasel/Desktop/repos/power_point/model/src/factory/rect_shape.cpp" "CMakeFiles/power.dir/model/src/factory/rect_shape.cpp.o" "gcc" "CMakeFiles/power.dir/model/src/factory/rect_shape.cpp.o.d"
   "/home/weasel/Desktop/repos/power_point/model/src/factory/shape_factory.cpp" "CMakeFiles/power.dir/model/src/factory/shape_factory.cpp.o" "gcc" "CMakeFiles/power.dir/model/src/factory/shape_factory.cpp.o.d"
+  "/home/weasel/Desktop/repos/power_point/model/src/model.cpp" "CMakeFiles/power.dir/model/src/model.cpp.o" "gcc" "CMakeFiles/power.dir/model/src/model.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

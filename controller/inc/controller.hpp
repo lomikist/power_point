@@ -2,6 +2,8 @@
 #define CONTROLLER
 #include "parser.hpp"
 #include <memory>
+namespace core
+{
 class Controller 
 {
 public:
@@ -13,7 +15,7 @@ public:
     ~Controller ();
     void start();
 private:
-    std::shared_ptr<CLI::Parser> _parser; 
+    std::shared_ptr<cli::Parser> _parser; 
 };
-
+};
 #endif // !CONTROLLER

@@ -1,8 +1,9 @@
 #include "controller.hpp"
+using namespace core;
 
 Controller::Controller()
 {
-    _parser = std::make_shared<CLI::Parser>();
+    _parser = std::make_shared<cli::Parser>();
 };
 
 Controller::~Controller(){

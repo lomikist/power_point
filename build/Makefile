@@ -345,6 +345,30 @@ model/src/factory/shape_factory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/power.dir/build.make CMakeFiles/power.dir/model/src/factory/shape_factory.cpp.s
 .PHONY : model/src/factory/shape_factory.cpp.s
 
+model/src/model.o: model/src/model.cpp.o
+.PHONY : model/src/model.o
+
+# target to build an object file
+model/src/model.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/power.dir/build.make CMakeFiles/power.dir/model/src/model.cpp.o
+.PHONY : model/src/model.cpp.o
+
+model/src/model.i: model/src/model.cpp.i
+.PHONY : model/src/model.i
+
+# target to preprocess a source file
+model/src/model.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/power.dir/build.make CMakeFiles/power.dir/model/src/model.cpp.i
+.PHONY : model/src/model.cpp.i
+
+model/src/model.s: model/src/model.cpp.s
+.PHONY : model/src/model.s
+
+# target to generate assembly for a file
+model/src/model.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/power.dir/build.make CMakeFiles/power.dir/model/src/model.cpp.s
+.PHONY : model/src/model.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -381,6 +405,9 @@ help:
 	@echo "... model/src/factory/shape_factory.o"
 	@echo "... model/src/factory/shape_factory.i"
 	@echo "... model/src/factory/shape_factory.s"
+	@echo "... model/src/model.o"
+	@echo "... model/src/model.i"
+	@echo "... model/src/model.s"
 .PHONY : help
 
 
