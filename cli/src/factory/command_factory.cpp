@@ -1,7 +1,7 @@
 #include "command_factory.hpp"
 #include "command.hpp"
 #include <string>
-
+using namespace cli;
 void CommandFactory::register_func(std::string command, std::string subcommand, CommandCreatorFun creator)
 {
     commandMap[command + " " + subcommand] = creator;

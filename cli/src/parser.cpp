@@ -1,10 +1,12 @@
 #include "parser.hpp"
 #include "add_shape_command.hpp"
 #include "add_slide_command.hpp"
+#include "observer.hpp"
 #include <algorithm>
 #include <iostream>
 #include <memory>
 #include <ostream>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -16,8 +18,12 @@ bool isNumber(const std::string& s) {
 
 Parser::Parser()
 {
-    _command_creator.register_func("add", "-slide", [](){return std::make_shared<AddSlideCommand>();});
-    _command_creator.register_func("add", "-shape", [](){return std::make_shared<AddShapeCommand>();});
+    _command_creator.register_func("add", "-slide", [](){
+        return std::make_shared<AddSlideCommand>();
+    });
+    _command_creator.register_func("add", "-shape", [](){
+        return std::make_shared<AddShapeCommand>();
+    });
 };
 
 void Parser::start(std::string user_input)
@@ -30,11 +36,38 @@ void Parser::start(std::string user_input)
         if (cmd)
         {
             std::vector<std::string> args(_tokens.begin() + 2, _tokens.end());
-            cmd->execute(args);
+            try {
+                cmd->execute(args);
+                notify_observers(cmd);
+            } catch(std::exception& e) {
+                std::cout << e.what() << std::endl; 
+            }
         }
         else 
-            std::cout << "invalid command\n";
+            std::cout << "CLI: INVALID ARGUMENT:" << std::endl;
     }
+};
+
+void Parser::notify_observers(const std::shared_ptr<Command>& cmd)
+{
+    for (auto&& observer : _observers)
+    {
+        observer->update_cli(cmd);
+    } 
+};
+void Parser::add_observer(std::shared_ptr<cli::Observer> obj)
+{
+    _observers.push_back(obj); 
+};
+void Parser::remove_observer(std::shared_ptr<cli::Observer> remove_ob)
+{
+    _observers.erase(std::remove_if(
+        _observers.begin(),
+        _observers.end(),
+        [&remove_ob](const std::shared_ptr<cli::Observer>& obj){
+            return obj == remove_ob;
+        }),
+        _observers.end());
 };
 
 std::vector<std::string> Parser::split(const std::string& input, char ch)

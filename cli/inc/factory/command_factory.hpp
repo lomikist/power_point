@@ -7,7 +7,8 @@
 #include "add_shape_command.hpp"
 #include "add_slide_command.hpp"
 #include "command.hpp"
-
+namespace cli
+{
 class CommandFactory
 {
 public:
@@ -17,4 +18,5 @@ public:
 private:
     std::map<std::string, CommandCreatorFun> commandMap;
 };
+}
 #endif // !COMMAND_FACTORY
