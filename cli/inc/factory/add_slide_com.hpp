@@ -1,17 +1,17 @@
-#ifndef ADD_SLIDE_COMMAND_HPP
-#define ADD_SLIDE_COMMAND_HPP
+#ifndef ADD_SLIDE_COM_HPP
+#define ADD_SLIDE_COM_HPP
 #include <map>
 #include <vector>
 #include <functional>
-#include "command.hpp"
+#include "icommand.hpp"
 
 namespace cli 
 {
-class AddSlideCommand : public Command
+class AddSlideCom : public ICommand
 {
 public:
-    AddSlideCommand();
-    ~AddSlideCommand() = default;
+    AddSlideCom();
+    ~AddSlideCom() = default;
     void execute(const std::vector<std::string>& tokens) override; 
 private:
     void add_title(const std::vector<std::string>& args);
@@ -20,4 +20,5 @@ private:
     std::map<std::string, std::function<void(const std::vector<std::string>&)>> _options;
 };
 }
-#endif // !ADD_SLIDE_COMMAND_HPP
+#endif // !ADD_SLIDE_COM_HPP
+

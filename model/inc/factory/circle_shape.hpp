@@ -5,7 +5,7 @@ namespace model
 {
 class CircleShape : public Shape
 {
-
+    void print() override;
 };
 };
 #endif //  CIRCLE_SHAPE_HPP

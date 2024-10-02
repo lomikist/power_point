@@ -8,6 +8,7 @@ protected:
 public:
     Shape(int x = 0, int y = 0) : x(x), y(y) {}
     virtual ~Shape() = default;
+    virtual void print() = 0; 
     int getX() const { return x; }
     int getY() const { return y; }
     void setPosition(int x, int y) {

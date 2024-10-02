@@ -11,6 +11,7 @@ private:
 public:
     RectShape(int x, int y, int width, int height)
         : Shape(x, y), width(width), height(height) {}
+    void print() override;
 };
 };
 #endif //  RECT_SHAPE_HPP

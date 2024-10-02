@@ -1,4 +1,4 @@
-#include "add_slide_command.hpp"
+#include "add_slide_com.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -6,21 +6,22 @@
 
 using namespace cli;
 
-AddSlideCommand::AddSlideCommand()
+AddSlideCom::AddSlideCom()
 {
     register_options();  
 };
-void AddSlideCommand::register_options()
+void AddSlideCom::register_options()
 {
     _options["-n"] = [this](const std::vector<std::string>& args){
-        this->add_title(args); 
+        add_title(args); 
     };
     _options["-i"] = [this](const std::vector<std::string>& args)
     {
-        this->add_index(args);
+        add_index(args);
     };
 };
-void AddSlideCommand::execute(const std::vector<std::string>& tokens)
+
+void AddSlideCom::execute(const std::vector<std::string>& tokens)
 {
     for (int i = 0; i < tokens.size(); ++i)
     {
@@ -28,21 +29,20 @@ void AddSlideCommand::execute(const std::vector<std::string>& tokens)
         {
             std::vector<std::string> args(tokens.begin() + i, tokens.end());
             _options[tokens[i]](args);
-            i++; // for jump over arg value
+            i++;
         } else 
         {
-            std::runtime_error("CLI: OPTION NOT FOUND:" + tokens[i]);
+            throw std::runtime_error("CLI: OPTION NOT FOUND:" + tokens[i]);
         }
     }    
 };
 
-void AddSlideCommand::add_title(const std::vector<std::string>& args)
+void AddSlideCom::add_title(const std::vector<std::string>& args)
 {
-    _args["-n"] = args.at(1);
+    _args_to_pass["-n"] = args.at(1);
 };
 
-void AddSlideCommand::add_index(const std::vector<std::string>& args)
+void AddSlideCom::add_index(const std::vector<std::string>& args)
 {
-    _args["-i"] = args.at(1);
+    _args_to_pass["-i"] = args.at(1);
 };
-
