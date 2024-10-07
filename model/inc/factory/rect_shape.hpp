@@ -1,17 +1,17 @@
 #ifndef RECT_SHAPE_HPP
 #define RECT_SHAPE_HPP
 #include "shape.hpp"
+#include <iostream>
 namespace model
 {
-class RectShape : public Shape
+class RectShape : public IShape
 {
 private:
-    int width, height;
+    int _width, _height;
 
 public:
-    RectShape(int x, int y, int width, int height)
-        : Shape(x, y), width(width), height(height) {}
-    void print() override;
+    RectShape(int x, int y, int width, int height);
+    void print(std::ostream& os) override;
 };
 };
 #endif //  RECT_SHAPE_HPP

@@ -1,4 +1,6 @@
 #include "add_slide_com.hpp"
+#include "editor.hpp"
+#include "parser.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -12,23 +14,32 @@ AddSlideCom::AddSlideCom()
 };
 void AddSlideCom::register_options()
 {
-    _options["-n"] = [this](const std::vector<std::string>& args){
+    _options["-n"] = [this](const std::string& args){
         add_title(args); 
     };
-    _options["-i"] = [this](const std::vector<std::string>& args)
+    _options["-i"] = [this](const std::string& args)
     {
         add_index(args);
     };
 };
 
-void AddSlideCom::execute(const std::vector<std::string>& tokens)
+void AddSlideCom::execute()
+{
+    int index = std::get<int>(_args["-i"]);
+    std::string name = std::get<std::string>(_args["-n"]);
+
+    core::Editor& editot = core::Editor::get_instance();
+    editot.add_slide(index, name);
+};
+
+void AddSlideCom::process_args(const std::vector<std::string>& tokens)
 {
     for (int i = 0; i < tokens.size(); ++i)
     {
         if (_options.find(tokens[i]) != _options.end())
         {
             std::vector<std::string> args(tokens.begin() + i, tokens.end());
-            _options[tokens[i]](args);
+            _options[tokens[i]](tokens[i + 1]);
             i++;
         } else 
         {
@@ -37,12 +48,13 @@ void AddSlideCom::execute(const std::vector<std::string>& tokens)
     }    
 };
 
-void AddSlideCom::add_title(const std::vector<std::string>& args)
+void AddSlideCom::add_title(const std::string& args)
 {
-    _args_to_pass["-n"] = args.at(1);
+    _args["-n"] = args;
 };
 
-void AddSlideCom::add_index(const std::vector<std::string>& args)
+void AddSlideCom::add_index(const std::string& args)
 {
-    _args_to_pass["-i"] = args.at(1);
+    int index = Parser::str_to_int(args);
+    _args["-i"] = index;
 };

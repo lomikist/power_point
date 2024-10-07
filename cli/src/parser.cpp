@@ -80,7 +80,7 @@ std::shared_ptr<ICommand> Parser::validate_semantics()
     }
     if (cmd)
     {
-        cmd->execute(argumens);
+        cmd->process_args(argumens);
         return cmd;
     } else 
         throw std::runtime_error("CLI: COMMAND " + _str_tokens[0] + " NOT FOUND");
@@ -181,3 +181,11 @@ std::vector<std::string> Parser::split(const std::string& input, char delimiter)
     return result;
 }
 
+int Parser::str_to_int(const std::string& str) {
+    // Check if the entire string is numeric (optional support for negative sign)
+    if (str.empty() || (!std::all_of(str.begin(), str.end(), ::isdigit) && 
+        !(str[0] == '-' && std::all_of(str.begin() + 1, str.end(), ::isdigit)))) {
+        throw std::runtime_error("CORE: Can't convert" + str + " to int.");
+    }
+    return std::stoi(str);
+}

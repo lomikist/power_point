@@ -1,31 +1,32 @@
 #ifndef SLIDE_HPP 
 #define SLIDE_HPP 
 #include <memory>
+#include <ostream>
 #include <vector>
 #include <string>
 #include "shape.hpp"
+#include <iostream>
 namespace model
 {
 class Slide 
 {
 public:
-    Slide(const std::string& title, int index)
-    {
-        _title = title;
-        _index = index;
-    };
+    Slide(const std::string& title, int index);
     int _index;
     std::string _title;
-    std::vector<std::shared_ptr<Shape>> _shapes;
-    void add_shape(std::shared_ptr<Shape> shape)
+    std::vector<std::shared_ptr<IShape>> _shapes;
+    void add_shape(std::shared_ptr<IShape> shape);
+
+    friend std::ostream& operator<<(std::ostream& os, const Slide& slide)
     {
-        _shapes.push_back(shape);
+        os << "Slide title: " << slide._title << ", Index: " << slide._index << std::endl;
+        for (auto&& shape : slide._shapes) {
+            shape->print(os);
+        }
+        return os;
     };
 private:
-    void set_index(int index)
-    {
-        _index = index;
-    }
+    void set_index(int index);
 };
 }
 

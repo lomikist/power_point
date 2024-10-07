@@ -1,19 +1,20 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
+#include <ostream>
 namespace model
 {
-class Shape {
+class IShape {
 protected:
-    int x, y;  // Common position for all shapes
+    int _x, _y;
 public:
-    Shape(int x = 0, int y = 0) : x(x), y(y) {}
-    virtual ~Shape() = default;
-    virtual void print() = 0; 
-    int getX() const { return x; }
-    int getY() const { return y; }
+    IShape(int x = 0, int y = 0) : _x(x), _y(y) {}
+    virtual ~IShape() = default;
+    virtual void print(std::ostream& os) = 0; 
+    int getX() const { return _x; }
+    int getY() const { return _y; }
     void setPosition(int x, int y) {
-        this->x = x;
-        this->y = y;
+        _x = x;
+        _y = y;
     }
 };
 

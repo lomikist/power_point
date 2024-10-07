@@ -1,9 +1,12 @@
 #include "show_slide_com.hpp"
+#include "parser.hpp"
+#include "vizualize.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
-
+#include <fstream>
+#include <ostream>
 using namespace cli;
 
 ShowSlideCom::ShowSlideCom()
@@ -14,11 +17,34 @@ void ShowSlideCom::register_options()
 {
     _options["-i"] = [this](const std::vector<std::string>& args)
     {
-        add_index(args);
+        add_index(args[1]);
+    };
+    _options["-t"] = [this](const std::vector<std::string>& args)
+    {
+        add_type(args[1]);
     };
 };
 
-void ShowSlideCom::execute(const std::vector<std::string>& tokens)
+void ShowSlideCom::execute()
+{
+    int index = std::get<int>(_args["-i"]);
+    std::string type = std::get<std::string>(_args["-t"]);
+
+    std::cout << "showing slide" << index << "\n";
+
+    core::Vizualizer& vizualizer = core::Vizualizer::get_instance();
+
+    if (type == "cmd")
+        vizualizer.print(std::cout, index);
+    else if (type == "file")
+    {
+        std::ofstream outfile;
+        outfile.open("../out.txt", std::ios::out | std::ios::trunc);
+        vizualizer.print(outfile, index);
+    }
+};
+
+void ShowSlideCom::process_args(const std::vector<std::string>& tokens)
 {
     for (int i = 0; i < tokens.size(); ++i)
     {
@@ -35,8 +61,14 @@ void ShowSlideCom::execute(const std::vector<std::string>& tokens)
     }    
 };
 
-void ShowSlideCom::add_index(const std::vector<std::string>& args)
+void ShowSlideCom::add_index(const std::string& arg)
 {
-    _args_to_pass["-i"] = args.at(1);
+    int index = cli::Parser::str_to_int(arg); 
+    _args["-i"] = index;
+}
+
+void ShowSlideCom::add_type(const std::string& arg)
+{
+    _args["-t"] = arg;
 }
 

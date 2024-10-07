@@ -12,9 +12,11 @@ class ShowSlideCom : public ICommand
 public:
     ShowSlideCom();
     ~ShowSlideCom() = default;
-    void execute(const std::vector<std::string>& tokens) override; 
+    void process_args(const std::vector<std::string>& tokens) override; 
+    void execute() override; 
 private:
-    void add_index(const std::vector<std::string>& args);
+    void add_index(const std::string& arg);
+    void add_type(const std::string& arg);
     void register_options();
     std::map<std::string, std::function<void(const std::vector<std::string>&)>> _options;
 };

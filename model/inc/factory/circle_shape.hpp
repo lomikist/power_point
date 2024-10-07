@@ -3,9 +3,13 @@
 #include "shape.hpp"
 namespace model
 {
-class CircleShape : public Shape
+class CircleShape : public IShape
 {
-    void print() override;
+private:
+    int _radius; 
+public:
+    void print(std::ostream& os) override;
+    CircleShape(int x, int y, int r);
 };
 };
 #endif //  CIRCLE_SHAPE_HPP

@@ -1,0 +1,2 @@
+Slide title: hello, Index: 23
+x - 23 y - 23 w - 30 h - 30

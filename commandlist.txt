@@ -1,0 +1,7 @@
+add <slide> -i 23 -n hello
+add <shape> -t rect -i 0 -x 23 -y 23 -h 30 -w 30
+add <shape> -t circle -i 0 -x 40 -y 40 -h 30 -w 30 
+add <slide> -i 23 -n another 
+shofw <slide> -i 0
+add <shape> -t circle -i 0 -x 40 -y 40 -h 30 -w 30 
+add <shape> -t circle -i 0 -x 40 -y 40 -h 30 -w 30 

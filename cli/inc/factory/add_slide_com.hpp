@@ -12,12 +12,13 @@ class AddSlideCom : public ICommand
 public:
     AddSlideCom();
     ~AddSlideCom() = default;
-    void execute(const std::vector<std::string>& tokens) override; 
+    void process_args(const std::vector<std::string>& tokens) override; 
+    void execute() override; 
 private:
-    void add_title(const std::vector<std::string>& args);
-    void add_index(const std::vector<std::string>& args);
+    void add_title(const std::string& args);
+    void add_index(const std::string& args);
     void register_options();
-    std::map<std::string, std::function<void(const std::vector<std::string>&)>> _options;
+    std::map<std::string, std::function<void(const std::string& str)>> _options;
 };
 }
 #endif // !ADD_SLIDE_COM_HPP

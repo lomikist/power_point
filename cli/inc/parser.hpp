@@ -25,6 +25,7 @@ public:
     ~Parser();
     std::shared_ptr<ICommand>   parse(std::istream& is);
     std::vector<TokenType>      tokenize(const std::string& str);
+    static int                  str_to_int(const std::string& str);
 private:   
     void                        validate_tokens();
     std::shared_ptr<ICommand>   validate_semantics();
