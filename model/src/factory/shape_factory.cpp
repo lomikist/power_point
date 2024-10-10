@@ -11,12 +11,14 @@ std::shared_ptr<IShape> ShapeFactory::create_shape(const std::unordered_map<std:
     std::string type = std::get<std::string>(options.at("-t"));
     int         x = std::get<int>(options.at("-x"));
     int         y = std::get<int>(options.at("-y"));
+
     if (type == "rect") 
     {
         int w = std::get<int>(options.at("-w"));
         int h = std::get<int>(options.at("-h"));
         return std::make_shared<model::RectShape>(x, y, w, h);
-    } else if (type == "circle") 
+    }
+    else if (type == "circle") 
     {
         int r = std::get<int>(options.at("-r"));
         return std::make_shared<model::CircleShape>(x, y, r);

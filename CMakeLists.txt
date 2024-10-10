@@ -5,7 +5,6 @@ project(power)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Include directories (recursive for headers)

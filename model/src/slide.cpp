@@ -5,7 +5,7 @@ namespace model
 {
 Slide::Slide(const std::string& title, int index)
 {
-    std::cout << "slide ctor";
+    std::cout << "slide cretaed\n";
     _title = title;
     _index = index;
 };

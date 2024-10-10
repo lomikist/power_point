@@ -16,7 +16,7 @@ private:
 public:
     ~Vizualizer();
     static Vizualizer& get_instance();
-    void print(std::ostream& os, int index);
+    void print_slide(std::ostream& os, int index);
     void set_model(std::shared_ptr<model::Model> model); 
 };
 }

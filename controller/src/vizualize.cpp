@@ -23,7 +23,7 @@ void Vizualizer::set_model(std::shared_ptr<model::Model> model)
 };
 
 
-void Vizualizer::print(std::ostream& os, int index)
+void Vizualizer::print_slide(std::ostream& os, int index)
 {
     os << *_model->_slides[index];
 };

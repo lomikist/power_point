@@ -12,5 +12,5 @@ void RectShape::print(std::ostream& os)
 
 RectShape::RectShape(int x, int y, int width, int height)
     : IShape(x, y), _width(width), _height(height) {
-    std::cout << "shape created (implement it)";
+    std::cout << "shape created (implement it)\n";
 }

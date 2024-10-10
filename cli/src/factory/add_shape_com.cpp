@@ -22,6 +22,7 @@ void AddShapeCom::register_options()
     _options["-y"] = [this](const std::string& args){add_y(args);};
     _options["-h"] = [this](const std::string& args){add_h(args);};
     _options["-w"] = [this](const std::string& args){add_w(args);};
+    _options["-r"] = [this](const std::string& args){add_radius(args);};
     _options["-c"] = [this](const std::string& args){add_color(args);};
 };
 
@@ -81,17 +82,20 @@ void AddShapeCom::add_index(const std::string& args)
     _args["-i"] = index;
 };
 
+void AddShapeCom::add_radius(const std::string& args)
+{
+    int index = Parser::str_to_int(args);
+    _args["-r"] = index;
+};
+
 void AddShapeCom::execute()
-{   
+{
+    if (_args.find("-i") == _args.end())
+        throw std::runtime_error("CLI: Enter a valid slide index with -i");
+
     core::Editor& editor = core::Editor::get_instance();
     editor.add_shape(_args);
 };
-
-
-
-
-
-
 
 
 

@@ -2,12 +2,14 @@
 #include "add_slide_com.hpp"
 #include "add_shape_com.hpp"
 #include "show_slide_com.hpp"
+#include "run_com.hpp"
 #include "icommand.hpp"
 #include <cctype>
 #include <cmath>
 #include <cstddef>
 #include <istream>
 #include <memory>
+#include <ostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -25,7 +27,9 @@ Parser::Parser()
     _command_creator.register_func("show", "<slide>", [](){
         return std::make_shared<ShowSlideCom>();
     });
-
+    _command_creator.register_func("run", "", [](){
+        return std::make_shared<RunCom>();
+    });
 };
 
 Parser::~Parser()
@@ -35,8 +39,9 @@ Parser::~Parser()
 std::shared_ptr<ICommand> Parser::parse(std::istream& is)
 {
     std::string str;
+    std::getline(is, str);
 
-    while (std::getline(is, str))
+    if (!str.empty())
     {
         _str_tokens.clear();
         _tokens.clear();
@@ -47,10 +52,7 @@ std::shared_ptr<ICommand> Parser::parse(std::istream& is)
             if (cmd)
                 return cmd;
         }
-        catch (const std::exception& e)
-        {
-            std::cout << e.what() << std::endl;
-        }
+        catch (const std::exception& e) {std::cout << e.what() << std::endl;}
     }
     return nullptr;
 };
@@ -139,7 +141,7 @@ TokenType Parser::get_token_type(const std::string& token)
         
         if (!std::all_of(token.begin() + 1, token.end(), ::isalpha))
             throw std::runtime_error("CLI: NOT VALID OPTION");
-
+        
         return TokenType::ARGUMENT;
     }
     else if (token[0] == '<' &&

@@ -16,6 +16,7 @@ public:
     void process_args(const std::vector<std::string>& tokens) override; 
     void execute() override; 
 private:
+    void add_radius(const std::string& args);
     void add_type(const std::string& args);
     void add_y(const std::string& args);
     void add_x(const std::string& args);

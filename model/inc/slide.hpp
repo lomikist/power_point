@@ -20,9 +20,11 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Slide& slide)
     {
         os << "Slide title: " << slide._title << ", Index: " << slide._index << std::endl;
+        os << "slide size" << slide._shapes.size() << std::endl;
         for (auto&& shape : slide._shapes) {
             shape->print(os);
         }
+        std::cout << std::endl;
         return os;
     };
 private:

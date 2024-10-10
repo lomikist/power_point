@@ -3,7 +3,7 @@
 
 int main (int argc, char *argv[])
 {
-    std::shared_ptr<core::Controller> controller= std::make_shared<core::Controller>();
-    controller->start();
+    core::Controller& controller = core::Controller::get_instance();
+    controller.start();
     return 0;
 }

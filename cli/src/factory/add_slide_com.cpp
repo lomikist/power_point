@@ -25,8 +25,13 @@ void AddSlideCom::register_options()
 
 void AddSlideCom::execute()
 {
-    int index = std::get<int>(_args["-i"]);
+    int index;
     std::string name = std::get<std::string>(_args["-n"]);
+
+    if (_args.find("-i") != _args.end())
+        index = std::get<int>(_args["-i"]);
+    else 
+        index = -1;
 
     core::Editor& editot = core::Editor::get_instance();
     editot.add_slide(index, name);

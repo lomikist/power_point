@@ -1,0 +1,12 @@
+add <slide> -n first
+add <slide> -n second
+add <slide> -n third -i 2
+add <shape> -i 1 -t rect -x 1 -y 1 -h 1 -w 1 -c red
+add <shape> -i 1 -t circle -x 1 -y 1 -r 1 -c red
+add <shape> -i 2 -t rect -x 2 -y 2 -h 2 -w 2 -c red
+add <shape> -i 2 -t circle -x 2 -y 2 -r 2 -c red
+add <shape> -i 3 -t rect -x 3 -y 3 -h 3 -w 3 -c red
+add <shape> -i 3 -t circle -x 3 -y 3 -r 3 -c red
+show <slide> -i 1
+show <slide> -i 2
+show <slide> -i 3

@@ -27,20 +27,23 @@ void ShowSlideCom::register_options()
 
 void ShowSlideCom::execute()
 {
-    int index = std::get<int>(_args["-i"]);
-    std::string type = std::get<std::string>(_args["-t"]);
-
-    std::cout << "showing slide" << index << "\n";
+    if (_args.find("-i") == _args.end())
+        std::runtime_error("CLI: enter valid index for slide.");
+ 
+    int index = std::get<int>(_args["-i"]) - 1;
+    std::string type = (_args.find("-t") != _args.end()) ? std::get<std::string>(_args["-t"]) : "cmd";
 
     core::Vizualizer& vizualizer = core::Vizualizer::get_instance();
-
     if (type == "cmd")
-        vizualizer.print(std::cout, index);
+        vizualizer.print_slide(std::cout, index);
     else if (type == "file")
     {
         std::ofstream outfile;
         outfile.open("../out.txt", std::ios::out | std::ios::trunc);
-        vizualizer.print(outfile, index);
+        if (outfile.is_open())
+            vizualizer.print_slide(outfile, index);
+        else 
+            throw std::runtime_error("cant open file");
     }
 };
 

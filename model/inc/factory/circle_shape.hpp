@@ -8,8 +8,8 @@ class CircleShape : public IShape
 private:
     int _radius; 
 public:
-    void print(std::ostream& os) override;
     CircleShape(int x, int y, int r);
+    void print(std::ostream& os) override;
 };
 };
 #endif //  CIRCLE_SHAPE_HPP

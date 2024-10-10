@@ -15,7 +15,16 @@
 
 using namespace core;
 
+Controller& Controller::get_instance()
+{
+    static Controller _instance;
+    return _instance;
+};
 
+cli::Parser& Controller::get_parser()
+{
+    return *_parser;
+};
 
 Controller::Controller()
 {
@@ -34,10 +43,9 @@ void Controller::start()
     while (true)
     {
         try{
-            /*std::ifstream myfile;*/
-            /*myfile.open ("../commandlist.txt", std::ios::in);*/
             auto cmd = _parser->parse(std::cin);
-            cmd->execute();
+            if (cmd)
+                cmd->execute();
         }
         catch(std::exception& e)
         {

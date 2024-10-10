@@ -10,12 +10,13 @@ namespace core
 {
 class Controller : public std::enable_shared_from_this<Controller> 
 {
-public:
+private:
     Controller ();
-    Controller (Controller  &&) = default;
-    /*Controller  &operator=(Controller  &&) = default;*/
+public:
     ~Controller ();
+    static Controller& get_instance();
     void start();
+    cli::Parser& get_parser();
 private:
     std::unique_ptr<cli::Parser> _parser;
     std::shared_ptr<model::Model> _model;
