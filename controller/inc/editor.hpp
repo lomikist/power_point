@@ -22,6 +22,8 @@ public:
 
     void add_slide(int index, const std::string& name);
     void add_shape(const std::unordered_map<std::string, std::variant<std::string, int, double>>& );  
+    void remove_shape(int slide_index, int shape_index);
+    void remove_slide(int index);
 };
 }
 

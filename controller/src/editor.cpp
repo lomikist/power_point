@@ -46,4 +46,19 @@ void Editor::add_slide(int index, const std::string& name)
         _model->add_slide(std::make_shared<model::Slide>(name, index));
 };
 
+void Editor::remove_shape(int slide_index, int shape_index){
+    if (slide_index < 0 &&
+        slide_index >= _model->_slides.size() && 
+        shape_index >= _model->_slides[slide_index - 1]->_shapes.size())
+        throw std::runtime_error("CLI: not valid index");
+    else
+        _model->_slides[slide_index]->remove_shape(shape_index);
+};
 
+void Editor::remove_slide(int slide_index){
+    if (slide_index < 0 &&
+        slide_index >= _model->_slides.size())
+        throw std::runtime_error("CLI: not valid index");
+    else
+        _model->remove_slide(slide_index);
+};

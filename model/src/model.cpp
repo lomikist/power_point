@@ -20,6 +20,6 @@ void Model::add_slide(std::shared_ptr<Slide> new_slide)
 
 void Model::remove_slide(int index)
 {
-//TODO 
+    std::cout << "removing slide\n"; 
 };
 

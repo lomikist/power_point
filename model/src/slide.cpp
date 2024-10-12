@@ -19,4 +19,10 @@ void Slide::set_index(int index)
 {
     _index = index;
 }
+
+void Slide::remove_shape(int index)
+{
+    if (index > _shapes.size() || index < 0)
+        _shapes.erase(_shapes.begin() + index);
+};
 }
