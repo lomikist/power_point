@@ -10,7 +10,7 @@ namespace cli
 class ICommand 
 { 
 public:
-    ~ICommand() = default;
+    virtual ~ICommand() = default;
     virtual void execute() = 0;
     virtual void process_args(const std::vector<std::string>&) = 0;
 public:

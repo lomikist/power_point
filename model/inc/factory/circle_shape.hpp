@@ -9,7 +9,7 @@ private:
     int _radius; 
 public:
     CircleShape(int x, int y, int r);
-    void print(std::ostream& os) override;
+    int getRadius(){return _radius;};
 };
 };
 #endif //  CIRCLE_SHAPE_HPP
