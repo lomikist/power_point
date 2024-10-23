@@ -2,6 +2,7 @@
 #define VIZUALIZER_HPP
 #include <memory>
 #include <ostream>
+#include "icanvas.hpp"
 #include "model.hpp"
 #include "slide.hpp"
 
@@ -16,7 +17,7 @@ private:
 public:
     ~Vizualizer();
     static Vizualizer& get_instance();
-    void print_slide(std::ostream& os, int index);
+    void process_slide(std::shared_ptr<core::ICanvas> canvas, int index);
     void set_model(std::shared_ptr<model::Model> model); 
 };
 }

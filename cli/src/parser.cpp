@@ -52,7 +52,9 @@ std::shared_ptr<ICommand> Parser::parse(std::istream& is)
             if (cmd)
                 return cmd;
         }
-        catch (const std::exception& e) {std::cout << e.what() << std::endl;}
+        catch (const std::exception& e) {
+            std::cout << e.what() << std::endl;
+        }
     }
     return nullptr;
 };

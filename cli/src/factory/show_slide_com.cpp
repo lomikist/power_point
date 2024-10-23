@@ -1,4 +1,6 @@
 #include "show_slide_com.hpp"
+#include "icanvas.hpp"
+#include "ostream_wrapper.hpp"
 #include "parser.hpp"
 #include "vizualize.hpp"
 #include <iostream>
@@ -35,13 +37,19 @@ void ShowSlideCom::execute()
 
     core::Vizualizer& vizualizer = core::Vizualizer::get_instance();
     if (type == "cmd")
-        vizualizer.print_slide(std::cout, index);
+    {
+        std::shared_ptr<core::ICanvas> canvas = std::make_shared<core::OstreamWrapper>(std::cout);
+        vizualizer.process_slide(canvas, index);
+    }
     else if (type == "file")
     {
         std::ofstream outfile;
         outfile.open("../out.txt", std::ios::out | std::ios::trunc);
         if (outfile.is_open())
-            vizualizer.print_slide(outfile, index);
+        {
+            std::shared_ptr<core::ICanvas> canvas = std::make_shared<core::OstreamWrapper>(outfile);
+            vizualizer.process_slide(canvas, index);
+        }
         else 
             throw std::runtime_error("cant open file");
     }

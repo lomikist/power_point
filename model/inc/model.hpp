@@ -7,10 +7,12 @@ namespace model
 {
 class Model
 {
-public:
+private:
     std::vector<std::shared_ptr<Slide>> _slides;
+public:
     void add_slide(std::shared_ptr<Slide> new_slide);
     void remove_slide(int index);
+    std::shared_ptr<Slide> get_slide(int index) const;
 };
 };
 #endif //  MODEL_HPP

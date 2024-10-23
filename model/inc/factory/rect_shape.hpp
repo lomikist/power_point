@@ -11,7 +11,8 @@ private:
 
 public:
     RectShape(int x, int y, int width, int height);
-    void print(std::ostream& os) override;
+    int getWidth() const {return _width;};
+    int getHeight() const {return _height;};
 };
 };
 #endif //  RECT_SHAPE_HPP
