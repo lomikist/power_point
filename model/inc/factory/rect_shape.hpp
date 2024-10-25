@@ -4,15 +4,17 @@
 #include <iostream>
 namespace model
 {
-class RectShape : public IShape
+class RectShape : public AShape
 {
 private:
-    int _width, _height;
+    class RectAtribute : public AShape::AAtribute
+    {
+    protected:
+        int _width, _height;
 
+    };
 public:
     RectShape(int x, int y, int width, int height);
-    int getWidth() const {return _width;};
-    int getHeight() const {return _height;};
 };
 };
 #endif //  RECT_SHAPE_HPP

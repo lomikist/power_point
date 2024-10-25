@@ -10,11 +10,14 @@
 #include <QGraphicsView>
 #include <QWheelEvent>
 #include <QWidget>
+#include "controller.hpp"
+#include "editor.hpp"
 #include "qboxlayout.h"
 #include "qgraphicsscene.h"
 #include "qgraphicsview.h"
 #include "qnamespace.h"
 #include "qpushbutton.h"
+#include "vizualize.hpp"
 #include "view.hpp"
 
 using namespace gui;
@@ -41,35 +44,35 @@ void MyView::setup_layout()
         delete oldlayout;
 
     _mainLayout = new QVBoxLayout;
-    _buttonsLayout = new QGridLayout;
+    _toolsLayout = new QGridLayout;
     _sceneLayout = new QHBoxLayout;
     _slideListLayout = new QVBoxLayout;
-
-    _mainLayout->addLayout(_buttonsLayout);
+    _mainLayout->addLayout(_toolsLayout);
     _mainLayout->addLayout(_sceneLayout);
     _sceneLayout->addLayout(_slideListLayout);
+    setLayout(_mainLayout);
+};
 
-    _buttonsLayout->addWidget(new QPushButton("Button 1"), 0, 0);
-    _buttonsLayout->addWidget(new QPushButton("Button 2"), 0, 1);
-    _buttonsLayout->addWidget(new QPushButton("Button 3"), 0, 2);
-    _buttonsLayout->addWidget(new QPushButton("Button 1"), 0, 3);
-    _buttonsLayout->addWidget(new QPushButton("Button 2"), 0, 4);
-    _buttonsLayout->addWidget(new QPushButton("Button 3"), 0, 5);
-    _buttonsLayout->addWidget(new QPushButton("Button 4"), 1, 0);
-    _buttonsLayout->addWidget(new QPushButton("Button 5"), 1, 1);
-    _buttonsLayout->addWidget(new QPushButton("Button 6"), 1, 2);
-    _buttonsLayout->addWidget(new QPushButton("Button 4"), 1, 3);
-    _buttonsLayout->addWidget(new QPushButton("Button 5"), 1, 4);
-    _buttonsLayout->addWidget(new QPushButton("Button 6"), 1, 5);
+void MyView::update_elements()
+{
+    /*_toolsLayout->addWidget(new QPushButton("Button 1"), 0, 0);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 2"), 0, 1);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 3"), 0, 2);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 1"), 0, 3);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 2"), 0, 4);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 3"), 0, 5);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 4"), 1, 0);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 5"), 1, 1);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 6"), 1, 2);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 4"), 1, 3);*/
+    /*_toolsLayout->addWidget(new QPushButton("Button 5"), 1, 4);*/
+    _toolsLayout->addWidget(new QPushButton("Button 6"), 1, 5);
 
     _sceneLayout->addWidget(_view);
-    _slideListLayout->addWidget(new QPushButton("fs"));
-    _slideListLayout->addWidget(new QPushButton("fs"));
-    _slideListLayout->addWidget(new QPushButton("fs"));
-    _slideListLayout->addWidget(new QPushButton("fs"));
-    _slideListLayout->addWidget(new QPushButton("fs"));
-    _slideListLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
-    setLayout(_mainLayout);
+    /*auto& slides = core::Editor::get_instance().get_slides();*/
+    /*for (auto&& slide : slides)*/
+        _slideListLayout->addWidget(new QPushButton("slide N", nullptr));
+    _slideListLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
 };
 

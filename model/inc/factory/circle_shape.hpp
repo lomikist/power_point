@@ -3,13 +3,16 @@
 #include "shape.hpp"
 namespace model
 {
-class CircleShape : public IShape
+class CircleShape : public AShape
 {
 private:
-    int _radius; 
+    class CircleAtribute : public AShape::AAtribute
+    {
+    protected:
+        int _radius;
+    };
 public:
     CircleShape(int x, int y, int r);
-    int getRadius(){return _radius;};
 };
 };
 #endif //  CIRCLE_SHAPE_HPP

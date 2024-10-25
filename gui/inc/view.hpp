@@ -22,13 +22,16 @@ public:
     ~MyView();
     QGraphicsScene* get_scene(){return _scene;}
     QGraphicsView* get_view(){return _view;}
+    void update_elements();
 private:
     QGraphicsView*  _view;
     QGraphicsScene* _scene;
     QVBoxLayout*    _mainLayout;
     QVBoxLayout*    _slideListLayout;
-    QGridLayout*    _buttonsLayout;
+    QGridLayout*    _toolsLayout;
     QHBoxLayout*    _sceneLayout;
+    QVector<QPushButton*> _slideListVector;
+    QVector<QPushButton*> _toolsVector;
 protected:
     void setup_layout();
     /*void paintEvent(QPaintEvent* event) override;*/
