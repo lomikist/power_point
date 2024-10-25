@@ -6,7 +6,7 @@
 
 using namespace model;
 
-std::shared_ptr<IShape> ShapeFactory::create_shape(const std::unordered_map<std::string, std::variant<std::string, int, double>>& options)
+std::shared_ptr<AShape> ShapeFactory::create_shape(const std::unordered_map<std::string, std::variant<std::string, int, double>>& options)
 {
     std::string type = std::get<std::string>(options.at("-t"));
     int         x = std::get<int>(options.at("-x"));

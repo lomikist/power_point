@@ -1,6 +1,5 @@
 #include "slide.hpp"
 
-
 namespace model
 {
 Slide::Slide(const std::string& title, int index)
@@ -10,7 +9,7 @@ Slide::Slide(const std::string& title, int index)
     _index = index;
 };
 
-void Slide::add_shape(std::shared_ptr<IShape> shape)
+void Slide::add_shape(std::shared_ptr<AShape> shape)
 {
     _shapes.push_back(shape);
 };

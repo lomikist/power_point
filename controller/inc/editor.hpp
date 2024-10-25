@@ -5,6 +5,7 @@
 #include "model.hpp"
 #include <cstddef>
 #include <memory>
+#include <stdexcept>
 #include <vector>
 #include <variant>
 #include <unordered_map>
@@ -25,9 +26,17 @@ public:
     void add_shape(const std::unordered_map<std::string, std::variant<std::string, int, double>>& );  
     void remove_shape(int slide_index, int shape_index);
     void remove_slide(int index);
-
     void notifyObservers() override;
     void addObserver(std::shared_ptr<IObserver> new_obserber) override; 
+    const std::vector<std::shared_ptr<model::Slide>>& get_slides(){
+        if (_model)
+        {
+            if (_model->get_slides().empty())
+                throw std::runtime_error("slide is empty");
+            else 
+                return _model->get_slides();
+        }
+    };
 };
 }
 

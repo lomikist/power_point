@@ -14,8 +14,8 @@ public:
     Slide(const std::string& title, int index);
     int _index;
     std::string _title;
-    std::vector<std::shared_ptr<IShape>> _shapes;
-    void add_shape(std::shared_ptr<IShape> shape);
+    std::vector<std::shared_ptr<AShape>> _shapes;
+    void add_shape(std::shared_ptr<AShape> shape);
     void remove_shape(int index); 
 private:
     void set_index(int index);

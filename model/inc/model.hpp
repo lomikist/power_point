@@ -13,6 +13,7 @@ public:
     void add_slide(std::shared_ptr<Slide> new_slide);
     void remove_slide(int index);
     std::shared_ptr<Slide> get_slide(int index) const;
+    const std::vector<std::shared_ptr<Slide>>& get_slides() const;
 };
 };
 #endif //  MODEL_HPP
