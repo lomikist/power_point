@@ -13,7 +13,7 @@ namespace model
 class ShapeFactory
 {
 public:
-    static std::shared_ptr<IShape> create_shape(const std::unordered_map<std::string, std::variant<std::string, int, double>>& options); 
+    static std::shared_ptr<AShape> create_shape(const std::unordered_map<std::string, std::variant<std::string, int, double>>& options); 
 };
 };
 #endif //  SHAPE_FACTORY_HPP

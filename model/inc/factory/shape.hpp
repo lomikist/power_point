@@ -1,6 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 #include <iostream>
+#include <memory>
 namespace model
 {
 
@@ -26,20 +27,19 @@ protected:
         int _r;
         int _g;
         int _b;
-    };
-    
+    }; 
     class AAtribute
     {
     public:
         RGB getColor(){return _color;};
         int getId(){return _id;}
         void setColoer(const RGB& color){ _color = color;}
+        AAtribute(int id, RGB color) : _id(id), _color(color) {};
         virtual ~AAtribute(){};
     protected:
-        RGB _color;
         int _id;
-    };
-    
+        RGB _color;
+    }; 
     struct Geometry
     {
     public:
@@ -57,6 +57,7 @@ protected:
     private:
         int _x, _y, _w, _h;
     };
+    inline static int id = 0;
     Geometry _geometry;
 public:
     AShape(int x = 0, int y = 0, int w = 0, int h = 0) : _geometry(x, y, w, h) {}

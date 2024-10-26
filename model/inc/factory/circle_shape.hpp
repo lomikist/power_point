@@ -10,9 +10,17 @@ private:
     {
     protected:
         int _radius;
+    public:
+    CircleAtribute(int radius, RGB color) : AShape::AAtribute(AShape::id, color) , _radius(radius)
+    {
+        AShape::id++;
     };
+    };
+    CircleAtribute _atributes;
 public:
-    CircleShape(int x, int y, int r);
+    CircleShape(int x, int y, int r, RGB color = {256, 256, 256}); 
+    CircleAtribute getAtributes();
+    Geometry getGeometry();
 };
 };
 #endif //  CIRCLE_SHAPE_HPP

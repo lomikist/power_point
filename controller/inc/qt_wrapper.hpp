@@ -30,23 +30,26 @@ public:
     PaintDeviceCanvas(QPainter* p) : _painter(p) {}
 
     void draw(const RectPtr& rect_shape) override {
+        auto geometry = rect_shape->getGeometry(); 
         _painter->drawRect(
-            rect_shape->_geometry.getX(),
-            rect_shape->_geometry.getY(),
-            rect_shape->getWidth(),
-            rect_shape->getHeight()
+            geometry.getX(),
+            geometry.getY(),
+            geometry.getW(),
+            geometry.getH()
         );
     }
 
     void draw(const CirclePtr& circle_shape) override {
+        auto geometry = circle_shape->getGeometry(); 
         _painter->drawEllipse(
-            circle_shape->_geometry.getX(),
-            circle_shape->_geometry.getY(),
-            circle_shape->getRadius(),
-            circle_shape->getRadius()
+            geometry.getX(),
+            geometry.getY(),
+            geometry.getW(),
+            geometry.getH()
         );
     }
 };
+
 
 class GraphicsSceneCanvas : public ICanvas 
 {
@@ -57,20 +60,22 @@ public:
     {};
 
     void draw(const RectPtr& rect_shape) override {
+        auto geometry = rect_shape->getGeometry(); 
         _scene->addRect(
-            rect_shape->_geometry.getX(),
-            rect_shape->_geometry.getY(),
-            rect_shape->getWidth(),
-            rect_shape->getHeight()
+            geometry.getX(),
+            geometry.getY(),
+            geometry.getW(),
+            geometry.getH()
         );
     };
 
     void draw(const CirclePtr& circle_shape) override {
+        auto geometry = circle_shape->getGeometry(); 
         _scene->addEllipse(
-            circle_shape->_geometry.getX(),
-            circle_shape->_geometry.getY(),
-            circle_shape->getRadius(),
-            circle_shape->getRadius()
+            geometry.getX(),
+            geometry.getY(),
+            geometry.getW(),
+            geometry.getH()
         );
     }
 };
