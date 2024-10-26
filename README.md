@@ -1,26 +1,39 @@
-# Power point
+# PowerPoint CLI Guide
+---
 
-For adding a slide command is 
-
-add <slide> -i <n> -n <string>
-
-for adding a shape command is 
-
+1. Add a Slide
+To add a new slide, use the following command:
+```bash
+add -i <index> -n <name>
+```
+2. Add a Shape
+To add a new shape command is 
+```bash
 add <shape> -i <n> -x <n> -y <n> -t <type> etc.
+```
 
-for runngin a command file  (look cl.txt file for example)
+3. Execute file
+To execute commands from a file, use:
+```bash
+run -p <path>
+```
 
-run -p <path>   (path is relative to executable file)
+(path is relative to executable file)
 
-for pringing a slide 
-
+3. Show something
+for pringing a slide
+```bash
 show <slide> -i <n> -t <type>
+```
 
-OPTIONS 
+Options
 
--i -- index 
--x -- x position 
--y -- y position 
--n -- name 
--p -- path for file
--t -- type (depedting on command can be different)
+| Option | Description                                                        |
+|--------|--------------------------------------------------------------------|
+| `-i`   | Index of the slide or item                                         |
+| `-x`   | X-coordinate position for shapes                                   |
+| `-y`   | Y-coordinate position for shapes                                   |
+| `-n`   | Name of the slide                                                  |
+| `-p`   | Path to a command file (relative to the executable)                |
+| `-t`   | Type of item (depends on the command; e.g., shape type, display type) |
+
