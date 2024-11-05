@@ -31,10 +31,10 @@ void ShowSlideCom::execute()
 {
     if (_args.find("-i") == _args.end())
         std::runtime_error("CLI: enter valid index for slide.");
- 
-    int index = std::get<int>(_args["-i"]) - 1;
+     
+    int index = std::get<int>(_args["-i"]);
     std::string type = (_args.find("-t") != _args.end()) ? std::get<std::string>(_args["-t"]) : "cmd";
-
+    
     core::Vizualizer& vizualizer = core::Vizualizer::get_instance();
     if (type == "cmd")
     {

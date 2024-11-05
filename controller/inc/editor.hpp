@@ -28,15 +28,6 @@ public:
     void remove_slide(int index);
     void notifyObservers() override;
     void addObserver(std::shared_ptr<IObserver> new_obserber) override; 
-    const std::vector<std::shared_ptr<model::Slide>>& get_slides(){
-        if (_model)
-        {
-            if (_model->get_slides().empty())
-                throw std::runtime_error("slide is empty");
-            else 
-                return _model->get_slides();
-        }
-    };
 };
 }
 

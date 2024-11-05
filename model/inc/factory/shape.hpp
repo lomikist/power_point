@@ -31,8 +31,8 @@ protected:
     class AAtribute
     {
     public:
-        RGB getColor(){return _color;};
-        int getId(){return _id;}
+        RGB getColor() const {return _color;};
+        int getId() const {return _id;}
         void setColoer(const RGB& color){ _color = color;}
         AAtribute(int id, RGB color) : _id(id), _color(color) {};
         virtual ~AAtribute(){};

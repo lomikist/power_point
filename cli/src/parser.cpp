@@ -1,6 +1,7 @@
 #include "parser.hpp"
 #include "add_slide_com.hpp"
 #include "add_shape_com.hpp"
+#include "exit_com.hpp"
 #include "show_slide_com.hpp"
 #include "run_com.hpp"
 #include "icommand.hpp"
@@ -29,6 +30,9 @@ Parser::Parser()
     });
     _command_creator.register_func("run", "", [](){
         return std::make_shared<RunCom>();
+    });
+    _command_creator.register_func("exit", "", [](){
+        return std::make_shared<ExitCom>();
     });
 };
 
@@ -74,7 +78,7 @@ std::shared_ptr<ICommand> Parser::validate_semantics()
     std::shared_ptr<ICommand>   cmd;
     std::vector<std::string>    argumens;
 
-    if (_tokens[1] == TokenType::SUBCOM)
+    if (_tokens.size() > 1 && _tokens[1] == TokenType::SUBCOM)
     {
         cmd = _command_creator.create(_str_tokens[0], _str_tokens[1]);
         argumens.assign(_str_tokens.begin() + 2, _str_tokens.end());

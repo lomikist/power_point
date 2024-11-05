@@ -10,6 +10,7 @@
 
 namespace cli 
 {
+
 class RunCom : public ICommand 
 { 
 public:
@@ -18,11 +19,12 @@ public:
     void execute() override;
     void process_args(const std::vector<std::string>&) override;
     void add_path(const std::string& path); 
-    std::unordered_map<std::string, std::variant<std::string, int, double>> _args;
+    std::unordered_map<std::string, Var_SID> _args;
 private:
     void register_options();
-    std::map<std::string, std::function<void(const std::string& str)>> _options;
+    std::map<std::string, F_vs> _options;
 };
+
 }
 #endif // !RUN_COM_HPP
 
