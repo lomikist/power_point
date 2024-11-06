@@ -8,7 +8,7 @@ CONFIG += c++20
 
 CONFIG(debug, debug|release): {
     CONFIG += debug
-    QMAKE_CXXFLAGS_DEBUG += -g
+    QMAKE_RUN_ENV += QT_DEBUG_PLUGINS=1
 }
 
 QMAKE_CXXFLAGS += -fmax-errors=5

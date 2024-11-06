@@ -2,6 +2,7 @@
 #define QT_WRAPPER_HPP
 #include "icanvas.hpp"
 #include "qgraphicsscene.h"
+#include "qpixmap.h"
 #include "view.hpp"
 #include "qt_widget_wrapper.hpp"
 #include "qt_graphic_wrapper.hpp"
@@ -15,7 +16,7 @@ private:
     std::unique_ptr<ICanvas> _canvas_impl;
 public:
     QtWrapper(QGraphicsView* view);
-    QtWrapper(QPainter* painter);
+    QtWrapper(QImage* image, QPainter* painter);
 
     virtual ~QtWrapper(){};
     virtual void draw(const RectPtr& rect_shape) override; 

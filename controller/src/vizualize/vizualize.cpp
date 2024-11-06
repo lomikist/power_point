@@ -35,11 +35,15 @@ void Vizualizer::process_slide(std::shared_ptr<core::ICanvas> canvas, int index)
             auto rect_shape = std::dynamic_pointer_cast<model::RectShape>(shape);
              
             if (circle_shape)
+            {
                 canvas->draw(circle_shape);
-            else if (rect_shape)
+            } else if (rect_shape)
+            {
                 canvas->draw(rect_shape);
+            }
         };
-    } catch(std::exception& e){
+    } catch (std::exception& e)
+    {
         std::cout << e.what();
     }
 };

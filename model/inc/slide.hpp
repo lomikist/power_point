@@ -15,11 +15,12 @@ class Slide
 {
 public:
     Slide(const std::string& title);
-    void            add_shape(std::shared_ptr<AShape> shape);
-    void            remove_shape(int index); 
-    int             get_id() const;
-    const Content&  get_content() const; 
-    Content&        get_content(); 
+    void                add_shape(std::shared_ptr<AShape> shape);
+    void                remove_shape(int index); 
+    int                 get_id() const;
+    const Content&      get_content() const; 
+    Content&            get_content(); 
+    const std::string&  get_title() const;
 private:
     inline static int s_id = 0;
     Content     _shapes;

@@ -10,10 +10,12 @@
 #include <QGraphicsView>
 #include <QWheelEvent>
 #include <QWidget>
+#include "editor.hpp"
 #include "qboxlayout.h"
 #include "qnamespace.h"
 #include "qpainter.h"
 #include "qpushbutton.h"
+#include "slide.hpp"
 #include "view.hpp"
 
 using namespace gui;
@@ -22,16 +24,18 @@ MyScreen::MyScreen(QWidget *parent)
     : QMainWindow(nullptr)
 {
     setWindowTitle("My First Qt Window");
-    resize(800, 600);
     setWindowState(Qt::WindowMaximized);
 
-    _paintCanvas =  new PaintArea(this, _painter);
+    _paintCanvas =  new PaintArea(this);
 
     setup_layout();
+
+    _sceneLayout->addWidget(_paintCanvas);
 }
 
 MyScreen::~MyScreen()
-{};
+{
+};
 
 void MyScreen::setup_layout()
 {
@@ -51,11 +55,17 @@ void MyScreen::setup_layout()
 
 void MyScreen::update_elements()
 {
-    _toolsLayout->addWidget(new QPushButton("Button 6"), 1, 5);
-
-    _sceneLayout->addWidget(_paintCanvas);
-
-    _slideListLayout->addWidget(new QPushButton("slide N", nullptr));
-    _slideListLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
+    std::cout << "updatee elements";
+    auto slides = core::Editor::get_instance().get_slides();
+    if (!slides.empty())
+    {
+        for (auto&& slide : slides)
+        {
+            auto button = new QPushButton("hello", nullptr);
+            button->setVisible(true);
+            /*_slideListLayout->addWidget(button);*/
+            _slideListVector.push_back(button);
+        }
+    }
 };
 

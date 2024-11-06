@@ -33,7 +33,7 @@ std::shared_ptr<Slide> Model::get_slide(int index) const
 
 const std::vector<std::shared_ptr<Slide>>& Model::get_slides() const
 {
-    if (_slides.size() == 0)
+    if (_slides.empty())
         throw std::runtime_error("Model: slide is empty");
     return _slides;
 };

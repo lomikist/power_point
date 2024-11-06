@@ -3,6 +3,7 @@
 #include "iobserver.hpp"
 #include "isubject.hpp"
 #include "model.hpp"
+#include "slide.hpp"
 #include <cstddef>
 #include <memory>
 #include <stdexcept>
@@ -26,6 +27,11 @@ public:
     void add_shape(const std::unordered_map<std::string, std::variant<std::string, int, double>>& );  
     void remove_shape(int slide_index, int shape_index);
     void remove_slide(int index);
+    //////////////////////
+    ///its not should be here 
+    const std::vector<std::shared_ptr<model::Slide>>& get_slides() const;
+
+    ////////////////////
     void notifyObservers() override;
     void addObserver(std::shared_ptr<IObserver> new_obserber) override; 
 };

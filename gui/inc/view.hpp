@@ -25,7 +25,6 @@ public:
     ~MyScreen();
     QGraphicsScene* get_scene(){return _scene;}
     QGraphicsView*  get_view(){return _view;}
-    QPainter*       get_painter(){return _painter;};
     PaintArea*      get_paint_canvas(){return _paintCanvas;}
     void            update_elements();
 private:
@@ -33,7 +32,6 @@ private:
     QGraphicsScene* _scene;
 
     PaintArea*      _paintCanvas;
-    QPainter*       _painter = nullptr;
 
     QVBoxLayout*    _mainLayout;
     QVBoxLayout*    _slideListLayout;

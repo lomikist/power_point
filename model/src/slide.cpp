@@ -29,6 +29,11 @@ Content& Slide::get_content()
     return _shapes;
 }; 
 
+const std::string&  Slide::get_title() const
+{
+    return _title;
+};
+
 void Slide::remove_shape(int index)
 {
     if (index > _shapes.size() || index < 0)
