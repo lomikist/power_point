@@ -16,7 +16,7 @@ private:
     std::unique_ptr<ICanvas> _canvas_impl;
 public:
     QtWrapper(QGraphicsView* view);
-    QtWrapper(QImage* image, QPainter* painter);
+    QtWrapper(QPainter* painter);
 
     virtual ~QtWrapper(){};
     virtual void draw(const RectPtr& rect_shape) override; 

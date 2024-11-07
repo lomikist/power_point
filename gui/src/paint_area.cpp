@@ -8,8 +8,7 @@ PaintArea::PaintArea(QWidget* parent) : QWidget(parent)
     setAttribute(Qt::WA_StaticContents);
     setBackgroundRole(QPalette::Base);
     setAutoFillBackground(true);
-    /*setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);*/
-    setStyleSheet("border: 2px solid black;");
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     _image = new QImage( QSize(1000, 800), QImage::Format_RGB32 );
     _image->fill(Qt::white);
@@ -38,8 +37,6 @@ QPainter* PaintArea::getPainter()
 {
     return _painter;
 };
-
-
 
 void PaintArea::setImage(QImage* image)
 {

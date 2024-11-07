@@ -10,7 +10,7 @@ GuiController::GuiController()
 {
     _screen = std::make_shared<gui::MyScreen>();
     _screen->show();
-    _pview_canvas = std::make_shared<core::QtWrapper>(_screen->get_paint_canvas()->getImage(), _screen->get_paint_canvas()->getPainter());
+    _pview_canvas = std::make_shared<core::QtWrapper>(_screen->get_paint_canvas()->getPainter());
 };
 
 void GuiController::update()

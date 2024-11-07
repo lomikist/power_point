@@ -2,10 +2,8 @@
 
 namespace model
 {
-Slide::Slide(const std::string& title)
+Slide::Slide(const std::string& title) : _title(title), _id(s_id)
 {
-    _title = title;
-    _id = Slide::s_id;
     Slide::s_id++;
 };
 
@@ -14,7 +12,7 @@ void Slide::add_shape(std::shared_ptr<AShape> shape)
     _shapes.push_back(shape);
 };
 
-int Slide::get_id() const 
+int Slide::get_id()
 {
     return _id;
 };
@@ -33,6 +31,12 @@ const std::string&  Slide::get_title() const
 {
     return _title;
 };
+
+std::string&  Slide::get_title()
+{
+    return _title;
+};
+
 
 void Slide::remove_shape(int index)
 {

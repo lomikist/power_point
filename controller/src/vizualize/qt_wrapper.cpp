@@ -14,9 +14,9 @@ QtWrapper::QtWrapper(QGraphicsView* view)
     }
 }
 
-QtWrapper::QtWrapper(QImage* image, QPainter* painter)
+QtWrapper::QtWrapper(QPainter* painter)
 {
-    _canvas_impl = std::make_unique<PaintDeviceCanvas>(image, painter);
+    _canvas_impl = std::make_unique<PaintDeviceCanvas>(painter);
 }
 
 void QtWrapper::draw(const RectPtr& rect_shape)

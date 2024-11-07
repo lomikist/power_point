@@ -1,11 +1,16 @@
 #include "qt_widget_wrapper.hpp"
+#include "qpixmap.h"
 #include <complex>
 
 using namespace core;
 
-PaintDeviceCanvas::PaintDeviceCanvas(QImage* image, QPainter* painter) : _image(image) , _painter(painter)
+PaintDeviceCanvas::PaintDeviceCanvas(QPainter* painter) :  _painter(painter)
 {
-}
+};
+
+/*PaintDeviceCanvas::PaintDeviceCanvas(QImage* image, QPainter* painter) : _image(image) , _painter(painter)*/
+/*{*/
+/*};*/
 
 void PaintDeviceCanvas::draw(const RectPtr& rect_shape)
 {
