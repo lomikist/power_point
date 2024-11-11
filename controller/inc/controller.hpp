@@ -16,12 +16,12 @@ class Controller : public std::enable_shared_from_this<Controller>
 private:
     QTimer timer;
     Controller ();
-    void process_args();
+    /*void process_args();*/
 public:
     ~Controller ();
     static Controller&  get_instance();
-    void                start();
     cli::Parser&        get_parser();
+    /*void                start();*/
 private:
     std::shared_ptr<gui::GuiController> _gui_controller;
     std::shared_ptr<model::Model> _model;

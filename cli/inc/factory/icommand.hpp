@@ -4,9 +4,14 @@
 #include <variant>
 #include <vector>
 #include <string>
+#include <functional>
 
 namespace cli 
 {
+
+using Var_SID = std::variant<std::string, int, double>;
+using F_vs = std::function<void(const std::string& str)>;
+
 class ICommand 
 { 
 public:
@@ -14,7 +19,7 @@ public:
     virtual void execute() = 0;
     virtual void process_args(const std::vector<std::string>&) = 0;
 public:
-    std::unordered_map<std::string, std::variant<std::string, int, double>> _args;
+    std::unordered_map<std::string, Var_SID> _args;
 };
 }
 #endif // !ICOMMAND_HPP

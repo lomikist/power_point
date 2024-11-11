@@ -52,7 +52,8 @@ void RunCom::process_args(const std::vector<std::string>& tokens)
 
 void RunCom::register_options()
 {
-    _options["-p"] = [this](const std::string& arg){
+    _options["-p"] = [this](const std::string& arg)
+    {
         add_path(arg); 
     };
 };

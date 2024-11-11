@@ -4,24 +4,24 @@
 
 using namespace model;
 
-void Model::add_slide(std::shared_ptr<Slide> new_slide)
+void Model::add_slide(std::shared_ptr<Slide> new_slide, int index)
 {
-    if (new_slide->_index == -1)
+    if (index == -1 || index > _slides.size())
     {
         _slides.push_back(new_slide);
-        new_slide->_index = _slides.size();
-    }
-    else if (new_slide->_index > _slides.size() || new_slide->_index < 0)
+    } else if (index < -1)
     {
-        throw std::runtime_error("MODEL: not valid index.");
+        throw std::runtime_error("Model: index can't be a less then -1");
+    } else 
+    {
+        _slides.insert(_slides.begin() + index, new_slide);
     }
-    else 
-        _slides.insert(_slides.begin() + new_slide->_index, new_slide);
 };
 
 void Model::remove_slide(int index)
 {
-    std::cout << "removing slide with index \n" << index << std::endl; 
+    _slides.erase(_slides.begin() + index);
+    std::cout << "Slide N " << index << " is removed.";
 };
 
 std::shared_ptr<Slide> Model::get_slide(int index) const
@@ -33,7 +33,7 @@ std::shared_ptr<Slide> Model::get_slide(int index) const
 
 const std::vector<std::shared_ptr<Slide>>& Model::get_slides() const
 {
-    if (_slides.size()==0)
+    if (_slides.empty())
         throw std::runtime_error("Model: slide is empty");
     return _slides;
 };

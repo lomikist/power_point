@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include "add_slide_com.hpp"
 #include "icommand.hpp"
 
 namespace cli 
@@ -25,7 +26,7 @@ private:
     void add_color(const std::string& args);
     void add_index(const std::string& args);
     void register_options();
-    std::map<std::string, std::function<void(const std::string&)>> _options;
+    std::map<std::string, F_vs> _options;
 };
 }
 #endif // !ADD_SHAPE_COM_HPP

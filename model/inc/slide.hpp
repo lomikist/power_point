@@ -8,17 +8,25 @@
 #include <iostream>
 namespace model
 {
+
+using Content = std::vector<std::shared_ptr<AShape>>;
+
 class Slide 
 {
 public:
-    Slide(const std::string& title, int index);
-    int _index;
-    std::string _title;
-    std::vector<std::shared_ptr<AShape>> _shapes;
-    void add_shape(std::shared_ptr<AShape> shape);
-    void remove_shape(int index); 
+    Slide(const std::string& title);
+    void                add_shape(std::shared_ptr<AShape> shape);
+    void                remove_shape(int index); 
+    int                 get_id();
+    const Content&      get_content() const; 
+    Content&            get_content(); 
+    const std::string&  get_title() const;
+    std::string&  get_title();
 private:
-    void set_index(int index);
+    inline static int s_id = 0;
+    Content     _shapes;
+    std::string _title;
+    int         _id;
 };
 }
 

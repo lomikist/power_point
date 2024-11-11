@@ -23,6 +23,8 @@ std::shared_ptr<AShape> ShapeFactory::create_shape(const std::unordered_map<std:
         int r = std::get<int>(options.at("-r"));
         return std::make_shared<model::CircleShape>(x, y, r);
     }
+    else if (type == "text")
+    {}
     else 
         throw std::runtime_error("MODEL: not valid shape.");
 };

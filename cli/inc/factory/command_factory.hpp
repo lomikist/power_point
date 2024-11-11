@@ -9,6 +9,7 @@
 
 namespace cli
 {
+
 using CommandCreatorFun = std::function<std::shared_ptr<ICommand>()>;
 
 class CommandFactory
