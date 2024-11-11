@@ -16,9 +16,12 @@ public:
     QImage*    getImage();
     QPainter*   getPainter(); 
     void        setImage(QImage* image);
+    void        setImageScale(int scale);
 protected:
-    QImage*    _image;
+    QImage*     _image;
     QPainter*   _painter;
+    double      _image_scale = 1.0;
+    void wheelEvent(QWheelEvent* event) override;
     void paintEvent(QPaintEvent* event) override;
 };
 }

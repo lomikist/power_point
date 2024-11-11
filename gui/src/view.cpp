@@ -14,6 +14,7 @@
 #include <sstream>
 #include "controller.hpp"
 #include "editor.hpp"
+#include "gui_controller.hpp"
 #include "qboxlayout.h"
 #include "qlineedit.h"
 #include "qnamespace.h"
@@ -33,7 +34,6 @@ MyScreen::MyScreen(QWidget *parent)
 {
     setWindowTitle("My First Qt Window");
     setWindowState(Qt::WindowMaximized);
-
     setup_layout();
 
     _paintCanvas =  new PaintArea(this);
@@ -50,6 +50,16 @@ MyScreen::MyScreen(QWidget *parent)
 MyScreen::~MyScreen()
 {
 };
+
+PaintArea* MyScreen::get_paint_canvas() const
+{
+    return _paintCanvas;
+}
+
+int MyScreen::get_current_slide() const
+{
+    return _current_slide;
+}
 
 void MyScreen::setup_layout()
 {
@@ -106,6 +116,7 @@ void MyScreen::update_elements()
 
                 QObject::connect(button, &QPushButton::clicked, [slide, this]()
                 {
+                    _current_slide = slide->get_id();
                     _paintCanvas->getImage()->fill(Qt::white);
 
                     auto _pview_canvas = std::make_shared<core::QtWrapper>(_paintCanvas->getPainter());
@@ -130,9 +141,10 @@ void MyScreen::draw_elements()
     for (auto&& btn : _slideListVector)
     {
         btn->setStyleSheet("background-color: gray;");
-        QPixmap pixmap(1000, 800);
+        QPixmap pixmap(PAREA_WIDTH, PAREA_HEIGHT);
+
         pixmap.fill(Qt::white); 
-        pixmap.scaled(QSize(100,100));
+        pixmap.scaled(QSize(BTN_ICONE_WIDTH, BTN_ICONE_HEIGHT));
 
         QPainter slide_list_painter(&pixmap);
         slide_list_painter.setPen(QPen(Qt::black,3));
@@ -142,7 +154,8 @@ void MyScreen::draw_elements()
         core::Vizualizer::get_instance().process_slide(_btn_canvas, btn->property("id").toInt());
 
         btn->setVisible(true); 
-        btn->setIconSize(QSize(100,100));
         btn->setIcon(QIcon(pixmap));
+        btn->setIconSize(QSize(BTN_ICONE_WIDTH, BTN_ICONE_HEIGHT));
     }
 }
+

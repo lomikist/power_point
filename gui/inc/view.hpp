@@ -25,11 +25,16 @@ Q_OBJECT
 public:
     MyScreen(QWidget* parent = nullptr);
     ~MyScreen();
+
     /*QGraphicsScene* get_scene(){return _scene;}*/
     /*QGraphicsView*  get_view(){return _view;}*/
-    PaintArea*      get_paint_canvas(){return _paintCanvas;}
+
+    PaintArea*      get_paint_canvas() const;
+    int             get_current_slide() const;
     void            update_elements();
 private:
+    int _current_slide = 0;
+
     /*QGraphicsView*  _view;*/
     /*QGraphicsScene* _scene;*/
 

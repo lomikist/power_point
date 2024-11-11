@@ -7,6 +7,12 @@
 #include <memory>
 namespace gui 
 {
+
+const int PAREA_HEIGHT = 800;
+const int PAREA_WIDTH = 1000;
+const int BTN_ICONE_HEIGHT = 100;
+const int BTN_ICONE_WIDTH = 100;
+
 class GuiController : public core::IObserver
 {
 public: 

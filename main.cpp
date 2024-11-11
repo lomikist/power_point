@@ -8,7 +8,6 @@ int main (int argc, char *argv[])
     QApplication app(argc, argv);
 
     core::Controller& controller = core::Controller::get_instance();
-    controller.start();
 
     return app.exec();
 }
