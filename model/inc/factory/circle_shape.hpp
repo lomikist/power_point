@@ -11,10 +11,14 @@ private:
     protected:
         int _radius;
     public:
-    CircleAtribute(int radius, RGB color) : AShape::AAtribute(AShape::id, color) , _radius(radius)
-    {
-        AShape::id++;
-    };
+        CircleAtribute(int radius, RGB color) : AShape::AAtribute(AShape::id, color) , _radius(radius)
+        {
+            AShape::id++;
+        };
+        int get_radius()
+        {
+            return _radius;
+        }
     };
     CircleAtribute _atributes;
 public:
