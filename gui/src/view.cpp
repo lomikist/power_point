@@ -15,6 +15,7 @@
 #include "controller.hpp"
 #include "editor.hpp"
 #include "gui_controller.hpp"
+#include "logger.hpp"
 #include "qboxlayout.h"
 #include "qlineedit.h"
 #include "qnamespace.h"
@@ -95,7 +96,8 @@ void MyScreen::set_connections()
             update_elements();
         }catch (const std::exception& e)
         {
-            std::cout << "Error: " << e.what() << std::endl;
+            core::Logger::get_instance().notify_loggers(e.what());
+            /*std::cout << "Error: " << e.what() << std::endl;*/
         }
    });
 }
@@ -157,5 +159,10 @@ void MyScreen::draw_elements()
         btn->setIcon(QIcon(pixmap));
         btn->setIconSize(QSize(BTN_ICONE_WIDTH, BTN_ICONE_HEIGHT));
     }
+}
+
+QTextBrowser* MyScreen::get_text_browser()
+{
+    return _cmd_browser;
 }
 

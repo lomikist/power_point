@@ -1,7 +1,10 @@
 #include "controller.hpp"
 #include "editor.hpp"
 #include "gui_controller.hpp"
+#include "guilogger.hpp"
 #include "icanvas.hpp"
+#include "ilogger.hpp"
+#include "oslogger.hpp"
 #include "qcoreapplication.h"
 #include "qobjectdefs.h"
 #include "qpainter.h"
@@ -38,37 +41,13 @@ Controller::Controller()
     _gui_controller = std::make_shared<gui::GuiController>();
 
     _editor.set_model(_model);
-    _editor.addObserver(_gui_controller);
     _vizualizer.set_model(_model);
-
+    _editor.addObserver(_gui_controller);
+    _logger.add_logger(std::make_shared<OsLogger>(&std::cout));
+    _logger.add_logger(std::make_shared<GuiLogger>(_gui_controller->get_screen()->get_text_browser()));
 }
 
 Controller::~Controller()
-{};
-
-/*void Controller::process_args()*/
-/*{*/
-    /*while (true)*/
-    /*{*/
-    /*    try*/
-    /*    {*/
-    /*        QCoreApplication::processEvents();*/
-    /*        auto cmd = _parser->parse(std::cin);*/
-    /*        if (cmd)*/
-    /*        {*/
-    /*            cmd->execute();*/
-    /*        }*/
-    /*    }*/
-    /*    catch(std::exception& e)*/
-    /*    {*/
-    /*        std::cout << e.what() << std::endl;*/
-    /*    };*/
-    /*}*/
-/*};*/
-
-/*void Controller::start()*/
-/*{*/
-    /*std::thread parser_thread(&Controller::process_args, this);*/
-    /*parser_thread.detach();*/
-/*};*/
+{
+};
 

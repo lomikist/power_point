@@ -18,6 +18,7 @@ class GuiController : public core::IObserver
 public: 
     GuiController();
     void update() override;
+    std::shared_ptr<MyScreen> get_screen() const;
 private:
     std::shared_ptr<MyScreen> _screen = nullptr;
     std::shared_ptr<core::ICanvas> _gview_canvas = nullptr;

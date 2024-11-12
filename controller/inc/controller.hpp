@@ -5,6 +5,7 @@
 #include "gui_controller.hpp"
 #include "qtimer.h"
 #include "vizualize.hpp"
+#include "logger.hpp"
 #include "model.hpp"
 #include "parser.hpp"
 #include "view.hpp"
@@ -29,6 +30,7 @@ private:
 
     Editor& _editor = Editor::get_instance();
     Vizualizer& _vizualizer = Vizualizer::get_instance();
+    Logger& _logger = Logger::get_instance();
 };
 };
 #endif // !CONTROLLER

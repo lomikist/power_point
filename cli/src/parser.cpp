@@ -2,6 +2,8 @@
 #include "add_slide_com.hpp"
 #include "add_shape_com.hpp"
 #include "exit_com.hpp"
+#include "logger.hpp"
+#include "logger.hpp"
 #include "show_slide_com.hpp"
 #include "run_com.hpp"
 #include "icommand.hpp"
@@ -57,7 +59,8 @@ std::shared_ptr<ICommand> Parser::parse(std::istream& is)
                 return cmd;
         }
         catch (const std::exception& e) {
-            std::cout << e.what() << std::endl;
+            core::Logger::get_instance().notify_loggers(e.what());
+            /*std::cout << e.what() << std::endl;*/
         }
     }
     return nullptr;

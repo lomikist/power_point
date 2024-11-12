@@ -17,7 +17,6 @@ class Editor : public ISubject
 {
 private:
     Editor();
-    Editor(const Editor&);
     std::shared_ptr<model::Model> _model;
 public: 
     ~Editor();

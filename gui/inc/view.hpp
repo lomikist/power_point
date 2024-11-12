@@ -31,6 +31,7 @@ public:
 
     PaintArea*      get_paint_canvas() const;
     int             get_current_slide() const;
+    QTextBrowser*   get_text_browser();
     void            update_elements();
 private:
     int _current_slide = 0;

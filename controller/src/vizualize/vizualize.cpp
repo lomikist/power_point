@@ -1,6 +1,8 @@
 #include "vizualize.hpp"
 #include "circle_shape.hpp"
 #include "icanvas.hpp"
+#include "logger.hpp"
+#include "logger.hpp"
 #include "slide.hpp"
 #include <exception>
 
@@ -44,7 +46,8 @@ void Vizualizer::process_slide(std::shared_ptr<core::ICanvas> canvas, int index)
         };
     } catch (std::exception& e)
     {
-        std::cout << e.what();
+        core::Logger::get_instance().notify_loggers(e.what());
+        /*std::cout << e.what();*/
     }
 };
 
