@@ -19,7 +19,7 @@ public:
     /*PaintDeviceCanvas(QImage* image, QPainter* painter);*/
     PaintDeviceCanvas(QPainter* painter);
     void draw(const RectPtr& rect_shape) override;
-    void draw(const CirclePtr& circle_shape) override;
+    /*void draw(const CirclePtr& circle_shape) override;*/
 };
 
 }

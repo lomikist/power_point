@@ -5,7 +5,6 @@
 #include "qpixmap.h"
 #include "view.hpp"
 #include "qt_widget_wrapper.hpp"
-#include "qt_graphic_wrapper.hpp"
 #include <iostream>
 
 namespace core 
@@ -17,7 +16,7 @@ public:
     QtWrapper(QPainter* painter);
     virtual ~QtWrapper(){};
     virtual void draw(const RectPtr& rect_shape) override; 
-    virtual void draw(const CirclePtr& circle_shape) override; 
+    /*virtual void draw(const CirclePtr& circle_shape) override; */
 
 private:
     std::unique_ptr<ICanvas> _canvas_impl;

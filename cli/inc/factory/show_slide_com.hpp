@@ -19,6 +19,9 @@ private:
     void add_type(const std::string& arg);
     void register_options();
     std::map<std::string, std::function<void(const std::vector<std::string>&)>> _options;
+    std::unordered_map<std::string, Var_SID> _args;
+    
+    
 };
 }
 #endif // !SHOW_SLIDE_COM_HPP

@@ -38,13 +38,13 @@ Controller::Controller()
 {
     _parser         = std::make_unique<cli::Parser>();
     _model          = std::make_shared<model::Model>();
-    _gui_controller = std::make_shared<gui::GuiController>();
+    /*_gui_controller = std::make_shared<gui::GuiController>();*/
 
     _editor.set_model(_model);
     _vizualizer.set_model(_model);
-    _editor.addObserver(_gui_controller);
+    /*_editor.addObserver(_gui_controller);*/
     _logger.add_logger(std::make_shared<OsLogger>(&std::cout));
-    _logger.add_logger(std::make_shared<GuiLogger>(_gui_controller->get_screen()->get_text_browser()));
+    /*_logger.add_logger(std::make_shared<GuiLogger>(_gui_controller->get_screen()->get_text_browser()));*/
 }
 
 Controller::~Controller()

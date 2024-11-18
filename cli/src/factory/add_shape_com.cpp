@@ -1,6 +1,7 @@
 #include "add_shape_com.hpp"
 #include "editor.hpp"
 #include "parser.hpp"
+#include <algorithm>
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -16,85 +17,110 @@ AddShapeCom::AddShapeCom()
 
 void AddShapeCom::register_options()
 {
-    _options["-t"] = [this](const std::string& args){add_type(args);};
-    _options["-i"] = [this](const std::string& args){add_index(args);};
-    _options["-x"] = [this](const std::string& args){add_x(args);};
-    _options["-y"] = [this](const std::string& args){add_y(args);};
-    _options["-h"] = [this](const std::string& args){add_h(args);};
-    _options["-w"] = [this](const std::string& args){add_w(args);};
-    _options["-r"] = [this](const std::string& args){add_radius(args);};
-    _options["-c"] = [this](const std::string& args){add_color(args);};
+    _optional_funcs["-t"] = [this](const std::string& args){add_type(args);};
+    _optional_funcs["-i"] = [this](const std::string& args){add_index(args);};
+    _optional_funcs["-x"] = [this](const std::string& args){add_x(args);};
+    _optional_funcs["-y"] = [this](const std::string& args){add_y(args);};
+    _optional_funcs["-h"] = [this](const std::string& args){add_h(args);};
+    _optional_funcs["-w"] = [this](const std::string& args){add_w(args);};
+    _optional_funcs["-r"] = [this](const std::string& args){add_radius(args);};
+    _optional_funcs["-c"] = [this](const std::string& args){add_color(args);};
+
+    _valid_shape_atributes["circle"]    = {"-c", "-i", "-t"};
+    _valid_shape_atributes["rect"]      = {"-c", "-i", "-t"};
+    _valid_shape_atributes["textbox"]   = {"-c", "-i", "-content"};
+    _valid_shape_atributes["elipse"]    = {"-c", "-i", "-t" };
+
+    _valid_geometry = {"-x", "-y", "-w", "-h"};
 };
 
 void AddShapeCom::process_args(const std::vector<std::string>& tokens)
 {
-    for (int i = 0; i < tokens.size(); ++i)
+    for (size_t i = 0; i < tokens.size(); ++i)
     {
-        if (_options.find(tokens[i]) != _options.end())
+        if (_optional_funcs.find(tokens[i]) != _optional_funcs.end())
         {
-            std::vector<std::string> args(tokens.begin() + i, tokens.end());
-            _options[tokens[i]](tokens[i + 1]);
+            _optional_funcs[tokens[i]](tokens[i + 1]);
             i++;
         } else 
         {
-            throw std::runtime_error("CLI: OPTION NOT FOUND:" + tokens[i]);
+            throw std::runtime_error("CLI: option not exist: " + tokens[i]);
         }
-    }    
+    }
+    std::string type = std::get<std::string>(_atributes["-t"]);
+
+    if (_valid_shape_atributes.count(type) == 1) 
+    {
+        if (std::any_of(_atributes.begin(), _atributes.end(), [this](auto&& pair){
+            return _valid_shape_atributes.count(pair.first) == 0;
+        }))
+        {
+            throw std::runtime_error("CLI: some atributes not found.");
+        }
+
+        if (std::any_of(_geometery.begin(), _geometery.end(), [this](auto&& pair){
+            return std::find(_valid_geometry.begin(), _valid_geometry.end(), pair.first) == _valid_geometry.end();
+        }))
+        {
+            throw std::runtime_error("CLI: some geometry option not found.");
+        }
+    }
+    else 
+{
+        throw std::runtime_error("CLI: No valid shape.");
+    }
+
 };
 
 void AddShapeCom::add_x(const std::string& args)
 {
     int x = Parser::str_to_int(args);
-    _args["-x"] = x;
+    _geometery["-x"] = x;
 };
-
+ 
 void AddShapeCom::add_y(const std::string& args)
 {
     int y = Parser::str_to_int(args);
-    _args["-y"] = y;
-};
-
-void AddShapeCom::add_type(const std::string& args)
-{
-    _args["-t"] = args;
-};
-
-void AddShapeCom::add_h(const std::string& args)
-{
-    int h = Parser::str_to_int(args);
-    _args["-h"] = h;
+    _geometery["-y"] = y;
 };
 
 void AddShapeCom::add_w(const std::string& args)
 {
     int w = Parser::str_to_int(args);
-    _args["-w"] = w;
+    _geometery["-w"] = w;
+};
+
+void AddShapeCom::add_h(const std::string& args)
+{
+    int h = Parser::str_to_int(args);
+    _geometery["-h"] = h;
+};
+
+void AddShapeCom::add_type(const std::string& args)
+{
+    _atributes["-t"] = args;
 };
 
 void AddShapeCom::add_color(const std::string& args)
 {
-    _args["-c"] = args;
+    _atributes["-c"] = args;
 };
 
 void AddShapeCom::add_index(const std::string& args)
 {
     int index = Parser::str_to_int(args);
-    _args["-i"] = index;
+    _atributes["-i"] = index;
 };
 
 void AddShapeCom::add_radius(const std::string& args)
 {
-    int index = Parser::str_to_int(args);
-    _args["-r"] = index;
+    int radius = Parser::str_to_int(args);
+    _atributes["-r"] = radius;
 };
 
 void AddShapeCom::execute()
 {
-    if (_args.find("-i") == _args.end())
-        throw std::runtime_error("CLI: Enter a valid slide index with -i");
-
     core::Editor& editor = core::Editor::get_instance();
-    editor.add_shape(_args);
+    editor.add_item(_geometery, _atributes);
 };
-
 

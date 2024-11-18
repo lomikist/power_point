@@ -60,7 +60,6 @@ std::shared_ptr<ICommand> Parser::parse(std::istream& is)
         }
         catch (const std::exception& e) {
             core::Logger::get_instance().notify_loggers(e.what());
-            /*std::cout << e.what() << std::endl;*/
         }
     }
     return nullptr;

@@ -20,6 +20,8 @@ private:
     void add_index(const std::string& args);
     void register_options();
     std::map<std::string, F_vs> _options;
+    std::unordered_map<std::string, Var_SID> _args;
+
 };
 }
 #endif // !ADD_SLIDE_COM_HPP

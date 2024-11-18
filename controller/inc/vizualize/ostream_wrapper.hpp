@@ -11,7 +11,7 @@ public:
     ~OstreamWrapper() = default;
     OstreamWrapper(std::ostream& device);
     virtual void draw(const RectPtr& rect_shape) override; 
-    virtual void draw(const CirclePtr& circle_shape) override; 
+    /*virtual void draw(const CirclePtr& circle_shape) override; */
 private:
     std::ostream* _device;
 };
