@@ -1,28 +1,24 @@
 #include "ostream_wrapper.hpp"
-#include <strstream>
 
 using namespace core;
 
-void OstreamWrapper::draw(const RectPtr& rect_shape)
+OstreamWrapper::OstreamWrapper(std::ostream& device) : _device(&device)
 {
-    auto geometry = rect_shape->get_geometery();
-    *_device << "x - " << geometry.getX() << 
-              " y - " << geometry.getY() <<
-              " width - " << geometry.getW() <<
-              " height - " << geometry.getH() << std::endl;     
 }
 
-/*void OstreamWrapper::draw(const CirclePtr& circle_shape)*/
-/*{*/
-/*    auto geometry = circle_shape->getGeometry();*/
-/*    auto atribute = circle_shape->getAtributes();*/
-/*    *_device << "x - " << geometry.getX() <<*/
-/*              " y - " << geometry.getY() <<*/
-/*              " r - " << atribute.get_radius() << std::endl;     */
-/*}*/
-
-OstreamWrapper::OstreamWrapper(std::ostream& device)
+void OstreamWrapper::draw_line(int x, int y, int w, int h) 
 {
-    _device = &device;
-}
-
+    /*_device->drawLine(x, y, w, h);*/
+};
+void OstreamWrapper::draw_elips(int x, int y, int w, int h)
+{
+    /*_device->drawEllipse(x, y, w, h);*/
+};
+void OstreamWrapper::draw_rect(int x, int y, int w, int h) 
+{
+    /*_device->drawRect(x, y, w, h);*/
+};
+void OstreamWrapper::draw_text(int x, int y, int w, int h, const std::string& content) 
+{
+    /*_device->drawText(x, y, QString::fromStdString(content));*/
+};

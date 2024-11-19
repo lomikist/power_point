@@ -22,6 +22,7 @@ INCLUDEPATH += \
     $$PWD/controller/inc/observer \
     $$PWD/controller/inc/logger \
     $$PWD/controller/inc/vizualize \
+    $$PWD/controller/inc/vizualize/factory \
     $$PWD/model/inc \
     $$PWD/model/inc/factory \
     $$PWD/gui/inc
@@ -34,6 +35,7 @@ SOURCES += \
     $$files($$PWD/controller/src/observer/*.cpp) \
     $$files($$PWD/controller/src/logger/*.cpp) \
     $$files($$PWD/controller/src/vizualize/*.cpp) \
+    $$files($$PWD/controller/src/vizualize/factory/*.cpp) \
     $$files($$PWD/model/src/*.cpp) \
     $$files($$PWD/model/src/factory/*.cpp) \
     $$files($$PWD/gui/src/*.cpp) \
@@ -47,6 +49,7 @@ HEADERS += \
     $$files($$PWD/controller/inc/observer/*.hpp) \
     $$files($$PWD/controller/inc/logger/*.hpp) \
     $$files($$PWD/controller/inc/vizualize/*.hpp) \
+    $$files($$PWD/controller/src/vizualize/factory/*.hpp) \
     $$files($$PWD/model/inc/*.hpp) \
     $$files($$PWD/model/inc/factory/*.hpp) \
     $$files($$PWD/gui/inc/*.hpp) \

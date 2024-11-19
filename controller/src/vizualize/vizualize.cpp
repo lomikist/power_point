@@ -1,10 +1,10 @@
 #include "vizualize.hpp"
-#include "circle_shape.hpp"
 #include "icanvas.hpp"
 #include "logger.hpp"
 #include "logger.hpp"
 #include "slide.hpp"
 #include <exception>
+#include <string>
 
 using namespace core;
 
@@ -31,23 +31,14 @@ void Vizualizer::process_slide(std::shared_ptr<core::ICanvas> canvas, int index)
 {
     try {
         auto slide = _model->get_slide(index);
-        for (const auto& shape : slide->get_content())
+        for (auto& item : slide->get_content())
         {
-            auto circle_shape = std::dynamic_pointer_cast<model::CircleShape>(shape);
-            auto rect_shape = std::dynamic_pointer_cast<model::RectShape>(shape);
-             
-            if (circle_shape)
-            {
-                canvas->draw(circle_shape);
-            } else if (rect_shape)
-            {
-                canvas->draw(rect_shape);
-            }
+            std::string type = std::get<std::string>(item->get_atributes().at("-t"));
+            _shape_creator.create_shape(type, item)->draw(canvas);
         };
     } catch (std::exception& e)
     {
         core::Logger::get_instance().notify_loggers(e.what());
-        /*std::cout << e.what();*/
     }
 };
 

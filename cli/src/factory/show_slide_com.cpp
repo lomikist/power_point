@@ -57,7 +57,7 @@ void ShowSlideCom::execute()
 
 void ShowSlideCom::process_args(const std::vector<std::string>& tokens)
 {
-    for (int i = 0; i < tokens.size(); ++i)
+    for (size_t i = 0; i < tokens.size(); ++i)
     {
         if (_options.find(tokens[i]) != _options.end())
         {

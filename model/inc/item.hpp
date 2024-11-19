@@ -51,13 +51,16 @@ private:
 class Item
 {
 public:
-    Item(int x, int y, int w, int h, const cli::Var_SID& atributes) : _geometry(x, y, w, h), _atributes(atributes) {}
+    using Atributes = std::unordered_map<std::string, cli::Var_SID>;
+
+    Item(int x, int y, int w, int h, const Atributes atributes) : _geometry(x, y, w, h), _atributes(atributes) {}
     virtual ~Item() = default;
     Geometry get_geometery(){return _geometry;};
+    const Atributes& get_atributes(){return _atributes;};
 protected:
     inline static int id = 0;
     Geometry _geometry;
-    cli::Var_SID _atributes;
+    Atributes _atributes;
 };
 
 }

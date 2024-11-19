@@ -16,7 +16,7 @@ class Slide
 public:
     Slide(const std::string& title);
     void                add_item(std::shared_ptr<Item> shape);
-    void                remove_item(int index); 
+    void                remove_item(size_t index); 
     int                 get_id();
     const Content&      get_content() const; 
     Content&            get_content(); 

@@ -28,7 +28,7 @@ void AddShapeCom::register_options()
 
     _valid_shape_atributes["circle"]    = {"-c", "-i", "-t"};
     _valid_shape_atributes["rect"]      = {"-c", "-i", "-t"};
-    _valid_shape_atributes["textbox"]   = {"-c", "-i", "-content"};
+    _valid_shape_atributes["textbox"]   = {"-c", "-i", "-t","-content"};
     _valid_shape_atributes["elipse"]    = {"-c", "-i", "-t" };
 
     _valid_geometry = {"-x", "-y", "-w", "-h"};
@@ -51,19 +51,20 @@ void AddShapeCom::process_args(const std::vector<std::string>& tokens)
 
     if (_valid_shape_atributes.count(type) == 1) 
     {
-        if (std::any_of(_atributes.begin(), _atributes.end(), [this](auto&& pair){
-            return _valid_shape_atributes.count(pair.first) == 0;
-        }))
-        {
-            throw std::runtime_error("CLI: some atributes not found.");
-        }
-
-        if (std::any_of(_geometery.begin(), _geometery.end(), [this](auto&& pair){
-            return std::find(_valid_geometry.begin(), _valid_geometry.end(), pair.first) == _valid_geometry.end();
-        }))
-        {
-            throw std::runtime_error("CLI: some geometry option not found.");
-        }
+        std::any_of(_atributes.begin(), _atributes.end(), [&](auto&& pair){
+            if (std::find(_valid_shape_atributes[type].begin(),
+                             _valid_shape_atributes[type].end(),
+                             pair.first) == _valid_shape_atributes[type].end()) 
+                throw std::runtime_error("CLI: some atributes " + pair.first + " not found.");
+            else
+                return true;
+        });
+        std::any_of(_geometery.begin(), _geometery.end(), [this](auto&& pair){
+            if (std::find(_valid_geometry.begin(), _valid_geometry.end(), pair.first) == _valid_geometry.end())
+                throw std::runtime_error("CLI: some geometry " + pair.first + " option not found.");
+            else
+                return true;
+        });
     }
     else 
 {
