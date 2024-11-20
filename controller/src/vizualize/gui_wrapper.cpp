@@ -11,7 +11,7 @@ void GuiPainterWrapper::draw_line(int x, int y, int w, int h)
 {
     _device->drawLine(x, y, w, h);
 };
-void GuiPainterWrapper::draw_elips(int x, int y, int w, int h)
+void GuiPainterWrapper::draw_elipse(int x, int y, int w, int h)
 {
     _device->drawEllipse(x, y, w, h);
 };

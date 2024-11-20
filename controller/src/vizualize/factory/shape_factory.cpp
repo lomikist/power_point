@@ -2,19 +2,25 @@
 #include "item.hpp"
 #include "rect_shape.hpp"
 #include "circle_shape.hpp"
+#include "textbox_shape.hpp"
+
 #include <memory>
 
 using namespace core;
 
 ShapeFactory::ShapeFactory()
 {
-    register_shape("circle", [](std::shared_ptr<model::Item>& item)
+    register_shape("elipse", [](std::shared_ptr<model::Item>& item)
     {
         return std::make_shared<core::CircleShape>(item);
     });
     register_shape("rect", [](std::shared_ptr<model::Item>& item)
     {
         return std::make_shared<core::RectShape>(item);
+    });
+    register_shape("textbox", [](std::shared_ptr<model::Item>& item)
+    {
+        return std::make_shared<core::TextBoxShape>(item);
     });
 }
 

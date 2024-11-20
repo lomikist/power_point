@@ -1,7 +1,6 @@
 #ifndef SHAPE_FACTORY_HPP
 #define SHAPE_FACTORY_HPP
 
-#include <stdexcept>
 #include "ishape.hpp"
 
 namespace core

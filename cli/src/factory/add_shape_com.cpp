@@ -25,8 +25,8 @@ void AddShapeCom::register_options()
     _optional_funcs["-w"] = [this](const std::string& args){add_w(args);};
     _optional_funcs["-r"] = [this](const std::string& args){add_radius(args);};
     _optional_funcs["-c"] = [this](const std::string& args){add_color(args);};
+    _optional_funcs["-content"] = [this](const std::string& args){add_content(args);};
 
-    _valid_shape_atributes["circle"]    = {"-c", "-i", "-t"};
     _valid_shape_atributes["rect"]      = {"-c", "-i", "-t"};
     _valid_shape_atributes["textbox"]   = {"-c", "-i", "-t","-content"};
     _valid_shape_atributes["elipse"]    = {"-c", "-i", "-t" };
@@ -105,6 +105,11 @@ void AddShapeCom::add_type(const std::string& args)
 void AddShapeCom::add_color(const std::string& args)
 {
     _atributes["-c"] = args;
+};
+
+void AddShapeCom::add_content(const std::string& args)
+{
+    _atributes["-content"] = args;
 };
 
 void AddShapeCom::add_index(const std::string& args)

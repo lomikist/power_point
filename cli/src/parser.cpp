@@ -100,7 +100,7 @@ void Parser::validate_tokens()
 {
     if (_tokens[0] != TokenType::WORD)
         std::runtime_error("CLI: NOT VALID COMMAND");
-    for (int i = 0; i < _tokens.size() - 1; ++i)
+    for (size_t i = 0; i < _tokens.size() - 1; ++i)
     {
         switch (_tokens[i])
         {

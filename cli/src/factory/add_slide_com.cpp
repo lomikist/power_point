@@ -39,6 +39,7 @@ void AddSlideCom::execute()
 
 void AddSlideCom::process_args(const std::vector<std::string>& tokens)
 {
+    //TODO if not zugy pawol
     for (size_t i = 0; i < tokens.size(); ++i)
     {
         if (_options.find(tokens[i]) != _options.end())

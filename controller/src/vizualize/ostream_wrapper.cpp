@@ -10,7 +10,7 @@ void OstreamWrapper::draw_line(int x, int y, int w, int h)
 {
     /*_device->drawLine(x, y, w, h);*/
 };
-void OstreamWrapper::draw_elips(int x, int y, int w, int h)
+void OstreamWrapper::draw_elipse(int x, int y, int w, int h)
 {
     /*_device->drawEllipse(x, y, w, h);*/
 };

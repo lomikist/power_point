@@ -28,11 +28,9 @@ public:
                   const std::unordered_map<std::string, cli::Var_SID>& atributes);
     void remove_item(int slide_index, int shape_index);
     void remove_slide(int index);
-    //////////////////////
-    ///its not should be here 
+
     const std::vector<std::shared_ptr<model::Slide>>& get_slides() const;
 
-    ////////////////////
     void notifyObservers() override;
     void addObserver(std::shared_ptr<IObserver> new_obserber) override; 
 };
