@@ -1,13 +1,13 @@
 #include "slide.hpp"
 
-namespace model
-{
+using namespace model;
+
 Slide::Slide(const std::string& title) : _title(title), _id(s_id)
 {
     Slide::s_id++;
 };
 
-void Slide::add_shape(std::shared_ptr<AShape> shape)
+void Slide::add_item(std::shared_ptr<Item> shape)
 {
     _shapes.push_back(shape);
 };
@@ -38,9 +38,9 @@ std::string&  Slide::get_title()
 };
 
 
-void Slide::remove_shape(int index)
+void Slide::remove_item(size_t index)
 {
-    if (index > _shapes.size() || index < 0)
+    if (index < _shapes.size())
         _shapes.erase(_shapes.begin() + index);
 };
-}
+

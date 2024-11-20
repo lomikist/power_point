@@ -1,24 +1,10 @@
 #include "controller.hpp"
 #include "editor.hpp"
-#include "gui_controller.hpp"
 #include "guilogger.hpp"
-#include "icanvas.hpp"
-#include "ilogger.hpp"
 #include "oslogger.hpp"
-#include "qcoreapplication.h"
-#include "qobjectdefs.h"
-#include "qpainter.h"
-#include "qt_wrapper.hpp"
-#include "view.hpp"
 #include <ctime>
-#include <thread>
-#include <algorithm>
-#include <exception>
-#include <fstream>
 #include <iostream>
 #include <memory>
-#include <ostream>
-#include <stdexcept>
 #include <QTimer>
 
 using namespace core;

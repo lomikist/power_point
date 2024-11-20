@@ -1,23 +1,22 @@
-#ifndef OSTREAM_WRAPPER_HPP
-#define OSTREAM_WRAPPER_HPP
+#ifndef GUI_WRAPPER_HPP
+#define GUI_WRAPPER_HPP
 
 #include "icanvas.hpp"
-#include <iostream>
-namespace core 
+#include "qpainter.h"
+
+namespace core
 {
-class OstreamWrapper : public ICanvas
+class GuiPainterWrapper : public ICanvas
 {
 public:
-    ~OstreamWrapper() = default;
-    OstreamWrapper(std::ostream& device);
+    virtual ~GuiPainterWrapper() = default;
+    GuiPainterWrapper(QPainter* painter);
     virtual void draw_line(int x, int y, int w, int h) override;
     virtual void draw_elipse(int x, int y, int w, int h) override;
     virtual void draw_rect(int x, int y, int w, int h) override;
     virtual void draw_text(int x, int y, int w, int h, const std::string& content) override;
 private:
-    std::ostream* _device;
+    QPainter* _device;
 };
 }
-
-
-#endif// !OSTREAM_WRAPPER_HPP
+#endif // !GUI_WRAPPER_HPP

@@ -4,19 +4,19 @@
 #include <ostream>
 #include <vector>
 #include <string>
-#include "shape.hpp"
+#include "item.hpp"
 #include <iostream>
 namespace model
 {
 
-using Content = std::vector<std::shared_ptr<AShape>>;
+using Content = std::vector<std::shared_ptr<Item>>;
 
 class Slide 
 {
 public:
     Slide(const std::string& title);
-    void                add_shape(std::shared_ptr<AShape> shape);
-    void                remove_shape(int index); 
+    void                add_item(std::shared_ptr<Item> shape);
+    void                remove_item(size_t index); 
     int                 get_id();
     const Content&      get_content() const; 
     Content&            get_content(); 

@@ -10,22 +10,14 @@
 #include <QGraphicsView>
 #include <QWheelEvent>
 #include <QWidget>
-#include <algorithm>
 #include <sstream>
 #include "controller.hpp"
 #include "editor.hpp"
-#include "gui_controller.hpp"
 #include "logger.hpp"
 #include "qboxlayout.h"
 #include "qlineedit.h"
 #include "qnamespace.h"
-#include "qpainter.h"
-#include "qpen.h"
-#include "qpixmap.h"
-#include "qpushbutton.h"
-#include "qt_wrapper.hpp"
-#include "slide.hpp"
-#include "vizualize.hpp"
+#include "gui_wrapper.hpp"
 #include "view.hpp"
 
 using namespace gui;
@@ -97,7 +89,6 @@ void MyScreen::set_connections()
         }catch (const std::exception& e)
         {
             core::Logger::get_instance().notify_loggers(e.what());
-            /*std::cout << "Error: " << e.what() << std::endl;*/
         }
    });
 }
@@ -121,7 +112,7 @@ void MyScreen::update_elements()
                     _current_slide = slide->get_id();
                     _paintCanvas->getImage()->fill(Qt::white);
 
-                    auto _pview_canvas = std::make_shared<core::QtWrapper>(_paintCanvas->getPainter());
+                    auto _pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paintCanvas->getPainter());
                     core::Vizualizer::get_instance().process_slide(_pview_canvas, slide->get_id());
 
                     _paintCanvas->repaint();
@@ -152,7 +143,7 @@ void MyScreen::draw_elements()
         slide_list_painter.setPen(QPen(Qt::black,3));
         slide_list_painter.setBrush(QBrush(Qt::red));
 
-        auto _btn_canvas = std::make_shared<core::QtWrapper>(&slide_list_painter);
+        auto _btn_canvas = std::make_shared<core::GuiPainterWrapper>(&slide_list_painter);
         core::Vizualizer::get_instance().process_slide(_btn_canvas, btn->property("id").toInt());
 
         btn->setVisible(true); 

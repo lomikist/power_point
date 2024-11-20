@@ -12,11 +12,11 @@
 #include <cstddef>
 #include <istream>
 #include <memory>
-#include <ostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
 #include <algorithm>
+
 using namespace cli;
 
 Parser::Parser()
@@ -60,7 +60,6 @@ std::shared_ptr<ICommand> Parser::parse(std::istream& is)
         }
         catch (const std::exception& e) {
             core::Logger::get_instance().notify_loggers(e.what());
-            /*std::cout << e.what() << std::endl;*/
         }
     }
     return nullptr;
@@ -101,7 +100,7 @@ void Parser::validate_tokens()
 {
     if (_tokens[0] != TokenType::WORD)
         std::runtime_error("CLI: NOT VALID COMMAND");
-    for (int i = 0; i < _tokens.size() - 1; ++i)
+    for (size_t i = 0; i < _tokens.size() - 1; ++i)
     {
         switch (_tokens[i])
         {

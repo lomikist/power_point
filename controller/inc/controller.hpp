@@ -17,20 +17,18 @@ class Controller : public std::enable_shared_from_this<Controller>
 private:
     QTimer timer;
     Controller ();
-    /*void process_args();*/
 public:
     ~Controller ();
     static Controller&  get_instance();
     cli::Parser&        get_parser();
-    /*void                start();*/
 private:
     std::shared_ptr<gui::GuiController> _gui_controller;
     std::shared_ptr<model::Model> _model;
     std::unique_ptr<cli::Parser> _parser;
 
-    Editor& _editor = Editor::get_instance();
+    Editor&     _editor = Editor::get_instance();
     Vizualizer& _vizualizer = Vizualizer::get_instance();
-    Logger& _logger = Logger::get_instance();
+    Logger&     _logger = Logger::get_instance();
 };
 };
 #endif // !CONTROLLER
