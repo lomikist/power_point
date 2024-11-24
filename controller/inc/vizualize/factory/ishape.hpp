@@ -3,13 +3,14 @@
 
 #include "icanvas.hpp"
 #include "item.hpp"
+#include <memory>
 
 namespace core
 {
 struct Ishape 
 {
-    Ishape(std::shared_ptr<model::Item>& item):_item(item){};
-    virtual ~Ishape() = default;
+    Ishape(const model::Item& item) : _item(std::make_shared<model::Item>(item)){};
+    virtual ~Ishape(){};
     virtual void draw(std::shared_ptr<ICanvas> canvas) = 0; 
     std::shared_ptr<model::Item> _item;
 };

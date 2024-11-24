@@ -9,7 +9,7 @@ namespace core
 class CircleShape : public Ishape 
 {
 public:
-    CircleShape(std::shared_ptr<model::Item>& item) : Ishape(item){};
+    CircleShape(const model::Item& item) : Ishape(item){};
     virtual ~CircleShape() = default;
     virtual void draw(std::shared_ptr<ICanvas> canvas) override;
 private:

@@ -1,17 +1,12 @@
 #include "editor.hpp"
 #include "icommand.hpp"
 #include "iobserver.hpp"
+#include "item.hpp"
 #include <memory>
 #include <string>
 #include <unordered_map>
 
 using namespace core;
-
-Editor::Editor()
-{};
-
-Editor::~Editor()
-{};
 
 Editor& Editor::get_instance()
 {
@@ -24,9 +19,8 @@ void Editor::set_model(std::shared_ptr<model::Model> model)
     _model = std::move(model); 
 };
 
-
-void Editor::add_item(const std::unordered_map<std::string, cli::Var_SID>& geometery,
-                      const std::unordered_map<std::string, cli::Var_SID>& atributes)
+void Editor::add_item(const model::Atributes& geometery,
+                      const model::Atributes& atributes)
 {
     int index = std::get<int>(atributes.at("-i"));
     int x = std::get<int>(geometery.at("-x"));
@@ -34,27 +28,29 @@ void Editor::add_item(const std::unordered_map<std::string, cli::Var_SID>& geome
     int w = std::get<int>(geometery.at("-w"));
     int h = std::get<int>(geometery.at("-h"));
 
-    _model->get_slide(index)->add_item(std::make_shared<model::Item>(x, y, w, h, atributes));
+    _model->get_slide(index).add_item(model::Item(x, y, w, h, atributes));
+    save_state();
     notifyObservers();
 };
 
 void Editor::remove_item(int slide_index, int shape_index)
 {
-    _model->get_slide(slide_index)->remove_item(shape_index);
+    _model->get_slide(slide_index).remove_item(shape_index);
+    save_state();
     notifyObservers();
 };
 
 void Editor::add_slide(int index, const std::string& name)
 {
-    _model->add_slide(std::make_shared<model::Slide>(name), index);
-
+    _model->add_slide(model::Slide(name), index);
+    save_state();
     notifyObservers();
 };
 
 void Editor::remove_slide(int slide_index)
 {
     _model->remove_slide(slide_index);
-    
+    save_state();
     notifyObservers();
 };
 
@@ -69,11 +65,38 @@ void Editor::notifyObservers()
 void Editor::addObserver(std::shared_ptr<IObserver> new_observer) 
 {
     _observers.push_back(new_observer); 
-}; 
+} 
 
-////////////////////////
-
-const std::vector<std::shared_ptr<model::Slide>>& Editor::get_slides() const
+void Editor::save_state()
 {
-    return _model->get_slides();
+    if (_model)
+    {
+        _undo_stack.push(model::ModelMemento(_model->get_slides()));
+        while (!_rendo_stack.empty()) {
+            _rendo_stack.pop();
+        }
+    }
 }
+
+void Editor::undo_state()
+{
+    if (_model && !_undo_stack.empty())
+    {
+        _rendo_stack.push(_undo_stack.top().get_state());
+        _undo_stack.pop();
+        _model->set_slides(_undo_stack.top().get_state());
+    }
+    notifyObservers();
+}
+
+void Editor::rendo_state()
+{
+    if (_model && !_rendo_stack.empty())
+    {
+        _model->set_slides(_rendo_stack.top().get_state()); 
+        _undo_stack.push(_rendo_stack.top());
+        _rendo_stack.pop();
+    }
+    notifyObservers();
+};
+

@@ -12,12 +12,13 @@ namespace core
 class Vizualizer 
 {
 public:
-    ~Vizualizer();
+    ~Vizualizer(){};
     static Vizualizer& get_instance();
     void process_slide(std::shared_ptr<core::ICanvas> canvas, int index);
     void set_model(std::shared_ptr<model::Model> model); 
+    const std::vector<model::Slide>& get_slides() const;
 private:
-    Vizualizer();
+    Vizualizer(){};
     std::shared_ptr<model::Model> _model;
     ShapeFactory _shape_creator;
 };

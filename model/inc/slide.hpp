@@ -8,20 +8,19 @@
 #include <iostream>
 namespace model
 {
-
-using Content = std::vector<std::shared_ptr<Item>>;
+using Content = std::vector<Item>;
 
 class Slide 
 {
 public:
     Slide(const std::string& title);
-    void                add_item(std::shared_ptr<Item> shape);
+    void                add_item(const Item& shape);
     void                remove_item(size_t index); 
-    int                 get_id();
+    int                 get_id() const;
     const Content&      get_content() const; 
-    Content&            get_content(); 
+    void                set_content(const Content& content); 
     const std::string&  get_title() const;
-    std::string&  get_title();
+    void                set_title(const std::string& title);
 private:
     inline static int s_id = 0;
     Content     _shapes;

@@ -10,7 +10,7 @@ namespace core
 class TextBoxShape : public Ishape 
 {
 public:
-    TextBoxShape(std::shared_ptr<model::Item>& item) : Ishape(item){};
+    TextBoxShape(const model::Item& item) : Ishape(item){};
     virtual ~TextBoxShape() = default;
     virtual void draw(std::shared_ptr<ICanvas> canvas) override;
 private:
