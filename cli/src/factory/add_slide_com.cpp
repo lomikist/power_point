@@ -10,10 +10,6 @@ using namespace cli;
 
 AddSlideCom::AddSlideCom()
 {
-    register_options();  
-};
-void AddSlideCom::register_options()
-{
     _options["-n"] = [this](const std::string& args){
         add_title(args); 
     };
