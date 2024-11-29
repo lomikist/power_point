@@ -20,6 +20,10 @@ cli::Parser& Controller::get_parser()
     return *_parser;
 };
 
+std::shared_ptr<gui::GuiController> Controller::get_guicontroller(){
+    return _gui_controller;
+};
+
 Controller::Controller()
 {
     _parser         = std::make_unique<cli::Parser>();

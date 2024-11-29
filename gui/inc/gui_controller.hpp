@@ -19,9 +19,9 @@ public:
     GuiController();
     void update() override;
     std::shared_ptr<MyScreen> get_screen() const;
+    void save_img(const std::string& path);
 private:
     std::shared_ptr<MyScreen> _screen = nullptr;
-    std::shared_ptr<core::ICanvas> _gview_canvas = nullptr;
     std::shared_ptr<core::ICanvas> _pview_canvas = nullptr;
 };
 }

@@ -12,7 +12,8 @@
 
 namespace core
 {
-class Controller : public std::enable_shared_from_this<Controller> 
+/*class Controller : public std::enable_shared_from_this<Controller> */
+class Controller 
 {
 private:
     QTimer timer;
@@ -21,6 +22,8 @@ public:
     ~Controller ();
     static Controller&  get_instance();
     cli::Parser&        get_parser();
+    std::shared_ptr<gui::GuiController> get_guicontroller();
+
 private:
     std::shared_ptr<gui::GuiController> _gui_controller;
     std::shared_ptr<model::Model> _model;
