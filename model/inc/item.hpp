@@ -43,10 +43,12 @@ public:
     Atributes& get_atributes();
     void set_geometer(Geometry);
     void set_atributes(const Atributes& other);
-protected:
-    inline static int id = 0;
+    int get_id();
+private:
+    inline static int s_id = 0;
     Geometry _geometry;
     Atributes _atributes;
+    int _id;
 };
 
 }

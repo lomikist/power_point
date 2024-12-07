@@ -5,27 +5,20 @@
 #include "slide.hpp"
 namespace model
 {
+
+using Page = std::shared_ptr<Slide>;
+
 class Model
 {
-private:
-    std::vector<Slide> _slides;
 public:
-    void add_slide(const Slide& new_slide, int index);
-    void remove_slide(int index);
-    const Slide& get_slide(int index) const;
-    const std::vector<Slide>& get_slides() const;
-    Slide& get_slide(int index);
-    std::vector<Slide>& get_slides();
-    void set_slides(const std::vector<Slide>& slides);
-};
-
-class ModelMemento 
-{
+    std::vector<Page> get_slides() const;
+    void              add_slide(Page new_slide, int index);
+    void              remove_slide(int index);
+    Page              get_slide(int index) const;
+    Page              get_slide_by_ID(int id) const;
+    void              set_slides(std::vector<Page> slides);
 private:
-    std::vector<Slide> _slides_state;
-public:
-    ModelMemento(const std::vector<Slide>& state);
-    const std::vector<Slide>& get_state() const;
+    std::vector<Page> _slides;
 };
 };
 #endif //  MODEL_HPP

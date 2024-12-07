@@ -13,7 +13,7 @@ void RendoCom::execute()
         count = 1;
     while (count > 0)
     {
-        core::Editor::get_instance().rendo_state();
+        core::Editor::get_instance().rendo_action();
         count--;
     }
 };

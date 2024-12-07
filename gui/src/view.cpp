@@ -99,22 +99,22 @@ void MyScreen::set_connections()
 
 void MyScreen::update_elements()
 {
-    auto slides = core::Vizualizer::get_instance().get_slides();
+    auto slides = core::Controller::get_instance().get_model()->get_slides();
 
     if (!slides.empty())
     {
         for (auto&& slide : slides)
         {
             auto button_it = std::find_if(_slideListVector.begin(), _slideListVector.end(), [&](QPushButton* elem){
-                return elem->property("id") == QString::number(slide.get_id()); 
+                return elem->property("id") == QString::number(slide->get_id()); 
             });
             if (button_it == _slideListVector.end())
             {
-                auto button = new QPushButton(QString::fromStdString(slide.get_title() + " " + std::to_string(slide.get_id())), nullptr);
+                auto button = new QPushButton(QString::fromStdString(slide->get_title() + " " + std::to_string(slide->get_id())), nullptr);
 
                 QObject::connect(button, &QPushButton::clicked, [slide, this]()
                 {
-                    _current_slide = slide.get_id();
+                    _current_slide = slide->get_id();
                     _paintCanvas->getImage()->fill(Qt::white);
 
                     auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paintCanvas->getPainter());
@@ -123,8 +123,8 @@ void MyScreen::update_elements()
                     _paintCanvas->repaint();
                 });
 
-                button->setProperty("title", QString::fromStdString(slide.get_title()));
-                button->setProperty("id", QString::number(slide.get_id()));
+                button->setProperty("title", QString::fromStdString(slide->get_title()));
+                button->setProperty("id", QString::number(slide->get_id()));
 
                 _slideListLayout->addWidget(button);
                 _slideListVector.push_back(button);

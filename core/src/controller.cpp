@@ -24,6 +24,11 @@ std::shared_ptr<gui::GuiController> Controller::get_guicontroller(){
     return _gui_controller;
 };
 
+std::shared_ptr<model::Model> Controller::get_model()
+{
+    return _model;
+};
+
 Controller::Controller()
 {
     _parser         = std::make_unique<cli::Parser>();
@@ -35,9 +40,9 @@ Controller::Controller()
     _editor.addObserver(_gui_controller);
     _logger.add_logger(std::make_shared<OsLogger>(&std::cout));
     _logger.add_logger(std::make_shared<GuiLogger>(_gui_controller->get_screen()->get_text_browser()));
-}
+};
 
 Controller::~Controller()
-{
-};
+{};
+
 

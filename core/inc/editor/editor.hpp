@@ -1,5 +1,6 @@
 #ifndef EDITOR_HPP
 #define EDITOR_HPP
+#include "iaction.hpp"
 #include "icommand.hpp"
 #include "iobserver.hpp"
 #include "isubject.hpp"
@@ -18,22 +19,20 @@ public:
     ~Editor(){};
     static Editor& get_instance();
     void set_model(std::shared_ptr<model::Model> model); 
-    void add_slide(int index, const std::string& name);
-    void add_item(const  model::Atributes& geometery, const  model::Atributes& atributes);
-    void remove_item(int slide_index, int shape_index);
-    void remove_slide(int index);
     void notifyObservers() override;
     void addObserver(std::shared_ptr<IObserver> new_obserber) override; 
-
-    void save_state();
-    void undo_state();
-    void rendo_state();
+    
+    void process_action(std::shared_ptr<Iaction> action);
+    void undo_action();
+    void rendo_action();
 private:
     Editor(){};
     std::shared_ptr<model::Model> _model;
-    std::stack<model::ModelMemento> _undo_stack;
-    std::stack<model::ModelMemento> _rendo_stack;
+    std::stack<std::shared_ptr<Iaction>> _undo_stack;
+    std::stack<std::shared_ptr<Iaction>> _rendo_stack;
 };
 }
 
 #endif // !EDITOR_HPP
+
+

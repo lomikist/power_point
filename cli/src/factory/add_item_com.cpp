@@ -1,5 +1,7 @@
-#include "add_shape_com.hpp"
+#include "add_item_com.hpp"
+#include "add_item_action.hpp"
 #include "editor.hpp"
+#include "item.hpp"
 #include "parser.hpp"
 #include <algorithm>
 #include <memory>
@@ -10,12 +12,12 @@
 
 using namespace cli;
 
-AddShapeCom::AddShapeCom()
+AddItemCom::AddItemCom()
 {
     register_options();  
 };
 
-void AddShapeCom::register_options()
+void AddItemCom::register_options()
 {
     _optional_funcs["-t"] = [this](const std::string& args){add_type(args);};
     _optional_funcs["-i"] = [this](const std::string& args){add_index(args);};
@@ -34,7 +36,7 @@ void AddShapeCom::register_options()
     _valid_geometry = {"-x", "-y", "-w", "-h"};
 };
 
-void AddShapeCom::process_args(const std::vector<std::string>& tokens)
+void AddItemCom::process_args(const std::vector<std::string>& tokens)
 {
     for (size_t i = 0; i < tokens.size(); ++i)
     {
@@ -67,66 +69,77 @@ void AddShapeCom::process_args(const std::vector<std::string>& tokens)
         });
     }
     else 
-{
+    {
         throw std::runtime_error("CLI: No valid shape.");
     }
 
 };
 
-void AddShapeCom::add_x(const std::string& args)
+void AddItemCom::add_x(const std::string& args)
 {
     int x = Parser::str_to_int(args);
     _geometery["-x"] = x;
 };
  
-void AddShapeCom::add_y(const std::string& args)
+void AddItemCom::add_y(const std::string& args)
 {
     int y = Parser::str_to_int(args);
     _geometery["-y"] = y;
 };
 
-void AddShapeCom::add_w(const std::string& args)
+void AddItemCom::add_w(const std::string& args)
 {
     int w = Parser::str_to_int(args);
     _geometery["-w"] = w;
 };
 
-void AddShapeCom::add_h(const std::string& args)
+void AddItemCom::add_h(const std::string& args)
 {
     int h = Parser::str_to_int(args);
     _geometery["-h"] = h;
 };
 
-void AddShapeCom::add_type(const std::string& args)
+void AddItemCom::add_type(const std::string& args)
 {
     _atributes["-t"] = args;
 };
 
-void AddShapeCom::add_color(const std::string& args)
+void AddItemCom::add_color(const std::string& args)
 {
     _atributes["-c"] = args;
 };
 
-void AddShapeCom::add_content(const std::string& args)
+void AddItemCom::add_content(const std::string& args)
 {
     _atributes["-content"] = args;
 };
 
-void AddShapeCom::add_index(const std::string& args)
+void AddItemCom::add_index(const std::string& args)
 {
     int index = Parser::str_to_int(args);
     _atributes["-i"] = index;
 };
 
-void AddShapeCom::add_radius(const std::string& args)
+void AddItemCom::add_radius(const std::string& args)
 {
     int radius = Parser::str_to_int(args);
     _atributes["-r"] = radius;
 };
 
-void AddShapeCom::execute()
+void AddItemCom::execute()
 {
+    int slide_index = std::get<int>(_atributes.at("-i"));
+    int x = std::get<int>(_geometery.at("-x"));
+    int y = std::get<int>(_geometery.at("-y"));
+    int w = std::get<int>(_geometery.at("-w"));
+    int h = std::get<int>(_geometery.at("-h"));
+     
+    auto action = std::make_shared<core::AddItemAction>(
+        std::make_shared<model::Item>(x, y, w, h, _atributes),
+        slide_index
+    );
+
     core::Editor& editor = core::Editor::get_instance();
-    editor.add_item(_geometery, _atributes);
+    editor.process_action(action);
 };
 

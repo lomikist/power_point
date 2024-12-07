@@ -1,7 +1,8 @@
 #include "add_slide_com.hpp"
+#include "add_slide_action.hpp"
 #include "editor.hpp"
 #include "parser.hpp"
-#include <iostream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -29,13 +30,13 @@ void AddSlideCom::execute()
     else 
         index = -1;
 
+    auto add_action = std::make_shared<core::AddSlideAction>(std::make_shared<model::Slide>(name), index);
     core::Editor& editot = core::Editor::get_instance();
-    editot.add_slide(index, name);
+    editot.process_action(add_action);
 };
 
 void AddSlideCom::process_args(const std::vector<std::string>& tokens)
 {
-    //TODO if not zugy pawol
     for (size_t i = 0; i < tokens.size(); ++i)
     {
         if (_options.find(tokens[i]) != _options.end())

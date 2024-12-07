@@ -8,12 +8,14 @@ void UndoCom::execute()
 {
     int count;
     if (_args.find("-n") != _args.end())
+    {
         count = std::get<int>(_args["-n"]);
+    }
     else 
         count = 1;
     while (count > 0)
     {
-        core::Editor::get_instance().undo_state();
+        core::Editor::get_instance().undo_action();
         count--;
     }
 };

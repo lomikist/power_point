@@ -10,11 +10,11 @@
 namespace cli 
 {
 
-class AddShapeCom : public ICommand
+class AddItemCom : public ICommand
 {
 public:
-    AddShapeCom();
-    ~AddShapeCom() = default;
+    AddItemCom();
+    ~AddItemCom() = default;
     void process_args(const std::vector<std::string>& tokens) override; 
     void execute() override; 
 private:

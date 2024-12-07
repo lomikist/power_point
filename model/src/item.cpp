@@ -35,12 +35,15 @@ void Geometry::setGeometry(int x, int y, int w, int h)
 RGB::RGB(int r, int g, int b) : _r(r), _g(g), _b(b)
 {};
  
-Item::Item(int x, int y, int w, int h, const Atributes& atributes) : _geometry(x, y, w, h), _atributes(atributes)
-{};
+Item::Item(int x, int y, int w, int h, const Atributes& atributes) : _geometry(x, y, w, h), _atributes(atributes), _id(s_id)
+{
+    s_id++;
+};
 
 Geometry Item::get_geometery() const { return _geometry;};
 
 const Atributes& Item::get_atributes() const { return _atributes;};
+
 Atributes& Item::get_atributes() { return _atributes;};
 
 void Item::set_geometer(Geometry other)
@@ -51,4 +54,9 @@ void Item::set_atributes(const Atributes& other)
 {
     _atributes = other;
 };
+
+int Item::get_id()
+{
+    return _id;
+}
 

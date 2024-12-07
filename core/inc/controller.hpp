@@ -12,26 +12,24 @@
 
 namespace core
 {
-/*class Controller : public std::enable_shared_from_this<Controller> */
 class Controller 
 {
-private:
-    QTimer timer;
-    Controller ();
 public:
     ~Controller ();
-    static Controller&  get_instance();
-    cli::Parser&        get_parser();
+    static Controller&                  get_instance();
+    cli::Parser&                        get_parser();
     std::shared_ptr<gui::GuiController> get_guicontroller();
-
+    std::shared_ptr<model::Model>       get_model();
 private:
-    std::shared_ptr<gui::GuiController> _gui_controller;
-    std::shared_ptr<model::Model> _model;
-    std::unique_ptr<cli::Parser> _parser;
+    Controller ();
 
-    Editor&     _editor = Editor::get_instance();
+    std::shared_ptr<gui::GuiController> _gui_controller;
+    std::shared_ptr<model::Model>       _model;
+    std::unique_ptr<cli::Parser>        _parser;
+
+    Editor&     _editor     = Editor::get_instance();
     Vizualizer& _vizualizer = Vizualizer::get_instance();
-    Logger&     _logger = Logger::get_instance();
+    Logger&     _logger     = Logger::get_instance();
 };
 };
 #endif // !CONTROLLER
