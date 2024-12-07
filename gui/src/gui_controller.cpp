@@ -1,5 +1,6 @@
 #include "gui_controller.hpp"
 #include "gui_wrapper.hpp"
+#include "qobject.h"
 #include "vizualize.hpp"
 
 using namespace gui;
@@ -14,13 +15,22 @@ GuiController::GuiController()
 
 void GuiController::update()
 {
+    core::Vizualizer::get_instance().process_slide(_pview_canvas, _screen->get_current_slide());
     _screen->update_elements(); 
     _screen->update();
     _screen->show();
-    core::Vizualizer::get_instance().process_slide(_pview_canvas, _screen->get_current_slide());
 };
 
 std::shared_ptr<MyScreen> GuiController::get_screen() const 
 {
     return _screen;
 }
+
+void GuiController::save_img(const std::string& path)
+{
+    if (_screen->get_paint_canvas()->getImage()->save(QString::fromStdString(path)))
+        std::cout << "alooooooo" << std::endl;
+    else 
+        std::cout << "blooooooo" << std::endl;
+}
+

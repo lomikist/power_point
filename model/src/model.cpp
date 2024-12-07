@@ -1,40 +1,52 @@
 #include "model.hpp"
+#include <algorithm>
 #include <memory>
 #include <stdexcept>
 
 using namespace model;
 
-void Model::add_slide(std::shared_ptr<Slide> new_slide, int index)
+void Model::add_slide(Page new_slide, int index)
 {
-    if (index == -1 || index > _slides.size())
-    {
+    if (index == -1 || index > _slides.size()){
         _slides.push_back(new_slide);
-    } else if (index < -1)
-    {
+    } else if (index < -1) {
         throw std::runtime_error("Model: index can't be a less then -1");
-    } else 
-    {
+    } else {
         _slides.insert(_slides.begin() + index, new_slide);
     }
-};
+}
 
 void Model::remove_slide(int index)
 {
     _slides.erase(_slides.begin() + index);
-    std::cout << "Slide N " << index << " is removed.";
+}
+
+Page Model::get_slide_by_ID(int id) const 
+{
+    auto slide = std::find_if(_slides.begin(), _slides.end(), [id](auto&& slide) {
+        return slide->get_id() == id; 
+    });
+    if (slide == _slides.end()){
+        throw std::runtime_error("MODEL: no slide with this id");
+    }
+    return *slide;
 };
 
-std::shared_ptr<Slide> Model::get_slide(int index) const
+Page Model::get_slide(int index) const
 {
-    if (index >= 0 && index < _slides.size())
+    if (index >= 0 && index < _slides.size()) {
         return _slides[index];
+    }
     throw std::runtime_error("Model: can't get slide");
 }
 
-const std::vector<std::shared_ptr<Slide>>& Model::get_slides() const
+std::vector<Page> Model::get_slides() const
 {
-    if (_slides.empty())
-        throw std::runtime_error("Model: slide is empty");
     return _slides;
-};
+}
+
+void Model::set_slides(std::vector<Page> slides)
+{
+    _slides = slides;
+}
 

@@ -80,22 +80,27 @@ void MyScreen::set_connections()
         std::stringstream stream(_cmd_line->text().toStdString());
         try {
             auto cmd = core::Controller::get_instance().get_parser().parse(stream);
-            if (cmd)
-            {
+            if (cmd) {
                 cmd->execute();
             }
+            _paintCanvas->getImage()->fill(Qt::white);
+
+            auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paintCanvas->getPainter());
+            core::Vizualizer::get_instance().process_slide(pview_canvas, _current_slide);
+
             _paintCanvas->repaint();
             update_elements();
         }catch (const std::exception& e)
         {
             core::Logger::get_instance().notify_loggers(e.what());
         }
-   });
+    });
 }
 
 void MyScreen::update_elements()
 {
-    auto slides = core::Editor::get_instance().get_slides();
+    auto slides = core::Controller::get_instance().get_model()->get_slides();
+
     if (!slides.empty())
     {
         for (auto&& slide : slides)
@@ -112,8 +117,8 @@ void MyScreen::update_elements()
                     _current_slide = slide->get_id();
                     _paintCanvas->getImage()->fill(Qt::white);
 
-                    auto _pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paintCanvas->getPainter());
-                    core::Vizualizer::get_instance().process_slide(_pview_canvas, slide->get_id());
+                    auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paintCanvas->getPainter());
+                    core::Vizualizer::get_instance().process_slide(pview_canvas, _current_slide);
 
                     _paintCanvas->repaint();
                 });

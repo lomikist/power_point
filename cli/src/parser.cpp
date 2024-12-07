@@ -1,7 +1,10 @@
 #include "parser.hpp"
 #include "add_slide_com.hpp"
-#include "add_shape_com.hpp"
+#include "add_item_com.hpp"
 #include "exit_com.hpp"
+#include "remove_slide_com.hpp"
+#include "rendo_com.hpp"
+#include "undo_com.hpp"
 #include "logger.hpp"
 #include "logger.hpp"
 #include "show_slide_com.hpp"
@@ -25,10 +28,13 @@ Parser::Parser()
         return std::make_shared<AddSlideCom>();
     });
     _command_creator.register_func("add", "<shape>", [](){
-        return std::make_shared<AddShapeCom>();
+        return std::make_shared<AddItemCom>();
     });
     _command_creator.register_func("show", "<slide>", [](){
         return std::make_shared<ShowSlideCom>();
+    });
+    _command_creator.register_func("remove", "<slide>", [](){
+        return std::make_shared<RemoveSlideCom>();
     });
     _command_creator.register_func("run", "", [](){
         return std::make_shared<RunCom>();
@@ -36,11 +42,16 @@ Parser::Parser()
     _command_creator.register_func("exit", "", [](){
         return std::make_shared<ExitCom>();
     });
+    _command_creator.register_func("undo", "", [](){
+        return std::make_shared<UndoCom>();
+    });
+    _command_creator.register_func("rendo", "", [](){
+        return std::make_shared<RendoCom>();
+    });
 };
 
 Parser::~Parser()
-{
-};
+{};
 
 std::shared_ptr<ICommand> Parser::parse(std::istream& is)
 {

@@ -4,4 +4,5 @@ add <slide> -n third -i 2
 add <shape> -i 0 -t rect -x 10 -y 10 -h 120 -w 133 -c red
 add <shape> -i 0 -t elipse -x 1 -y 262 -w 56 -h 23 -c red
 add <shape> -i 1 -t rect -x 2 -y 2 -h 22 -w 23 -c red
-add <shape> -t textbox -i 0 -x 233 -y 344 -w 23 -h 23 -content helloworld
+add <shape> -t textbox -i 0 -x 233 -y 344 -w 23 -h 23 -content helloworldsdfsdf
+
