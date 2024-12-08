@@ -3,20 +3,26 @@
 #include <iostream>
 #include <istream>
 #include <memory>
+#include <unordered_set>
 #include <vector>
 #include "command_factory.hpp"
 #include "icommand.hpp"
 
 namespace cli
 {
-enum class TokenType
+enum TokenType
 {
-    NUMBER,
-    SUBCOM,
+    START,
     WORD,
-    ARGUMENT,
+    OPT,
+    NUM,
+    MVAL,
+    SCON,
+    ECON,
     BADTYPE
 };
+
+using ValidStates = std::unordered_map<TokenType, std::unordered_set<TokenType>>;
 
 class Parser
 {
@@ -26,14 +32,14 @@ public:
     std::shared_ptr<ICommand>   parse(std::istream& is);
     static int                  str_to_int(const std::string& str);
 private:   
-    std::vector<TokenType>      tokenize(const std::string& str);
-    void                        validate_tokens();
-    std::shared_ptr<ICommand>   validate_semantics();
+    TokenType _current_state = TokenType::START;
+    ValidStates _valid_states;
     std::vector<std::string>    split(const std::string& input, char ch);
     TokenType                   get_token_type(const std::string& token);
     std::vector<TokenType>      _tokens;
     std::vector<std::string>    _str_tokens;
     cli::CommandFactory         _command_creator;
+    
 };
 }
 #endif // !PARSER_HPP

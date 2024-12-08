@@ -1,7 +1,7 @@
 #include "remove_slide_com.hpp"
-#include "editor.hpp"
 #include "parser.hpp"
-#include "remove_slide_action.hpp"
+/*#include "editor.hpp"*/
+/*#include "remove_slide_action.hpp"*/
 #include <memory>
 #include <stdexcept>
 
@@ -36,10 +36,11 @@ void RemoveSlideCom::process_args(const std::vector<std::string>& tokens)
 
 void RemoveSlideCom::execute()
 {
-    int id = std::get<int>(_args["-i"]);
-
-    auto remove_act = std::make_shared<core::RemoveSlideAction>(id);
-    core::Editor::get_instance().process_action(remove_act);
+    std::cout << "exec removslide" << std::endl;
+    /*int id = std::get<int>(_args["-i"]);*/
+    /**/
+    /*auto remove_act = std::make_shared<core::RemoveSlideAction>(id);*/
+    /*core::Editor::get_instance().process_action(remove_act);*/
 };
 
 void RemoveSlideCom::add_id(const std::string& args)

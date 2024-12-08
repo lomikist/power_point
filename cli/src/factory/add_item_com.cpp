@@ -1,7 +1,7 @@
 #include "add_item_com.hpp"
-#include "add_item_action.hpp"
-#include "editor.hpp"
-#include "item.hpp"
+/*#include "add_item_action.hpp"*/
+/*#include "editor.hpp"*/
+/*#include "item.hpp"*/
 #include "parser.hpp"
 #include <algorithm>
 #include <memory>
@@ -128,18 +128,19 @@ void AddItemCom::add_radius(const std::string& args)
 
 void AddItemCom::execute()
 {
-    int slide_index = std::get<int>(_atributes.at("-i"));
-    int x = std::get<int>(_geometery.at("-x"));
-    int y = std::get<int>(_geometery.at("-y"));
-    int w = std::get<int>(_geometery.at("-w"));
-    int h = std::get<int>(_geometery.at("-h"));
-     
-    auto action = std::make_shared<core::AddItemAction>(
-        std::make_shared<model::Item>(x, y, w, h, _atributes),
-        slide_index
-    );
-
-    core::Editor& editor = core::Editor::get_instance();
-    editor.process_action(action);
+    std::cout << "exec additemcom" << std::endl;
+    /*int slide_index = std::get<int>(_atributes.at("-i"));*/
+    /*int x = std::get<int>(_geometery.at("-x"));*/
+    /*int y = std::get<int>(_geometery.at("-y"));*/
+    /*int w = std::get<int>(_geometery.at("-w"));*/
+    /*int h = std::get<int>(_geometery.at("-h"));*/
+    /**/
+    /*auto action = std::make_shared<core::AddItemAction>(*/
+    /*    std::make_shared<model::Item>(x, y, w, h, _atributes),*/
+    /*    slide_index*/
+    /*);*/
+    /**/
+    /*core::Editor& editor = core::Editor::get_instance();*/
+    /*editor.process_action(action);*/
 };
 
