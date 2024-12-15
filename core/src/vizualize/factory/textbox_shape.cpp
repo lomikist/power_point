@@ -8,6 +8,9 @@ using namespace core;
 
 void TextBoxShape::draw(std::shared_ptr<ICanvas> canvas) 
 {
+    if (_item->get_atributes().find("-content") == _item->get_atributes().end())
+        throw std::runtime_error("Core: no content");
+
     auto content = std::get<std::string>(_item->get_atributes().at("-content")); 
     canvas->draw_text(_item->get_geometery().getX(), _item->get_geometery().getY(),
                        _item->get_geometery().getW(), _item->get_geometery().getH(), content);

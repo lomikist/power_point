@@ -12,19 +12,12 @@ void CommandFactory::register_func(std::string command, CommandCreatorFun fun)
     _command_map[command] = fun; 
 };
 
-std::shared_ptr<ICommand>   CommandFactory::create(std::string command, std::string subcom)
+std::shared_ptr<Acommand> CommandFactory::create(const std::string& command_name)
 {
-    auto key = command + subcom;
-    if (_command_map.find(key) != _command_map.end())
-        return _command_map[key]();
-
+    if (_command_map.find(command_name) != _command_map.end())
+    {
+        return _command_map[command_name]();
+    }
     return nullptr;
 };
 
-std::shared_ptr<ICommand>   CommandFactory::create(std::string command)
-{
-    if (_command_map.find(command) != _command_map.end())
-        return _command_map[command]();
-
-    return nullptr;
-};

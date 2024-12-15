@@ -6,6 +6,7 @@
 #include <algorithm>
 
 using namespace gui;
+
 PaintArea::PaintArea(QWidget* parent) : QWidget(parent)
 {
     setAttribute(Qt::WA_StaticContents);

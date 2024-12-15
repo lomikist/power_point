@@ -10,4 +10,3 @@ void ExitCom::execute()
 ExitCom::ExitCom()
 {
 }
-

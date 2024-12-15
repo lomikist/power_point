@@ -4,7 +4,6 @@
 #include <istream>
 #include <memory>
 #include <unordered_set>
-#include <vector>
 #include "command_factory.hpp"
 #include "icommand.hpp"
 
@@ -14,6 +13,7 @@ enum TokenType
 {
     START,
     WORD,
+    SUBCOM,
     OPT,
     NUM,
     MVAL,
@@ -32,14 +32,37 @@ public:
     std::shared_ptr<ICommand>   parse(std::istream& is);
     static int                  str_to_int(const std::string& str);
 private:   
-    TokenType _current_state = TokenType::START;
-    ValidStates _valid_states;
-    std::vector<std::string>    split(const std::string& input, char ch);
-    TokenType                   get_token_type(const std::string& token);
-    std::vector<TokenType>      _tokens;
-    std::vector<std::string>    _str_tokens;
-    cli::CommandFactory         _command_creator;
-    
+    class Tokenizer 
+    {
+        public:
+            TokenType   get_token(const std::string& token);
+        private:
+            bool        start_con_check(const std::string& str); 
+            bool        end_con_check(const std::string& str); 
+            bool        word_check(const std::string& str); 
+            bool        opt_check(const std::string& str); 
+            bool        num_check(const std::string& str); 
+            bool        mval_check(const std::string& str); 
+            bool        subcom_check(const std::string& str);
+    };
+
+    void command_init();
+    void create_table(); 
+    void shape_command(TokenType token, const std::string& raw_token);
+
+    Tokenizer                   _tokenizer;
+    CommandFactory              _command_creator;
+
+    ////////////////////
+    TokenType                   _current_state = TokenType::START;
+    ValidStates                 _valid_states;
+    CommandInfo                 _command_info; 
+    int                         _token_order = 0; 
+    std::string                 _last_option;
+    bool                        _content_started = false;
+    std::string                 _content;
+
+    void                        reset();
 };
 }
 #endif // !PARSER_HPP

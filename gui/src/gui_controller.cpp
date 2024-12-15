@@ -7,7 +7,7 @@ using namespace gui;
 
 GuiController::GuiController()
 {
-    _screen = std::make_shared<gui::MyScreen>();
+    _screen = std::make_shared<MyScreen>();
     _screen->show();
 
     _pview_canvas = std::make_shared<core::GuiPainterWrapper>(_screen->get_paint_canvas()->getPainter());
@@ -29,8 +29,12 @@ std::shared_ptr<MyScreen> GuiController::get_screen() const
 void GuiController::save_img(const std::string& path)
 {
     if (_screen->get_paint_canvas()->getImage()->save(QString::fromStdString(path)))
-        std::cout << "alooooooo" << std::endl;
+    {
+        /*std::cout << "alooooooo" << std::endl;*/
+    }
     else 
-        std::cout << "blooooooo" << std::endl;
+    {
+        /*std::cout << "blooooooo" << std::endl;*/
+    }
 }
 

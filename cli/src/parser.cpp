@@ -5,7 +5,7 @@
 #include "remove_slide_com.hpp"
 #include "rendo_com.hpp"
 #include "undo_com.hpp"
-/*#include "logger.hpp"*/
+#include "logger.hpp"
 #include "show_slide_com.hpp"
 #include "run_com.hpp"
 #include "icommand.hpp"
@@ -13,7 +13,9 @@
 #include <cmath>
 #include <cstddef>
 #include <istream>
+#include <iterator>
 #include <memory>
+#include <ostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -23,6 +25,12 @@
 using namespace cli;
 
 Parser::Parser()
+{
+    command_init();
+    create_table();
+ };
+
+void Parser::command_init()
 {
     _command_creator.register_func("add", "<slide>", [](){
         return std::make_shared<AddSlideCom>();
@@ -48,171 +56,220 @@ Parser::Parser()
     _command_creator.register_func("rendo", "", [](){
         return std::make_shared<RendoCom>();
     });
+};
 
+void Parser::create_table()
+{
     _valid_states[TokenType::START] = {TokenType::WORD}; 
-    _valid_states[TokenType::WORD] = { TokenType::WORD, TokenType::OPT, TokenType::ECON}; 
+    _valid_states[TokenType::WORD] = {TokenType::WORD, TokenType::NUM, TokenType::OPT, TokenType::ECON, TokenType::SUBCOM}; 
     _valid_states[TokenType::OPT] = {TokenType::WORD, TokenType::NUM, TokenType::MVAL, TokenType::SCON};  
     _valid_states[TokenType::NUM] = {TokenType::OPT, TokenType::ECON}; 
-    _valid_states[TokenType::MVAL] = {TokenType::OPT}; 
+    _valid_states[TokenType::MVAL] = {TokenType::OPT, TokenType::MVAL}; 
     _valid_states[TokenType::SCON] = {TokenType::WORD, TokenType::NUM, TokenType::ECON}; 
     _valid_states[TokenType::ECON] = {TokenType::OPT}; 
+    _valid_states[TokenType::SUBCOM] = {TokenType::OPT}; 
+};
+
+void Parser::shape_command(TokenType token, const std::string& raw_token)
+{
+    if (token == TokenType::ECON) {
+        _content_started = false;
+        _content += raw_token + " "; 
+        _command_info._arguments[_last_option] = _content;
+    }
+    if (_content_started == true) {
+        _content += raw_token + " ";
+    }
+    else 
+    {
+        if (_token_order == 0 && _current_state == TokenType::START)
+        { 
+            _command_info._command_name = raw_token;
+        }
+        else if (_token_order == 1 &&
+            _current_state == TokenType::WORD &&
+            token == TokenType::SUBCOM)
+        {
+            _command_info._subcommand_name = raw_token;
+        }
+        else if (token == TokenType::OPT)
+        {
+            _last_option = raw_token;
+        }
+        else if (token == TokenType::SCON)
+        {
+            _content_started = true;
+            _content += raw_token + " ";
+        }
+        else if (token == TokenType::WORD || token == TokenType::NUM)
+        {
+            _command_info._arguments[_last_option] = raw_token;
+        }
+    }
+    _token_order++;
 };
 
 Parser::~Parser()
-{};
+{
+};
 
 std::shared_ptr<ICommand> Parser::parse(std::istream& is)
 {
-    std::string str;
-    std::getline(is, str);
-    std::stringstream current_line(str); 
-    
-    if (!str.empty())
+    std::string full_str;
+    std::getline(is, full_str);
+    std::stringstream current_line_stream(full_str); 
+    std::string raw_token; 
+    try
     {
-        _str_tokens.clear();
-        _tokens.clear();
-        try {
-            while (!current_line.empty()){
-                current_line >> str;
-                std::cout << str << "\n"; 
+        while (current_line_stream >> raw_token) {
+            TokenType token = _tokenizer.get_token(raw_token);
+            if (_valid_states[_current_state].count(token) != 0) {
+                shape_command(token, raw_token); 
+                _current_state = token;
+            }
+            else { 
+                throw std::runtime_error(std::string("wrong token " + raw_token));
             }
         }
-        catch (const std::exception& e) {
-            /*core::Logger::get_instance().notify_loggers(e.what());*/
-            std::cout << e.what() << std::endl;
-        }
+        auto command = _command_creator.create(_command_info._command_name + _command_info._subcommand_name);
+        command->process_args(_command_info);
+
+        ////////////////////
+        reset();
+        ////////////////////
+
+        return command;
+    }
+    catch (const std::exception& e)
+    {
+        reset();
+        core::Logger::get_instance().notify_loggers(e.what());
     }
     return nullptr;
 };
 
-/*std::vector<TokenType> Parser::tokenize(const std::string& str)*/
-/*{*/
-/*    _str_tokens = split(str, ' ');*/
-/*    for (auto&& str : _str_tokens)*/
-/*    {*/
-/*        _tokens.push_back(get_token_type(str)); */
-/*    }*/
-/*    return _tokens;*/
-/*};*/
+void Parser::reset()
+{
+    _command_info._arguments.clear();
+    _command_info._command_name.clear();
+    _command_info._subcommand_name.clear();
+    _current_state = TokenType::START;
+    _content_started = false;
+    _token_order = 0;
+    _last_option = "";
+    _content = "";
+};
 
-/*std::shared_ptr<ICommand> Parser::validate_semantics()*/
-/*{*/
-/*    std::shared_ptr<ICommand>   cmd;*/
-/*    std::vector<std::string>    argumens;*/
-/**/
-/*    if (_tokens.size() > 1 && _tokens[1] == TokenType::SUBCOM)*/
-/*    {*/
-/*        cmd = _command_creator.create(_str_tokens[0], _str_tokens[1]);*/
-/*        argumens.assign(_str_tokens.begin() + 2, _str_tokens.end());*/
-/*    } else {*/
-/*        cmd = _command_creator.create(_str_tokens[0]);*/
-/*        argumens.assign(_str_tokens.begin() + 1, _str_tokens.end());*/
-/*    }*/
-/*    if (cmd)*/
-/*    {*/
-/*        cmd->process_args(argumens);*/
-/*        return cmd;*/
-/*    } else */
-/*        throw std::runtime_error("CLI: COMMAND " + _str_tokens[0] + " NOT FOUND");*/
-/*};*/
+TokenType Parser::Tokenizer::get_token(const std::string& token)
+{
+    if (start_con_check(token)) {
+        return TokenType::SCON;
+    }
+    else if (end_con_check(token)) {
+        return TokenType::ECON;
+    }
+    else if (word_check(token)) {
+        return TokenType::WORD;
+    }
+    else if (opt_check(token)) {
+        return TokenType::OPT;
+    }   
+    else if (num_check(token)) {
+        return TokenType::NUM;
+    }
+    else if (mval_check(token)) {
+        return TokenType::MVAL;
+    }
+    else if (subcom_check(token)) {
+        return TokenType::SUBCOM;
+    }
+    return TokenType::BADTYPE;
+};
 
-/*void Parser::validate_tokens()*/
-/*{*/
-/*    if (_tokens[0] != TokenType::WORD)*/
-/*        std::runtime_error("CLI: NOT VALID COMMAND");*/
-/*    for (size_t i = 0; i < _tokens.size() - 1; ++i)*/
-/*    {*/
-/*        switch (_tokens[i])*/
-/*        {*/
-/*            case TokenType::WORD:*/
-/*                if (_tokens[i + 1] == TokenType::WORD ||*/
-/*                    _tokens[i + 1] == TokenType::NUMBER)*/
-/*                    throw std::runtime_error("CLI: INVALID OPTION OR SUBCOM");*/
-/*            break;*/
-/**/
-/*            case TokenType::SUBCOM:*/
-/*                if (_tokens[i + 1] == TokenType::WORD ||*/
-/*                    _tokens[i + 1] == TokenType::NUMBER ||*/
-/*                    _tokens[i + 1] == TokenType::SUBCOM )*/
-/*                    throw std::runtime_error("CLI: INVALID OPTION");*/
-/*            break;*/
-/**/
-/*            case TokenType::ARGUMENT:*/
-/*                if (_tokens[i + 1] == TokenType::SUBCOM ||*/
-/*                    _tokens[i + 1] == TokenType::ARGUMENT)*/
-/*                    throw std::runtime_error("CLI: INVALID Value");*/
-/*            break;*/
-/**/
-/*            case TokenType::NUMBER:*/
-/*                if (_tokens[i + 1] == TokenType::SUBCOM ||*/
-/*                    _tokens[i + 1] == TokenType::WORD ||*/
-/*                    _tokens[i + 1] == TokenType::NUMBER)*/
-/*                    throw std::runtime_error("CLI: INVALID OPTION OR ");*/
-/*            break;*/
-/**/
-/*            case TokenType::BADTYPE:*/
-/*                std::runtime_error("CLI: BADTYPE");*/
-/*            break;*/
-/*        } */
-/*    }*/
-/*};*/
+bool Parser::Tokenizer::start_con_check(const std::string& str)
+{
+    if (str[0] == '"'
+        && std::all_of(str.begin() + 1, str.end(), ::isalnum))
+    {
+        return true;
+    }
+    return false;
+}  
 
-/*TokenType Parser::get_token_type(const std::string& token)*/
-/*{*/
-/*    if (std::all_of(token.begin(), token.end(), ::isdigit))*/
-/*        return TokenType::NUMBER;*/
-/**/
-/*    if (token[0] == '-')*/
-/*    {*/
-/*        if (std::all_of(token.begin() + 1, token.end(), ::isdigit))*/
-/*            return TokenType::NUMBER;*/
-/**/
-/*        if (!std::all_of(token.begin() + 1, token.end(), ::isalpha))*/
-/*            throw std::runtime_error("CLI: NOT VALID OPTION");*/
-/**/
-/*        return TokenType::ARGUMENT;*/
-/*    }*/
-/*    else if (token[0] == '<' &&*/
-/*            token[token.size() - 1] == '>' &&*/
-/*            std::all_of(token.begin() + 1, token.end() - 1, ::isalpha))*/
-/*    {*/
-/*        return TokenType::SUBCOM;*/
-/*    }*/
-/*    else if (std::all_of(token.begin(), token.end(), ::isalpha)) {*/
-/*        return TokenType::WORD;*/
-/*    }*/
-/*    else {*/
-/*        return TokenType::BADTYPE;*/
-/*    }*/
-/*};*/
+bool Parser::Tokenizer::end_con_check(const std::string& str)
+{
+    if (str[str.size() - 1] == '"'
+        && std::all_of(str.begin(), str.end() - 1, ::isalnum))
+    {
+        return true;
+    }
+    return false;
+}  
 
-/*std::vector<std::string> Parser::split(const std::string& input, char delimiter)*/
-/*{*/
-/*    std::vector<std::string> result; */
-/*    size_t start = 0;*/
-/*    size_t end = input.find(delimiter);*/
-/**/
-/*    while (end != std::string::npos)*/
-/*    {*/
-/*        result.push_back(input.substr(start, end - start));*/
-/*        start = end + 1;*/
-/*        end = input.find(delimiter, start);*/
-/*    } */
-/*    result.push_back(input.substr(start));*/
-/*    //remove empty lines*/
-/*    result.erase(*/
-/*        std::remove_if(*/
-/*            result.begin(),*/
-/*            result.end(),*/
-/*            [](const std::string& str){ return str.empty();}*/
-/*        ),*/
-/*        result.end()*/
-/*    );*/
-/*    return result;*/
-/*}*/
+bool Parser::Tokenizer::subcom_check(const std::string& str)
+{
+    if (str[0] == '<' &&
+        str[str.size() - 1] == '>' && 
+        std::all_of(str.begin() + 1, str.end() - 1, ::isalpha))
+    {
+        return true;
+    }
+    return false;
+};
 
-int Parser::str_to_int(const std::string& str) {
-    // Check if the entire string is numeric (optional support for negative sign)
+bool Parser::Tokenizer::word_check(const std::string& str)
+{
+    if (std::all_of(str.begin(), str.end(), ::isalnum)) {
+        return true;
+    }
+    return false;
+}  
+
+bool Parser::Tokenizer::opt_check(const std::string& str)
+{
+    if (str[0] == '-' && std::all_of(str.begin() + 1, str.end(), ::isalpha))
+    {
+        return true;
+    }
+    return false;
+}
+
+bool Parser::Tokenizer::num_check(const std::string& str)
+{
+    if (std::all_of(str.begin(), str.end(), ::isdigit) || 
+       (str[0] == '-' && std::all_of(str.begin() + 1, str.end(), ::isdigit))) 
+    {
+        return true;
+    }
+    return false;
+} 
+
+bool Parser::Tokenizer::mval_check(const std::string& str)
+{
+    auto first = std::find(str.begin(), str.end(), ',');
+    auto second = std::find(first, str.end(), ',');
+    auto temp = second;
+    auto last_comma = std::find(str.rbegin(), str.rend(), ',');
+
+    if (!std::all_of(str.begin(), first, ::isdigit))
+        return false;
+    while (second < last_comma.base())
+    {
+        if (!std::all_of(first + 1, second, ::isdigit))
+            return false;
+        if (second - first == 1)
+            return false;
+        second = std::find(second + 1, str.end(), ',');
+        first = temp;
+        temp = second;
+    }
+    if (!std::all_of(last_comma.base(), str.end(), ::isdigit))
+        return false;
+    return true;
+};
+
+int Parser::str_to_int(const std::string& str)
+{
     if (str.empty() || (!std::all_of(str.begin(), str.end(), ::isdigit) && 
         !(str[0] == '-' && std::all_of(str.begin() + 1, str.end(), ::isdigit)))) {
         throw std::runtime_error("CORE: Can't convert" + str + " to int.");
