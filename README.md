@@ -11,6 +11,7 @@ To add a new shape command is
 ```bash
 add <shape> -i <n> -x <n> -y <n> -t <type> etc.
 ```
+valid types {elipse, textbox, rect}
 
 3. Execute file
 To execute commands from a file, use:
