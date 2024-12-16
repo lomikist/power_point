@@ -40,10 +40,6 @@ MyScreen::MyScreen(QWidget *parent)
     set_connections();
 }
 
-MyScreen::~MyScreen()
-{
-};
-
 PaintArea* MyScreen::get_paint_canvas() const
 {
     return _paintCanvas;

@@ -4,21 +4,20 @@
 #include <memory>
 #include <map>
 #include <string>
-#include "add_slide_com.hpp"
 #include "icommand.hpp"
+#include "command_info.hpp"
 
 namespace cli
 {
 
-using CommandCreatorFun = std::function<std::shared_ptr<ICommand>()>;
+using CommandCreatorFun = std::function<std::shared_ptr<Acommand>()>;
 
 class CommandFactory
 {
 public:
     void                        register_func(std::string command, std::string subcommand, CommandCreatorFun); 
     void                        register_func(std::string command, CommandCreatorFun fun);
-    std::shared_ptr<ICommand>   create(std::string command, std::string subcom);
-    std::shared_ptr<ICommand>   create(std::string command);
+    std::shared_ptr<Acommand>   create(const std::string& command_name);
 private:
     std::map<std::string, CommandCreatorFun> _command_map;
 };

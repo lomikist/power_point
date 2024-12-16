@@ -1,16 +1,16 @@
 #ifndef RECT_SHAPE_HPP
 #define RECT_SHAPE_HPP
 
-#include "ishape.hpp"
+#include "ashape.hpp"
 #include <memory>
 
 namespace core
 {
 
-class RectShape : public Ishape 
+class RectShape : public Ashape 
 {
 public:
-    RectShape(const model::Item& item) : Ishape(item){};
+    RectShape(const model::Item& item) : Ashape(item){};
     virtual ~RectShape() = default;
     virtual void draw(std::shared_ptr<ICanvas> canvas) override;
 private:

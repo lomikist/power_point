@@ -1,4 +1,5 @@
 #include "slide.hpp"
+#include <algorithm>
 #include <pstl/glue_algorithm_defs.h>
 #include <vector>
 

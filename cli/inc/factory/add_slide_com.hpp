@@ -4,22 +4,22 @@
 #include <map>
 #include <vector>
 #include <functional>
+#include "command_factory.hpp"
 #include "icommand.hpp"
 
 namespace cli 
 {
 
-class AddSlideCom : public ICommand
+class AddSlideCom : public Acommand
 {
 public:
     AddSlideCom();
     ~AddSlideCom() = default;
-    void process_args(const std::vector<std::string>& tokens) override; 
+    /*void process_args(const CommandInfo& com_info) override; */
     void execute() override; 
 private:
-    void add_title(const std::string& args);
-    void add_index(const std::string& args);
-    std::map<std::string, F_vs> _options;
+    void add_title(const std::string& opt, const std::string& args);
+    void add_index(const std::string& opt, const std::string& args);
     std::unordered_map<std::string, Var_SID> _args;
 
 };

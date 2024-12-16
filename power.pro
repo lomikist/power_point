@@ -6,10 +6,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++20
 
-CONFIG(debug, debug|release): {
-    CONFIG += debug
-    QMAKE_RUN_ENV += QT_DEBUG_PLUGINS=1
-}
 
 QMAKE_CXXFLAGS += -fmax-errors=5
 QMAKE_CXXFLAGS += -fdiagnostics-color=always

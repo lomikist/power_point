@@ -2,9 +2,7 @@
 #define VIEW_HPP
 
 #include "qboxlayout.h"
-#include "qgraphicsview.h"
 #include "qmainwindow.h"
-#include "qpainter.h"
 #include "qpushbutton.h"
 #include "qwidget.h"
 #include <QGraphicsItem>
@@ -24,7 +22,7 @@ class MyScreen : public QMainWindow
 Q_OBJECT
 public:
     MyScreen(QWidget* parent = nullptr);
-    ~MyScreen();
+    virtual ~MyScreen() = default;
     PaintArea*      get_paint_canvas() const;
     int             get_current_slide() const;
     QTextBrowser*   get_text_browser();

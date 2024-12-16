@@ -13,7 +13,7 @@ class PaintArea : public QWidget
     Q_OBJECT
 public:
     PaintArea(QWidget* parent = nullptr);
-    QImage*    getImage();
+    QImage*     getImage();
     QPainter*   getPainter(); 
     void        setImage(QImage* image);
     void        setImageScale(int scale);

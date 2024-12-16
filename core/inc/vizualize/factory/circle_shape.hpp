@@ -1,18 +1,17 @@
 #ifndef CIRCLE_SHAPE_HPP
 #define CIRCLE_SHAPE_HPP
 
-#include "ishape.hpp"
+#include "ashape.hpp"
 #include "item.hpp"
 
 namespace core
 {
-class CircleShape : public Ishape 
+class CircleShape : public Ashape 
 {
 public:
-    CircleShape(const model::Item& item) : Ishape(item){};
+    CircleShape(const model::Item& item) : Ashape(item){};
     virtual ~CircleShape() = default;
     virtual void draw(std::shared_ptr<ICanvas> canvas) override;
-private:
 };
 }
 #endif // !CIRCLE_SHAPE_HPP

@@ -20,30 +20,14 @@ void RendoCom::execute()
 
 RendoCom::RendoCom()
 {
-    _options["-n"] = [this](const std::string& args){
-        add_count(args); 
+    _options["-n"] = [this](const std::string& opt,const std::string& args){
+        add_count(opt, args); 
     };
 }
 
-void RendoCom::process_args(const std::vector<std::string>& tokens)
-{
-    for (size_t i = 0; i < tokens.size(); ++i)
-    {
-        if (_options.find(tokens[i]) != _options.end())
-        {
-            std::vector<std::string> args(tokens.begin() + i, tokens.end());
-            _options[tokens[i]](tokens[i + 1]);
-            i++;
-        } else 
-        {
-            throw std::runtime_error("CLI: OPTION NOT FOUND:" + tokens[i]);
-        }
-    }    
-}
-
-void RendoCom::add_count(const std::string& args)
+void RendoCom::add_count(const std::string& opt, const std::string& args)
 {
     int count = Parser::str_to_int(args);
-    _args["-n"] = count;
+    _args[opt] = count;
 }
 

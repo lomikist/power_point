@@ -1,14 +1,15 @@
 #ifndef SHAPE_FACTORY_HPP
 #define SHAPE_FACTORY_HPP
 
-#include "ishape.hpp"
+#include "ashape.hpp"
+#include <functional>
 
 namespace core
 {
 class ShapeFactory
 {
 public:
-    using ShapeCreator = std::function<std::shared_ptr<Ishape>(const model::Item& item)>;
+    using ShapeCreator = std::function<std::shared_ptr<Ashape>(const model::Item& item)>;
 
     ShapeFactory();
     void register_shape(const std::string& name, ShapeCreator creator);
