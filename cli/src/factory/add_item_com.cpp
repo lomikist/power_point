@@ -4,7 +4,9 @@
 #include "item.hpp"
 #include "parser.hpp"
 #include <algorithm>
+#include <cctype>
 #include <memory>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -71,10 +73,22 @@ void AddItemCom::add_type(const std::string& opt, const std::string& type)
     }
 };
 
-void AddItemCom::add_color(const std::string& opt, const std::string& args)
+void AddItemCom::add_color(const std::string& opt, const std::string& arg)
 {
-    _atributes[opt] = args;
+    if (std::all_of(arg.begin(), arg.end(), ::isalpha))
+        _atributes[opt] = arg;
+    else
+    {
+        std::vector<std::string> str_colors = Parser::splitString(arg, ',');
+        int r = Parser::str_to_int(str_colors[0]);
+        int b = Parser::str_to_int(str_colors[1]);
+        int g = Parser::str_to_int(str_colors[2]);
+        model::RGB color(r, b, g);
+        _atributes[opt] = color;
+    }
 };
+
+//TODO chane drawing and prinitin part
 
 void AddItemCom::add_content(const std::string& opt, const std::string& args)
 {

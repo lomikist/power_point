@@ -10,7 +10,6 @@ class RendoCom : public Acommand
 public:
     RendoCom();
     void execute() override;
-    /*void process_args(const CommandInfo& com_info) override;*/
 private:
     void add_count(const std::string& opt, const std::string& arg);
     std::unordered_map<std::string, Var_SID> _args;

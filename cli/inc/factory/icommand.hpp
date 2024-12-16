@@ -1,6 +1,7 @@
 #ifndef ICOMMAND_HPP
 #define ICOMMAND_HPP
 #include "command_info.hpp"
+#include "item.hpp"
 #include <stdexcept>
 #include <variant>
 #include <vector>
@@ -11,7 +12,7 @@
 namespace cli 
 {
 
-using Var_SID = std::variant<std::string, int, double>;
+using Var_SID = std::variant<std::string, int, double, model::RGB>;
 using F_vs = std::function<void(const std::string& option, const std::string& str)>;
 using Valid_types = std::map<std::string, std::vector<std::string>>;
 

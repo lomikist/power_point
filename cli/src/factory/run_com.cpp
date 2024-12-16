@@ -5,6 +5,7 @@
 #include <iostream>
 #include "controller.hpp"
 #include "editor.hpp"
+#include "logger.hpp"
 #include <fstream>
 
 using namespace cli;
@@ -42,6 +43,7 @@ void RunCom::execute()
     }
     else 
         std::cout << "cant open file\n";
+    myfile.close();
 };
 
 

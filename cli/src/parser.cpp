@@ -11,15 +11,12 @@
 #include "icommand.hpp"
 #include <cctype>
 #include <cmath>
-#include <cstddef>
 #include <istream>
 #include <iterator>
 #include <memory>
-#include <ostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
-#include <vector>
 #include <algorithm>
 
 using namespace cli;
@@ -101,7 +98,7 @@ void Parser::shape_command(TokenType token, const std::string& raw_token)
             _content_started = true;
             _content += raw_token + " ";
         }
-        else if (token == TokenType::WORD || token == TokenType::NUM)
+        else if (token == TokenType::WORD || token == TokenType::NUM || token == TokenType::MVAL) // TODO change in futur
         {
             _command_info._arguments[_last_option] = raw_token;
         }
@@ -132,12 +129,13 @@ std::shared_ptr<ICommand> Parser::parse(std::istream& is)
             }
         }
         auto command = _command_creator.create(_command_info._command_name + _command_info._subcommand_name);
-        command->process_args(_command_info);
-
-        ////////////////////
-        reset();
-        ////////////////////
-
+        if (command)
+        {
+            command->process_args(_command_info);
+            ////////////////////
+            reset();
+            ////////////////////
+        }
         return command;
     }
     catch (const std::exception& e)
@@ -219,7 +217,12 @@ bool Parser::Tokenizer::subcom_check(const std::string& str)
 
 bool Parser::Tokenizer::word_check(const std::string& str)
 {
-    if (std::all_of(str.begin(), str.end(), ::isalnum)) {
+    if (
+        std::all_of(str.begin(), str.end(), ::isalnum) || 
+        std::any_of(str.begin(), str.end(), [](auto&& elem){
+            return (elem == '.' || elem == '/');   
+        })
+    ){
         return true;
     }
     return false;
@@ -275,4 +278,14 @@ int Parser::str_to_int(const std::string& str)
         throw std::runtime_error("CORE: Can't convert" + str + " to int.");
     }
     return std::stoi(str);
+}
+std::vector<std::string> Parser::splitString(const std::string& str, char delimiter)
+{
+    std::vector<std::string> result;
+    std::stringstream ss(str);
+    std::string token;
+    while (std::getline(ss, token, delimiter)) {
+        result.push_back(token);
+    }
+    return result;
 }

@@ -1,13 +1,13 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "icommand.hpp"
 #include <iostream>
 #include <memory>
+#include <unordered_map>
+#include <variant>
 
 namespace model
 {
-using Atributes = std::unordered_map<std::string, cli::Var_SID>;
 
 struct RGB
 {
@@ -16,6 +16,9 @@ struct RGB
     int _g;
     int _b;
 }; 
+
+using Var_SID = std::variant<std::string, int, double, RGB>;
+using Atributes = std::unordered_map<std::string, Var_SID>;
 
 struct Geometry
 {

@@ -29,8 +29,9 @@ class Parser
 public:
     Parser();
     ~Parser();
-    std::shared_ptr<ICommand>   parse(std::istream& is);
-    static int                  str_to_int(const std::string& str);
+    std::shared_ptr<ICommand>       parse(std::istream& is);
+    static int                      str_to_int(const std::string& str);
+    static std::vector<std::string> splitString(const std::string& str, char delimiter);
 private:   
     class Tokenizer 
     {
@@ -58,8 +59,8 @@ private:
     ValidStates                 _valid_states;
     CommandInfo                 _command_info; 
     int                         _token_order = 0; 
-    std::string                 _last_option;
     bool                        _content_started = false;
+    std::string                 _last_option;
     std::string                 _content;
 
     void                        reset();

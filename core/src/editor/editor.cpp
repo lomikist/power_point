@@ -1,7 +1,6 @@
 #include "editor.hpp"
-#include "icommand.hpp"
 #include "iobserver.hpp"
-#include "item.hpp"
+#include "logger.hpp"
 #include <memory>
 
 using namespace core;
@@ -41,15 +40,29 @@ void Editor::process_action(std::shared_ptr<Iaction> action)
 
 void Editor::undo_action()
 {
-    _rendo_stack.push(_undo_stack.top()->do_action(_model));
-    _undo_stack.pop();
-    notifyObservers();
+    if (!_undo_stack.empty())
+    {
+        _rendo_stack.push(_undo_stack.top()->do_action(_model));
+        _undo_stack.pop();
+        notifyObservers();
+    }
+    else 
+    {
+        core::Logger::get_instance().notify_loggers("Core: no state for undo");
+    }
 }
 
 void Editor::rendo_action()
 {
-    _undo_stack.push(_rendo_stack.top()->do_action(_model));
-    _rendo_stack.pop();
-    notifyObservers();
+    if (!_rendo_stack.empty())
+    {
+        _undo_stack.push(_rendo_stack.top()->do_action(_model));
+        _rendo_stack.pop();
+        notifyObservers();
+    }
+    else 
+    {
+        core::Logger::get_instance().notify_loggers("Core: no state for rendo");
+    }
 }
 
