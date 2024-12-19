@@ -4,6 +4,7 @@
 #include "exit_com.hpp"
 #include "remove_slide_com.hpp"
 #include "rendo_com.hpp"
+#include "type.hpp"
 #include "undo_com.hpp"
 #include "logger.hpp"
 #include "show_slide_com.hpp"
@@ -29,29 +30,29 @@ Parser::Parser()
 
 void Parser::command_init()
 {
-    _command_creator.register_func("add", "<slide>", [](){
-        return std::make_shared<AddSlideCom>();
+    _command_creator.register_func("add", "<slide>", [](const CommandInfo& com){
+        return std::make_shared<AddSlideCom>(com);
     });
-    _command_creator.register_func("add", "<shape>", [](){
-        return std::make_shared<AddItemCom>();
+    _command_creator.register_func("add", "<shape>", [](const CommandInfo& com){
+        return std::make_shared<AddItemCom>(com);
     });
-    _command_creator.register_func("show", "<slide>", [](){
-        return std::make_shared<ShowSlideCom>();
+    _command_creator.register_func("show", "<slide>", [](const CommandInfo& com){
+        return std::make_shared<ShowSlideCom>(com);
     });
-    _command_creator.register_func("remove", "<slide>", [](){
-        return std::make_shared<RemoveSlideCom>();
+    _command_creator.register_func("remove", "<slide>", [](const CommandInfo& com){
+        return std::make_shared<RemoveSlideCom>(com);
     });
-    _command_creator.register_func("run", "", [](){
-        return std::make_shared<RunCom>();
+    _command_creator.register_func("run", "", [](const CommandInfo& com){
+        return std::make_shared<RunCom>(com);
     });
-    _command_creator.register_func("exit", "", [](){
-        return std::make_shared<ExitCom>();
+    _command_creator.register_func("exit", "", [](const CommandInfo& com){
+        return std::make_shared<ExitCom>(com);
     });
-    _command_creator.register_func("undo", "", [](){
-        return std::make_shared<UndoCom>();
+    _command_creator.register_func("undo", "", [](const CommandInfo& com){
+        return std::make_shared<UndoCom>(com);
     });
-    _command_creator.register_func("rendo", "", [](){
-        return std::make_shared<RendoCom>();
+    _command_creator.register_func("rendo", "", [](const CommandInfo& com){
+        return std::make_shared<RendoCom>(com);
     });
 };
 
@@ -128,14 +129,9 @@ std::shared_ptr<ICommand> Parser::parse(std::istream& is)
                 throw std::runtime_error(std::string("wrong token " + raw_token));
             }
         }
-        auto command = _command_creator.create(_command_info._command_name + _command_info._subcommand_name);
+        auto command = _command_creator.create(_command_info);
         if (command)
-        {
-            command->process_args(_command_info);
-            ////////////////////
             reset();
-            ////////////////////
-        }
         return command;
     }
     catch (const std::exception& e)

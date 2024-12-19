@@ -10,20 +10,11 @@
 
 using namespace cli;
 
-RunCom::RunCom()
+RunCom::RunCom(const CommandInfo& com):
+        RunSem()
 {
-    register_options();
+    process_args(com._arguments);
 }
-
-void RunCom::register_options()
-{
-    _options["-p"] = [this](const std::string& opt, const std::string& arg) { add_path(opt, arg); };
-};
-
-void RunCom::add_path(const std::string& opt, const std::string& path)
-{
-    _args[opt] = path; 
-};
 
 void RunCom::execute()
 {

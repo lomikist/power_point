@@ -29,12 +29,8 @@ std::shared_ptr<MyScreen> GuiController::get_screen() const
 void GuiController::save_img(const std::string& path)
 {
     if (_screen->get_paint_canvas()->getImage()->save(QString::fromStdString(path)))
-    {
-        /*std::cout << "alooooooo" << std::endl;*/
-    }
+    {}
     else 
-    {
-        /*std::cout << "blooooooo" << std::endl;*/
-    }
+    {}
 }
 

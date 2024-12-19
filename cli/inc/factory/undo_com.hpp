@@ -1,19 +1,17 @@
 #ifndef UNDO_COM
 #define UNDO_COM
-#include "command_factory.hpp"
+
 #include "icommand.hpp"
+#include "type.hpp"
+#include "undo_sem.hpp"
 
 using namespace cli;
 
-class UndoCom : public Acommand
+class UndoCom : public ICommand, public UndoSem
 {
 public:
-    UndoCom();
+    UndoCom(const CommandInfo& com);
     void execute() override;
-    /*void process_args(const CommandInfo& com_info) override;*/
-private:
-    void add_count(const std::string& opt, const std::string& arg);
-    std::unordered_map<std::string, Var_SID> _args;
 };
 #endif // !UNDO_COM
 

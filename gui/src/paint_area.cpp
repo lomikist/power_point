@@ -18,6 +18,7 @@ PaintArea::PaintArea(QWidget* parent) : QWidget(parent)
     _image->fill(Qt::white);
 
     _painter = new QPainter(_image);
+    _painter->setRenderHint(QPainter::Antialiasing);// just for fun )
 }
 
 void PaintArea::paintEvent(QPaintEvent* event)

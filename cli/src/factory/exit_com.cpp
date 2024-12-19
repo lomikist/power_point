@@ -7,6 +7,7 @@ void ExitCom::execute()
     std::exit(0);   
 };
 
-ExitCom::ExitCom()
+ExitCom::ExitCom(const CommandInfo& com)
 {
+    /*process_args(com._arguments);*/
 }
