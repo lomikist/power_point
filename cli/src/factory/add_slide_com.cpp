@@ -1,5 +1,6 @@
 #include "add_slide_com.hpp"
 #include "add_slide_action.hpp"
+#include "controller.hpp"
 #include "editor.hpp"
 #include "parser.hpp"
 #include <memory>
@@ -26,7 +27,6 @@ void AddSlideCom::execute()
         index = -1;
 
     auto add_action = std::make_shared<core::AddSlideAction>(std::make_shared<model::Slide>(name), index);
-    core::Editor& editot = core::Editor::get_instance();
-    editot.process_action(add_action);
+    core::Controller::get_instance().get_editor()->process_action(add_action);
 };
 

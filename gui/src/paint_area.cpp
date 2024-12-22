@@ -1,5 +1,6 @@
 #include "paint_area.hpp"
 #include "add_item_action.hpp"
+#include "controller.hpp"
 #include "editor.hpp"
 #include "gui_controller.hpp"
 #include "gui_wrapper.hpp"
@@ -87,7 +88,7 @@ void PaintArea::mouseReleaseEvent(QMouseEvent* event)
 
             _new_item->set_geometer(geometry);
             auto action  = std::make_shared<core::AddItemAction>(_new_item, 0);
-            core::Editor::get_instance().process_action(action);
+            core::Controller::get_instance().get_editor()->process_action(action);
         }
         update();
     }

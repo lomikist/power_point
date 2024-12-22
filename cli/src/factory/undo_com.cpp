@@ -1,4 +1,5 @@
 #include "undo_com.hpp"
+#include "controller.hpp"
 #include "editor.hpp"
 #include "parser.hpp"
 
@@ -21,7 +22,7 @@ void UndoCom::execute()
         count = 1;
     while (count > 0)
     {
-        core::Editor::get_instance().undo_action();
+        core::Controller::get_instance().get_editor()->undo_action();
         count--;
     }
 };

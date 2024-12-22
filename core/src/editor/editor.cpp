@@ -1,19 +1,13 @@
 #include "editor.hpp"
+#include "controller.hpp"
 #include "iobserver.hpp"
-#include "logger.hpp"
 #include <memory>
 
 using namespace core;
 
-Editor& Editor::get_instance()
-{
-    static Editor _instance;
-    return _instance;
-};
-
 void Editor::set_model(std::shared_ptr<model::Model> model)
 {
-    _model = std::move(model); 
+    _model = model; 
 };
 
 void Editor::notifyObservers()
@@ -48,7 +42,7 @@ void Editor::undo_action()
     }
     else 
     {
-        core::Logger::get_instance().notify_loggers("Core: no state for undo");
+        core::Controller::get_instance().get_logger()->notify_loggers("Core: no state for undo");
     }
 }
 
@@ -62,7 +56,7 @@ void Editor::rendo_action()
     }
     else 
     {
-        core::Logger::get_instance().notify_loggers("Core: no state for rendo");
+        core::Controller::get_instance().get_logger()->notify_loggers("Core: no state for rendo");
     }
 }
 

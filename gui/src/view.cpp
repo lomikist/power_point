@@ -144,22 +144,22 @@ void MyScreen::set_connections()
             _paint_canvas->get_image()->fill(Qt::white);
 
             auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paint_canvas->get_painter());
-            core::Vizualizer::get_instance().process_slide(pview_canvas, _current_slide);
+            core::Controller::get_instance().get_vizualizer()->process_slide(pview_canvas, _current_slide);
 
             _paint_canvas->repaint();
             update_elements();
         }catch (const std::exception& e)
         {
-            core::Logger::get_instance().notify_loggers(e.what());
+            core::Controller::get_instance().get_logger()->notify_loggers(e.what());
         }
     });
     QObject::connect(_btn_undo, &QPushButton::clicked, [&]()
     {
-        core::Editor::get_instance().undo_action(); 
+        core::Controller::get_instance().get_editor()->undo_action(); 
     });
     QObject::connect(_btn_rendo, &QPushButton::clicked, [&]()
     {
-        core::Editor::get_instance().rendo_action(); 
+        core::Controller::get_instance().get_editor()->rendo_action(); 
     });
     QObject::connect(_btn_add_item, &QPushButton::clicked, [&]()
     {
@@ -193,7 +193,7 @@ void MyScreen::update_elements()
                     _paint_canvas->get_image()->fill(Qt::white);
 
                     auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paint_canvas->get_painter());
-                    core::Vizualizer::get_instance().process_slide(pview_canvas, _current_slide);
+                    core::Controller::get_instance().get_vizualizer()->process_slide(pview_canvas, _current_slide);
 
                     _paint_canvas->repaint();
                 });
@@ -224,7 +224,7 @@ void MyScreen::draw_elements()
         slide_list_painter.setBrush(QBrush(Qt::red));
 
         auto _btn_canvas = std::make_shared<core::GuiPainterWrapper>(&slide_list_painter);
-        core::Vizualizer::get_instance().process_slide(_btn_canvas, btn->property("id").toInt());
+        core::Controller::get_instance().get_vizualizer()->process_slide(_btn_canvas, btn->property("id").toInt());
 
         btn->setVisible(true); 
         btn->setIcon(QIcon(pixmap));

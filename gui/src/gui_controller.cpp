@@ -1,4 +1,5 @@
 #include "gui_controller.hpp"
+#include "controller.hpp"
 #include "gui_wrapper.hpp"
 #include "qobject.h"
 #include "vizualize.hpp"
@@ -15,7 +16,7 @@ GuiController::GuiController()
 
 void GuiController::update()
 {
-    core::Vizualizer::get_instance().process_slide(_pview_canvas, _screen->get_current_slide());
+    core::Controller::get_instance().get_vizualizer()->process_slide(_pview_canvas, _screen->get_current_slide());
     _screen->update_elements(); 
     _screen->update();
     _screen->show();

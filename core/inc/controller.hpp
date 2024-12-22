@@ -20,16 +20,20 @@ public:
     cli::Parser&                        get_parser();
     std::shared_ptr<gui::GuiController> get_guicontroller();
     std::shared_ptr<model::Model>       get_model();
+    std::shared_ptr<core::Editor>       get_editor();
+    std::shared_ptr<core::Vizualizer>   get_vizualizer();
+    std::shared_ptr<core::Logger>       get_logger();
+    
 private:
-    Controller ();
+    Controller();
 
     std::shared_ptr<gui::GuiController> _gui_controller;
     std::shared_ptr<model::Model>       _model;
     std::unique_ptr<cli::Parser>        _parser;
 
-    Editor&     _editor     = Editor::get_instance();
-    Vizualizer& _vizualizer = Vizualizer::get_instance();
-    Logger&     _logger     = Logger::get_instance();
+    std::shared_ptr<Editor>     _editor;
+    std::shared_ptr<Vizualizer> _vizualizer;
+    std::shared_ptr<Logger>     _logger;
 };
 };
 #endif // !CONTROLLER

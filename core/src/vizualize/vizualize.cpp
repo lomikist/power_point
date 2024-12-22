@@ -9,12 +9,6 @@
 
 using namespace core;
 
-Vizualizer& Vizualizer::get_instance()
-{
-    static Vizualizer instance;
-    return instance;
-};
-
 void Vizualizer::set_model(std::shared_ptr<model::Model> model)
 {
     _model = std::move(model); 
@@ -34,7 +28,7 @@ void Vizualizer::process_slide(std::shared_ptr<core::ICanvas> canvas, int index)
         }
     } catch (std::exception& e)
     {
-        core::Logger::get_instance().notify_loggers(e.what());
+        core::Controller::get_instance().get_logger()->notify_loggers(e.what());
     }
 };
 

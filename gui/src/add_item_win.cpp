@@ -1,13 +1,14 @@
 #include "add_item_win.hpp"
 #include "add_item_action.hpp"
 #include "add_item_com.hpp"
-#include "editor.hpp"
+#include "controller.hpp"
 #include "item.hpp"
 #include "qboxlayout.h"
 #include "qlineedit.h"
 #include "qpushbutton.h"
 #include "type.hpp"
 #include <QLabel>
+
 using namespace gui;
 
 AddItemWin::AddItemWin(const std::string& type, int slide_index, QWidget* parent) :
@@ -61,7 +62,7 @@ void AddItemWin::shape_item()
 
     auto item = std::make_shared<model::Item>(x, y, w, h, _atributes);
     auto add_action = std::make_shared<core::AddItemAction>(item, std::get<int>(_atributes["-i"]));
-    core::Editor::get_instance().process_action(add_action);
+    core::Controller::get_instance().get_editor()->process_action(add_action);
 };
 
 void AddItemWin::setup_widgets()

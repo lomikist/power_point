@@ -13,11 +13,10 @@ class Vizualizer
 {
 public:
     ~Vizualizer(){};
-    static Vizualizer& get_instance();
+    Vizualizer(){};
     void process_slide(std::shared_ptr<core::ICanvas> canvas, int index);
     void set_model(std::shared_ptr<model::Model> model); 
 private:
-    Vizualizer(){};
     std::shared_ptr<model::Model> _model;
     ShapeFactory _shape_creator;
 };

@@ -1,4 +1,5 @@
 #include "remove_slide_com.hpp"
+#include "controller.hpp"
 #include "parser.hpp"
 #include "editor.hpp"
 #include "remove_slide_action.hpp"
@@ -17,6 +18,6 @@ void RemoveSlideCom::execute()
     int id = std::get<int>(_args["-i"]);
 
     auto remove_act = std::make_shared<core::RemoveSlideAction>(id);
-    core::Editor::get_instance().process_action(remove_act);
+    core::Controller::get_instance().get_editor()->process_action(remove_act);
 };
 

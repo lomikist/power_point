@@ -1,7 +1,5 @@
 #include "rendo_com.hpp"
-#include "editor.hpp"
-#include "parser.hpp"
-#include "undo_sem.hpp"
+#include "controller.hpp"
 
 using namespace cli;
 
@@ -20,7 +18,7 @@ void RendoCom::execute()
         count = 1;
     while (count > 0)
     {
-        core::Editor::get_instance().rendo_action();
+        core::Controller::get_instance().get_editor()->rendo_action();
         count--;
     }
 };

@@ -1,9 +1,8 @@
 #include "add_item_com.hpp"
 #include "add_item_action.hpp"
+#include "controller.hpp"
 #include "editor.hpp"
 #include "item.hpp"
-#include "parser.hpp"
-#include <algorithm>
 #include <cctype>
 #include <memory>
 #include <stdexcept>
@@ -45,7 +44,6 @@ void AddItemCom::execute()
             slide_index
         );
     
-    core::Editor& editor = core::Editor::get_instance();
-    editor.process_action(action);
+    core::Controller::get_instance().get_editor()->process_action(action);
 };
 

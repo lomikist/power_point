@@ -17,7 +17,7 @@ class Editor : public ISubject
 {
 public: 
     ~Editor(){};
-    static Editor& get_instance();
+    Editor(){};
     void set_model(std::shared_ptr<model::Model> model); 
     void notifyObservers() override;
     void addObserver(std::shared_ptr<IObserver> new_obserber) override; 
@@ -26,7 +26,6 @@ public:
     void undo_action();
     void rendo_action();
 private:
-    Editor(){};
     std::shared_ptr<model::Model> _model;
     std::stack<std::shared_ptr<Iaction>> _undo_stack;
     std::stack<std::shared_ptr<Iaction>> _rendo_stack;

@@ -6,7 +6,7 @@
 #include "rendo_com.hpp"
 #include "type.hpp"
 #include "undo_com.hpp"
-#include "logger.hpp"
+#include "controller.hpp"
 #include "show_slide_com.hpp"
 #include "run_com.hpp"
 #include "icommand.hpp"
@@ -137,7 +137,7 @@ std::shared_ptr<ICommand> Parser::parse(std::istream& is)
     catch (const std::exception& e)
     {
         reset();
-        core::Logger::get_instance().notify_loggers(e.what());
+        core::Controller::get_instance().get_logger()->notify_loggers(e.what());
     }
     return nullptr;
 };

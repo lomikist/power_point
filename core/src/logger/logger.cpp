@@ -8,12 +8,6 @@ Logger::Logger()
 Logger::~Logger()
 {};
 
-Logger& Logger::get_instance()
-{
-    static Logger _instance;
-    return _instance;
-};
-
 void Logger::add_logger(std::shared_ptr<ILogger> new_logger)
 {
     _loggers.push_back(new_logger);

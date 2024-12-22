@@ -11,11 +11,10 @@ class Logger
 {
 public: 
     ~Logger();
-    static Logger& get_instance();
+    Logger();
     void add_logger(std::shared_ptr<ILogger> new_one);
     void notify_loggers(const std::string& message);
 private:
-    Logger();
     std::vector<std::shared_ptr<ILogger>> _loggers;
 };
 }

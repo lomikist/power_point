@@ -29,11 +29,11 @@ void ShowSlideCom::execute()
     std::string type = (_args.find("-t") != _args.end()) ? std::get<std::string>(_args["-t"]) : "cmd";
     std::string path = (_args.find("-p") != _args.end()) ? std::get<std::string>(_args["-p"]) : "../out.txt";
 
-    core::Vizualizer& vizualizer = core::Vizualizer::get_instance();
+    
     if (type == "cmd")
     {
         std::shared_ptr<core::ICanvas> canvas = std::make_shared<core::OstreamWrapper>(std::cout);
-        vizualizer.process_slide(canvas, index);
+        core::Controller::get_instance().get_vizualizer()->process_slide(canvas, index);
     }
     else if (type == "file")
     {
@@ -48,7 +48,7 @@ void ShowSlideCom::execute()
             if (outfile.is_open())
             {
                 std::shared_ptr<core::ICanvas> canvas = std::make_shared<core::OstreamWrapper>(outfile);
-                vizualizer.process_slide(canvas, index);
+                core::Controller::get_instance().get_vizualizer()->process_slide(canvas, index);
             }
             else 
                 throw std::runtime_error("cant open file");

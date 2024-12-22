@@ -1,4 +1,5 @@
 #include "remove_item_com.hpp"
+#include "controller.hpp"
 #include "parser.hpp"
 #include "editor.hpp"
 #include "remove_item_action.hpp"
@@ -19,6 +20,6 @@ void RemoveItemCom::execute()
     int slide_index = std::get<int>(_args["-i"]);
 
     auto remove_action = std::make_shared<core::RemoveItemAction>(slide_index, item_id);
-    core::Editor::get_instance().process_action(remove_action);
+    core::Controller::get_instance().get_editor()->process_action(remove_action);
 };
 
