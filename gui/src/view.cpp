@@ -10,6 +10,7 @@
 #include <QGraphicsView>
 #include <QWheelEvent>
 #include <QWidget>
+#include <algorithm>
 #include <sstream>
 #include "add_item_com.hpp"
 #include "add_item_win.hpp"
@@ -48,7 +49,7 @@ int MyScreen::get_current_slide() const
 
 void MyScreen::setup_widgets()
 {
-    _paint_canvas =  new PaintArea(this);
+    _paint_canvas =  new PaintArea(_tools_vector, this);
     _cmd_line =     new QLineEdit(this);
     _cmd_browser =  new QTextBrowser(this);
     _cmd_browser->setFixedHeight(100);
@@ -62,25 +63,48 @@ void MyScreen::setup_widgets()
     _btn_rendo =        new QPushButton("Rendo", this);
     _btn_add_item =     new QPushButton("Add Item", this);
     _box_item_type =    new QComboBox(this);
-    
-    _btn_add_rect->setCheckable(true);
-    _btn_add_elipse->setCheckable(true);
-    _btn_add_textbox->setCheckable(true);
 
+    // Dynamic elements 
     QLabel* item_type = new QLabel("Item type: ", this);
+    int i = 0;
     for (auto&& item : cli::AddItemCom::s_valid_shape_atributes)
+    {
+        QPushButton* new_btn = new QPushButton(item.first.c_str(), this);
+
+        new_btn->setCheckable(true);
+        new_btn->setProperty("item_type", item.first.c_str());
+        _tools_main_layout->addWidget(new_btn, 1, i);
+
+        connect(new_btn, &QPushButton::clicked, [this, new_btn]() { 
+            item_type_toggle(new_btn);
+        }); 
+
+        _tools_vector.push_back(new_btn);
         _box_item_type->addItem(QString::fromStdString(item.first));
+        i++;
+    }
 
     _tools_add_item_layout->addWidget(_btn_add_item, 0, 0, 1, 2);
     _tools_add_item_layout->addWidget(_box_item_type, 1, 1);
     _tools_add_item_layout->addWidget(item_type, 1, 0);
 
-    _tools_main_layout->addWidget(_btn_add_rect, 1, 0);
-    _tools_main_layout->addWidget(_btn_add_elipse, 1, 1);
-    _tools_main_layout->addWidget(_btn_add_textbox, 1, 4); 
     _tools_main_layout->addWidget(_btn_undo, 0, 0);
     _tools_main_layout->addWidget(_btn_rendo, 0, 1);
 };
+
+void MyScreen::item_type_toggle(QPushButton* clickedButton)
+{
+    for (QPushButton* button : _tools_vector) 
+    {
+        if (button != clickedButton)
+        {
+            button->setChecked(false);
+        }
+    }
+    _paint_canvas->item_selected(!std::all_of(_tools_vector.begin(), _tools_vector.end(), [&](auto && btn){
+        return !btn->isChecked();
+    }));
+}
 
 void MyScreen::setup_layout()
 {
@@ -117,9 +141,9 @@ void MyScreen::set_connections()
             if (cmd) {
                 cmd->execute();
             }
-            _paint_canvas->getImage()->fill(Qt::white);
+            _paint_canvas->get_image()->fill(Qt::white);
 
-            auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paint_canvas->getPainter());
+            auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paint_canvas->get_painter());
             core::Vizualizer::get_instance().process_slide(pview_canvas, _current_slide);
 
             _paint_canvas->repaint();
@@ -137,25 +161,11 @@ void MyScreen::set_connections()
     {
         core::Editor::get_instance().rendo_action(); 
     });
-
     QObject::connect(_btn_add_item, &QPushButton::clicked, [&]()
     {
         auto type = _box_item_type->currentText();
         AddItemWin* add_popup = new AddItemWin(type.toStdString(), _current_slide, this); 
         add_popup->show();
-    });
-
-    QObject::connect(_btn_add_elipse, &QPushButton::clicked, [&]()
-    {
-        
-    });
-    QObject::connect(_btn_add_textbox, &QPushButton::clicked, [&]()
-    {
-        
-    });
-    QObject::connect(_btn_add_rect, &QPushButton::clicked, [&]()
-    {
-
     });
 }
 
@@ -180,9 +190,9 @@ void MyScreen::update_elements()
                 QObject::connect(button, &QPushButton::clicked, [slide, this]()
                 {
                     _current_slide = slide->get_id();
-                    _paint_canvas->getImage()->fill(Qt::white);
+                    _paint_canvas->get_image()->fill(Qt::white);
 
-                    auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paint_canvas->getPainter());
+                    auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paint_canvas->get_painter());
                     core::Vizualizer::get_instance().process_slide(pview_canvas, _current_slide);
 
                     _paint_canvas->repaint();

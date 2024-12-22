@@ -10,7 +10,7 @@ GuiController::GuiController()
     _screen = std::make_shared<MyScreen>();
     _screen->show();
 
-    _pview_canvas = std::make_shared<core::GuiPainterWrapper>(_screen->get_paint_canvas()->getPainter());
+    _pview_canvas = std::make_shared<core::GuiPainterWrapper>(_screen->get_paint_canvas()->get_painter());
 };
 
 void GuiController::update()
@@ -28,7 +28,7 @@ std::shared_ptr<MyScreen> GuiController::get_screen() const
 
 void GuiController::save_img(const std::string& path)
 {
-    if (_screen->get_paint_canvas()->getImage()->save(QString::fromStdString(path)))
+    if (_screen->get_paint_canvas()->get_image()->save(QString::fromStdString(path)))
     {}
     else 
     {}

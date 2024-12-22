@@ -27,7 +27,7 @@ public:
     QTextBrowser*   get_text_browser();
     void            update_elements();
 private:
-    int _current_slide = 0;
+    int             _current_slide = 0;
 
     QTextBrowser*   _cmd_browser;
     QLineEdit*      _cmd_line;
@@ -44,18 +44,16 @@ private:
     QVector<QPushButton*> _slide_list_vector;
     QVector<QPushButton*> _tools_vector;
 
-    QPushButton* _btn_add_textbox;
-    QPushButton* _btn_add_rect;
-    QPushButton* _btn_add_elipse;
-    QPushButton* _btn_undo;
-    QPushButton* _btn_rendo;
-    QPushButton* _btn_add_item;
-    QComboBox*   _box_item_type;
+    QPushButton*    _btn_undo;
+    QPushButton*    _btn_rendo;
+    QPushButton*    _btn_add_item;
+    QComboBox*      _box_item_type;
     
     void setup_layout();
     void setup_widgets();
     void set_connections();
     void draw_elements();
+    void item_type_toggle(QPushButton* clickedButton);
 };
 }
 #endif // VIEW_HPP
