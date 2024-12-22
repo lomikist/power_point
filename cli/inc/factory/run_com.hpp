@@ -1,26 +1,18 @@
 #ifndef RUN_COM_HPP
 #define RUN_COM_HPP
-#include "command_factory.hpp"
+
 #include "icommand.hpp"
-#include <map>
-#include <unordered_map>
-#include <vector>
-#include <string>
+#include "run_sem.hpp"
+#include "type.hpp"
 
 namespace cli 
 {
-
-class RunCom : public Acommand 
+class RunCom : public ICommand, public RunSem
 { 
 public:
-    RunCom();
+    RunCom(const CommandInfo& com);
     ~RunCom() = default;
     void execute() override;
-    /*void process_args(const CommandInfo& com_info) override;*/
-    void add_path(const std::string& , const std::string& path); 
-private:
-    void register_options();
-    std::unordered_map<std::string, Var_SID> _args;
 };
 
 }

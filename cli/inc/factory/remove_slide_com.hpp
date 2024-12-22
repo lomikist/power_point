@@ -1,27 +1,18 @@
 #ifndef REMOVE_SLIDE_COM_HPP
 #define REMOVE_SLIDE_COM_HPP
 
-#include <map>
-#include <vector>
-#include <functional>
-#include "command_factory.hpp"
 #include "icommand.hpp"
+#include "remove_slide_sem.hpp"
+#include "type.hpp"
 
 namespace cli 
 {
-
-class RemoveSlideCom : public Acommand
+class RemoveSlideCom : public ICommand, public RemoveSlideSem 
 {
 public:
-    RemoveSlideCom();
+    RemoveSlideCom(const CommandInfo& com);
     ~RemoveSlideCom() = default;
-    /*void process_args(const CommandInfo& com_info) override; */
     void execute() override; 
-private:
-    void add_id(const std::string& opt, const std::string& args);
-    void add_index(const std::string& opt, const std::string& args);
-    std::unordered_map<std::string, Var_SID> _args;
-
 };
 }
 #endif // !REMOVE_SLIDE_COM_HPP

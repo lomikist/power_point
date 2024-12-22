@@ -1,8 +1,15 @@
 #include "rendo_com.hpp"
 #include "editor.hpp"
 #include "parser.hpp"
+#include "undo_sem.hpp"
 
 using namespace cli;
+
+RendoCom::RendoCom(const CommandInfo& com):
+          RendoSem()
+{
+    process_args(com._arguments);
+};
 
 void RendoCom::execute()
 {
@@ -17,17 +24,4 @@ void RendoCom::execute()
         count--;
     }
 };
-
-RendoCom::RendoCom()
-{
-    _options["-n"] = [this](const std::string& opt,const std::string& args){
-        add_count(opt, args); 
-    };
-}
-
-void RendoCom::add_count(const std::string& opt, const std::string& args)
-{
-    int count = Parser::str_to_int(args);
-    _args[opt] = count;
-}
 

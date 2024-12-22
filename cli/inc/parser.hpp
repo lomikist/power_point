@@ -1,28 +1,13 @@
 #ifndef PARSER_HPP
 #define PARSER_HPP
-#include <iostream>
-#include <istream>
+
 #include <memory>
-#include <unordered_set>
+#include "type.hpp"
 #include "command_factory.hpp"
 #include "icommand.hpp"
 
 namespace cli
 {
-enum TokenType
-{
-    START,
-    WORD,
-    SUBCOM,
-    OPT,
-    NUM,
-    MVAL,
-    SCON,
-    ECON,
-    BADTYPE
-};
-
-using ValidStates = std::unordered_map<TokenType, std::unordered_set<TokenType>>;
 
 class Parser
 {

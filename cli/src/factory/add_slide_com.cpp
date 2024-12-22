@@ -9,10 +9,10 @@
 
 using namespace cli;
 
-AddSlideCom::AddSlideCom()
+AddSlideCom::AddSlideCom(const CommandInfo& com) :
+             AddSlideSem()
 {
-    _options["-n"] = [this](const std::string& opt, const std::string& args){ add_title(opt, args); };
-    _options["-i"] = [this](const std::string& opt, const std::string& args){ add_index(opt, args); };
+    process_args(com._arguments);
 };
 
 void AddSlideCom::execute()
@@ -30,13 +30,3 @@ void AddSlideCom::execute()
     editot.process_action(add_action);
 };
 
-void AddSlideCom::add_title(const std::string& opt, const std::string& args)
-{
-    _args[opt] = args;
-};
-
-void AddSlideCom::add_index(const std::string& opt, const std::string& args)
-{
-    int index = Parser::str_to_int(args);
-    _args[opt] = index;
-};

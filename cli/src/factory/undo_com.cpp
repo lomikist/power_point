@@ -4,15 +4,10 @@
 
 using namespace cli;
 
-UndoCom::UndoCom()
+UndoCom::UndoCom(const CommandInfo& com) : 
+         UndoSem()
 {
-    _options["-n"] = [this](const std::string& opt, const std::string& args){ add_count(opt, args); };
-}
-
-void UndoCom::add_count(const std::string& opt,const std::string& args)
-{
-    int count = Parser::str_to_int(args);
-    _args[opt] = count;
+    process_args(com._arguments);
 }
 
 void UndoCom::execute()
@@ -31,4 +26,3 @@ void UndoCom::execute()
     }
 };
 
-//TODO fix bug conntected with some parser state i think.

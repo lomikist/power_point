@@ -14,6 +14,7 @@ INCLUDEPATH += \
     $$PWD/cli/inc \
     $$PWD/cli/inc/factory \
     $$PWD/cli/inc/observer \
+    $$PWD/cli/inc/semantic \
     $$PWD/core/inc \
     $$PWD/core/inc/observer \
     $$PWD/core/inc/logger \
@@ -28,6 +29,7 @@ SOURCES += \
     $$files($$PWD/cli/src/*.cpp) \
     $$files($$PWD/cli/src/factory/*.cpp) \
     $$files($$PWD/cli/src/observer/*.cpp) \
+    $$files($$PWD/cli/src/semantic/*.cpp) \
     $$files($$PWD/core/src/*.cpp) \
     $$files($$PWD/core/src/observer/*.cpp) \
     $$files($$PWD/core/src/logger/*.cpp) \
@@ -43,6 +45,7 @@ HEADERS += \
     $$files($$PWD/cli/inc/*.hpp) \
     $$files($$PWD/cli/inc/factory/*.hpp) \
     $$files($$PWD/cli/inc/observer/*.hpp) \
+    $$files($$PWD/cli/inc/semantic/*.hpp) \
     $$files($$PWD/core/inc/*.hpp) \
     $$files($$PWD/core/inc/observer/*.hpp) \
     $$files($$PWD/core/inc/logger/*.hpp) \

@@ -14,42 +14,11 @@
 
 using namespace cli;
 
-ShowSlideCom::ShowSlideCom()
-{
-    register_options();  
+ShowSlideCom::ShowSlideCom(const CommandInfo& com) :
+                ShowSlideSem()
+{ 
+    process_args(com._arguments);
 };
-
-void ShowSlideCom::register_options()
-{
-    _options["-i"] = [this](const std::string& opt,const std::string& args)
-    {
-        add_index(opt, args);
-    };
-    _options["-t"] = [this](const std::string& opt,const std::string& args)
-    {
-        add_type(opt, args);
-    };
-    _options["-p"] = [this](const std::string& opt,const std::string& args)
-    {
-        add_path(opt, args);
-    };
-};
-
-void ShowSlideCom::add_index(const std::string& opt,const std::string& arg)
-{
-    int index = cli::Parser::str_to_int(arg); 
-    _args[opt] = index;
-}
-
-void ShowSlideCom::add_type(const std::string& opt,const std::string& arg)
-{
-    _args[opt] = arg;
-}
-
-void ShowSlideCom::add_path(const std::string& opt,const std::string& arg)
-{
-    _args[opt] = arg;
-}
 
 void ShowSlideCom::execute()
 {
