@@ -10,12 +10,6 @@
 
 using namespace core;
 
-Controller& Controller::get_instance()
-{
-    static Controller _instance;
-    return _instance;
-};
-
 cli::Parser& Controller::get_parser()
 {
     return *_parser;
@@ -30,8 +24,12 @@ std::shared_ptr<model::Model> Controller::get_model()
     return _model;
 };
 
-Controller::Controller()
+Controller* Controller::s_app = nullptr;
+
+Controller::Controller(int &argc, char *argv[]) :
+            QApplication(argc, argv)
 {
+
     _parser         = std::make_unique<cli::Parser>();
     _model          = std::make_shared<model::Model>();
     _gui_controller = std::make_shared<gui::GuiController>();
@@ -46,6 +44,7 @@ Controller::Controller()
 
     _logger->add_logger(std::make_shared<OsLogger>(&std::cout));
     _logger->add_logger(std::make_shared<GuiLogger>(_gui_controller->get_screen()->get_text_browser()));
+    s_app = this;
 };
 
 std::shared_ptr<core::Editor>   Controller::get_editor()
@@ -61,7 +60,12 @@ std::shared_ptr<core::Logger>   Controller::get_logger()
     return _logger;
 };
 
+Controller *Controller::instance(){
+    return s_app;
+}
+
 Controller::~Controller()
-{};
+{
+};
 
 

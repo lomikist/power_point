@@ -137,29 +137,29 @@ void MyScreen::set_connections()
     {
         std::stringstream stream(_cmd_line->text().toStdString());
         try {
-            auto cmd = core::Controller::get_instance().get_parser().parse(stream);
+            auto cmd = core::Controller::instance()->get_parser().parse(stream);
             if (cmd) {
                 cmd->execute();
             }
             _paint_canvas->get_image()->fill(Qt::white);
 
             auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paint_canvas->get_painter());
-            core::Controller::get_instance().get_vizualizer()->process_slide(pview_canvas, _current_slide);
+            core::Controller::instance()->get_vizualizer()->process_slide(pview_canvas, _current_slide);
 
             _paint_canvas->repaint();
             update_elements();
         }catch (const std::exception& e)
         {
-            core::Controller::get_instance().get_logger()->notify_loggers(e.what());
+            core::Controller::instance()->get_logger()->notify_loggers(e.what());
         }
     });
     QObject::connect(_btn_undo, &QPushButton::clicked, [&]()
     {
-        core::Controller::get_instance().get_editor()->undo_action(); 
+        core::Controller::instance()->get_editor()->undo_action(); 
     });
     QObject::connect(_btn_rendo, &QPushButton::clicked, [&]()
     {
-        core::Controller::get_instance().get_editor()->rendo_action(); 
+        core::Controller::instance()->get_editor()->rendo_action(); 
     });
     QObject::connect(_btn_add_item, &QPushButton::clicked, [&]()
     {
@@ -171,7 +171,7 @@ void MyScreen::set_connections()
 
 void MyScreen::update_elements()
 {
-    auto slides = core::Controller::get_instance().get_model()->get_slides();
+    auto slides = core::Controller::instance()->get_model()->get_slides();
 
     if (!slides.empty())
     {
@@ -193,7 +193,7 @@ void MyScreen::update_elements()
                     _paint_canvas->get_image()->fill(Qt::white);
 
                     auto pview_canvas = std::make_shared<core::GuiPainterWrapper>(_paint_canvas->get_painter());
-                    core::Controller::get_instance().get_vizualizer()->process_slide(pview_canvas, _current_slide);
+                    core::Controller::instance()->get_vizualizer()->process_slide(pview_canvas, _current_slide);
 
                     _paint_canvas->repaint();
                 });
@@ -224,7 +224,7 @@ void MyScreen::draw_elements()
         slide_list_painter.setBrush(QBrush(Qt::red));
 
         auto _btn_canvas = std::make_shared<core::GuiPainterWrapper>(&slide_list_painter);
-        core::Controller::get_instance().get_vizualizer()->process_slide(_btn_canvas, btn->property("id").toInt());
+        core::Controller::instance()->get_vizualizer()->process_slide(_btn_canvas, btn->property("id").toInt());
 
         btn->setVisible(true); 
         btn->setIcon(QIcon(pixmap));

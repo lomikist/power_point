@@ -27,6 +27,6 @@ void AddSlideCom::execute()
         index = -1;
 
     auto add_action = std::make_shared<core::AddSlideAction>(std::make_shared<model::Slide>(name), index);
-    core::Controller::get_instance().get_editor()->process_action(add_action);
+    core::Controller::instance()->get_editor()->process_action(add_action);
 };
 

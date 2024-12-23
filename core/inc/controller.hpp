@@ -3,29 +3,35 @@
 #include <memory>
 #include "editor.hpp"
 #include "gui_controller.hpp"
-#include "qtimer.h"
+#include "qapplication.h"
 #include "vizualize.hpp"
 #include "logger.hpp"
 #include "model.hpp"
 #include "parser.hpp"
-#include "view.hpp"
 
 namespace core
 {
-class Controller 
+class Controller : public QApplication
 {
 public:
+    static Controller* instance(); 
+
+    Controller(int &argc, char *argv[]);
     ~Controller ();
-    static Controller&                  get_instance();
+
+    Controller(const Controller&) = delete;
+    Controller(Controller&&) = delete;
+    Controller& operator=(const Controller&) = delete;
+    Controller& operator=(Controller&&) = delete;
+
     cli::Parser&                        get_parser();
     std::shared_ptr<gui::GuiController> get_guicontroller();
     std::shared_ptr<model::Model>       get_model();
     std::shared_ptr<core::Editor>       get_editor();
     std::shared_ptr<core::Vizualizer>   get_vizualizer();
     std::shared_ptr<core::Logger>       get_logger();
-    
 private:
-    Controller();
+    static Controller*                  s_app;
 
     std::shared_ptr<gui::GuiController> _gui_controller;
     std::shared_ptr<model::Model>       _model;

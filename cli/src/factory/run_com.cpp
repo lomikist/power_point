@@ -27,7 +27,7 @@ void RunCom::execute()
     {
         while (myfile.good()) 
         {
-            auto cmd = core::Controller::get_instance().get_parser().parse(myfile);
+            auto cmd = core::Controller::instance()->get_parser().parse(myfile);
             if (cmd)
                 cmd->execute(); 
         }

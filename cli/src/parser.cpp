@@ -137,7 +137,7 @@ std::shared_ptr<ICommand> Parser::parse(std::istream& is)
     catch (const std::exception& e)
     {
         reset();
-        core::Controller::get_instance().get_logger()->notify_loggers(e.what());
+        core::Controller::instance()->get_logger()->notify_loggers(e.what());
     }
     return nullptr;
 };

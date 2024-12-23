@@ -18,7 +18,7 @@ void RendoCom::execute()
         count = 1;
     while (count > 0)
     {
-        core::Controller::get_instance().get_editor()->rendo_action();
+        core::Controller::instance()->get_editor()->rendo_action();
         count--;
     }
 };

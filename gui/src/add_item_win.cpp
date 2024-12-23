@@ -62,7 +62,7 @@ void AddItemWin::shape_item()
 
     auto item = std::make_shared<model::Item>(x, y, w, h, _atributes);
     auto add_action = std::make_shared<core::AddItemAction>(item, std::get<int>(_atributes["-i"]));
-    core::Controller::get_instance().get_editor()->process_action(add_action);
+    core::Controller::instance()->get_editor()->process_action(add_action);
 };
 
 void AddItemWin::setup_widgets()

@@ -44,6 +44,6 @@ void AddItemCom::execute()
             slide_index
         );
     
-    core::Controller::get_instance().get_editor()->process_action(action);
+    core::Controller::instance()->get_editor()->process_action(action);
 };
 

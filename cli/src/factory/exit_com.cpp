@@ -4,10 +4,8 @@ using namespace cli;
 
 void ExitCom::execute()
 {
-    std::exit(0);   
+    std::exit(0);
 };
 
 ExitCom::ExitCom(const CommandInfo& com)
-{
-    /*process_args(com._arguments);*/
-}
+{}

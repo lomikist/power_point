@@ -22,7 +22,7 @@ void UndoCom::execute()
         count = 1;
     while (count > 0)
     {
-        core::Controller::get_instance().get_editor()->undo_action();
+        core::Controller::instance()->get_editor()->undo_action();
         count--;
     }
 };

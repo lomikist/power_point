@@ -4,11 +4,9 @@
 #include <QApplication>
 
 int main (int argc, char *argv[])
-{ 
-    QApplication app(argc, argv);
+{
+    auto app = core::Controller(argc, argv);
 
-    core::Controller& controller = core::Controller::get_instance();
-
-    return app.exec();
+    return app.instance()->exec();
 }
 

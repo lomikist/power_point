@@ -33,13 +33,13 @@ void ShowSlideCom::execute()
     if (type == "cmd")
     {
         std::shared_ptr<core::ICanvas> canvas = std::make_shared<core::OstreamWrapper>(std::cout);
-        core::Controller::get_instance().get_vizualizer()->process_slide(canvas, index);
+        core::Controller::instance()->get_vizualizer()->process_slide(canvas, index);
     }
     else if (type == "file")
     {
         if (path.find(".png"))//TODO 
         {
-            core::Controller::get_instance().get_guicontroller()->save_img(path);
+            core::Controller::instance()->get_guicontroller()->save_img(path);
         }
         else 
         {            
@@ -48,7 +48,7 @@ void ShowSlideCom::execute()
             if (outfile.is_open())
             {
                 std::shared_ptr<core::ICanvas> canvas = std::make_shared<core::OstreamWrapper>(outfile);
-                core::Controller::get_instance().get_vizualizer()->process_slide(canvas, index);
+                core::Controller::instance()->get_vizualizer()->process_slide(canvas, index);
             }
             else 
                 throw std::runtime_error("cant open file");

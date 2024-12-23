@@ -42,7 +42,7 @@ void Editor::undo_action()
     }
     else 
     {
-        core::Controller::get_instance().get_logger()->notify_loggers("Core: no state for undo");
+        core::Controller::instance()->get_logger()->notify_loggers("Core: no state for undo");
     }
 }
 
@@ -56,7 +56,7 @@ void Editor::rendo_action()
     }
     else 
     {
-        core::Controller::get_instance().get_logger()->notify_loggers("Core: no state for rendo");
+        core::Controller::instance()->get_logger()->notify_loggers("Core: no state for rendo");
     }
 }
 

@@ -16,7 +16,7 @@ GuiController::GuiController()
 
 void GuiController::update()
 {
-    core::Controller::get_instance().get_vizualizer()->process_slide(_pview_canvas, _screen->get_current_slide());
+    core::Controller::instance()->get_vizualizer()->process_slide(_pview_canvas, _screen->get_current_slide());
     _screen->update_elements(); 
     _screen->update();
     _screen->show();

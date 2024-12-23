@@ -28,7 +28,7 @@ void Vizualizer::process_slide(std::shared_ptr<core::ICanvas> canvas, int index)
         }
     } catch (std::exception& e)
     {
-        core::Controller::get_instance().get_logger()->notify_loggers(e.what());
+        core::Controller::instance()->get_logger()->notify_loggers(e.what());
     }
 };
 
