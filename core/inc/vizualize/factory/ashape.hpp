@@ -14,13 +14,13 @@ struct Ashape : public Ishape
         _brush_color(1,1,1), 
         _line_color(1,1,1) 
     {
-        _brush_color = std::get<model::RGB>(item.get_atributes().at("-c"));
-        _line_color = std::get<model::RGB>(item.get_atributes().at("-c"));
+        _brush_color = std::get<cli::RGB>(item.get_atributes().at("-c"));
+        _line_color = std::get<cli::RGB>(item.get_atributes().at("-c"));
     };
     virtual ~Ashape() = default;
     std::shared_ptr<model::Item> _item;
-    model::RGB _brush_color;
-    model::RGB _line_color;
+    cli::RGB _brush_color;
+    cli::RGB _line_color;
 };
 }
 

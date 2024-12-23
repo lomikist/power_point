@@ -7,13 +7,14 @@
 
 namespace cli 
 {
-class ShowSlideCom : public ICommand, public ShowSlideSem
+class ShowSlideCom : public ICommand 
 {
 public:
     ShowSlideCom(const CommandInfo& com);
     ~ShowSlideCom() = default;
     void execute() override; 
-   
+
+    ShowSlideSem    _sem_analizer;  
 };
 }
 #endif // !SHOW_SLIDE_COM_HPP

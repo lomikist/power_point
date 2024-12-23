@@ -7,12 +7,13 @@
 
 namespace cli 
 {
-class RunCom : public ICommand, public RunSem
+class RunCom : public ICommand 
 { 
 public:
     RunCom(const CommandInfo& com);
     ~RunCom() = default;
     void execute() override;
+    RunSem _sem_analizer;
 };
 
 }

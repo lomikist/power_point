@@ -7,11 +7,13 @@
 
 using namespace cli;
 
-class UndoCom : public ICommand, public UndoSem
+class UndoCom : public ICommand 
 {
 public:
     UndoCom(const CommandInfo& com);
     void execute() override;
+
+    UndoSem _sem_analizer;
 };
 #endif // !UNDO_COM
 

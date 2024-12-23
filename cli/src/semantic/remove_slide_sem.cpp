@@ -20,3 +20,9 @@ void RemoveSlideSem::add_index(const std::string& opt, const std::string& args)
     _args[opt] = index;
 };
 
+Atributes RemoveSlideSem::get_args()
+{
+    return _args;
+}
+
+

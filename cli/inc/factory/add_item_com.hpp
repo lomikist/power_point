@@ -5,12 +5,14 @@
 
 namespace cli 
 {
-class AddItemCom : public ICommand, public AddItemSem
+class AddItemCom : public ICommand
 {
 public:
     AddItemCom(const CommandInfo& com);
     ~AddItemCom() = default;
     void execute() override; 
+    AddItemSem _sem_analizer;
+
     static const Valid_types                s_valid_shape_atributes;
     static const std::vector<std::string>   s_valid_geometry; 
 };

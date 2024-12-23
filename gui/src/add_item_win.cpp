@@ -13,7 +13,7 @@ using namespace gui;
 
 AddItemWin::AddItemWin(const std::string& type, int slide_index, QWidget* parent) :
                         QMainWindow(parent),
-                        cli::AddItemSem(),
+                        _sem_analizer(),
                         _add_btn(new QPushButton("Add", this)),
                         _item_type(type),
                         _slide_index(slide_index) 
@@ -53,15 +53,15 @@ void AddItemWin::shape_item()
     }
     ////////////////////////////
     
-    process_args(str_atributes);
+    _sem_analizer.process_args(str_atributes);
 
-    int x = std::get<int>(_geometery["-x"]);
-    int y = std::get<int>(_geometery["-y"]);
-    int w = std::get<int>(_geometery["-w"]);
-    int h = std::get<int>(_geometery["-h"]);
+    int x = std::get<int>(_sem_analizer.get_geometery()["-x"]);
+    int y = std::get<int>(_sem_analizer.get_geometery()["-y"]);
+    int w = std::get<int>(_sem_analizer.get_geometery()["-w"]);
+    int h = std::get<int>(_sem_analizer.get_geometery()["-h"]);
 
-    auto item = std::make_shared<model::Item>(x, y, w, h, _atributes);
-    auto add_action = std::make_shared<core::AddItemAction>(item, std::get<int>(_atributes["-i"]));
+    auto item = std::make_shared<model::Item>(x, y, w, h, _sem_analizer.get_atributes());
+    auto add_action = std::make_shared<core::AddItemAction>(item, std::get<int>(_sem_analizer.get_atributes()["-i"]));
     core::Controller::instance()->get_editor()->process_action(add_action);
 };
 

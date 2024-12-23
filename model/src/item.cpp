@@ -1,4 +1,5 @@
 #include "item.hpp"
+#include "type.hpp"
 
 using namespace model;
 
@@ -31,26 +32,23 @@ void Geometry::setGeometry(int x, int y, int w, int h)
     _w = w;
     _h = h;
 }
-
-RGB::RGB(int r, int g, int b) : _r(r), _g(g), _b(b)
-{};
  
-Item::Item(int x, int y, int w, int h, const Atributes& atributes) : _geometry(x, y, w, h), _atributes(atributes), _id(s_id)
+Item::Item(int x, int y, int w, int h, const cli::Atributes& atributes) : _geometry(x, y, w, h), _atributes(atributes), _id(s_id)
 {
     s_id++;
 };
 
 Geometry Item::get_geometery() const { return _geometry;};
 
-const Atributes& Item::get_atributes() const { return _atributes;};
+const cli::Atributes& Item::get_atributes() const { return _atributes;};
 
-Atributes& Item::get_atributes() { return _atributes;};
+cli::Atributes& Item::get_atributes() { return _atributes;};
 
 void Item::set_geometer(Geometry other)
 {
     _geometry = other;
 };
-void Item::set_atributes(const Atributes& other)
+void Item::set_atributes(const cli::Atributes& other)
 {
     _atributes = other;
 };

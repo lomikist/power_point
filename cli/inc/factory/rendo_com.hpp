@@ -7,11 +7,13 @@
 
 using namespace cli;
 
-class RendoCom : public ICommand, public RendoSem
+class RendoCom : public ICommand
 {
 public:
     RendoCom(const CommandInfo& com);
     void execute() override;
+    
+    RendoSem _sem_analizer;
 };
 #endif // !RENDO_COM
 

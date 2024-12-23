@@ -7,12 +7,14 @@
 
 namespace cli 
 {
-class RemoveSlideCom : public ICommand, public RemoveSlideSem 
+class RemoveSlideCom : public ICommand  
 {
 public:
     RemoveSlideCom(const CommandInfo& com);
     ~RemoveSlideCom() = default;
     void execute() override; 
+
+    RemoveSlideSem _sem_analizer;
 };
 }
 #endif // !REMOVE_SLIDE_COM_HPP

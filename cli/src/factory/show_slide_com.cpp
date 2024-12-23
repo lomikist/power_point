@@ -15,19 +15,19 @@
 using namespace cli;
 
 ShowSlideCom::ShowSlideCom(const CommandInfo& com) :
-                ShowSlideSem()
+                _sem_analizer()
 { 
-    process_args(com._arguments);
+    _sem_analizer.process_args(com._arguments);
 };
 
 void ShowSlideCom::execute()
 {
-    if (_args.find("-i") == _args.end())
+    if (_sem_analizer.get_args().find("-i") == _sem_analizer.get_args().end())
         std::runtime_error("CLI: enter valid index for slide.");
 
-    int index = std::get<int>(_args["-i"]);
-    std::string type = (_args.find("-t") != _args.end()) ? std::get<std::string>(_args["-t"]) : "cmd";
-    std::string path = (_args.find("-p") != _args.end()) ? std::get<std::string>(_args["-p"]) : "../out.txt";
+    int index = std::get<int>(_sem_analizer.get_args()["-i"]);
+    std::string type = (_sem_analizer.get_args().find("-t") != _sem_analizer.get_args().end()) ? std::get<std::string>(_sem_analizer.get_args()["-t"]) : "cmd";
+    std::string path = (_sem_analizer.get_args().find("-p") != _sem_analizer.get_args().end()) ? std::get<std::string>(_sem_analizer.get_args()["-p"]) : "../out.txt";
 
     
     if (type == "cmd")

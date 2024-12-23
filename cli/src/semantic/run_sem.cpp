@@ -12,3 +12,9 @@ void RunSem::add_path(const std::string& opt, const std::string& path)
     _args[opt] = path; 
 };
 
+Atributes RunSem::get_args()
+{
+    return _args;
+}
+
+

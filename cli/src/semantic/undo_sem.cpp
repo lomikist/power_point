@@ -14,3 +14,9 @@ void UndoSem::add_count(const std::string& opt,const std::string& args)
     _args[opt] = count;
 }
 
+Atributes UndoSem::get_args()
+{
+    return _args;
+}
+
+

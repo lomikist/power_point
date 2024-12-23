@@ -7,11 +7,12 @@ namespace cli
 {
 class RunSem : public ASemAn
 {
-protected:
+public:
     RunSem();
 
-    std::unordered_map<std::string, Var_SID> _args;
+    Atributes get_args();
 private:
+    Atributes _args;
     void add_path(const std::string& opt, const std::string& path); 
 };
 }

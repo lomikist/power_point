@@ -12,7 +12,7 @@ public:
     ExitCom(const CommandInfo& com);
     void execute() override;
 private:
-    std::unordered_map<std::string, Var_SID> _args;
+    Atributes _args;
 };
 #endif // !EXIT_COM
 

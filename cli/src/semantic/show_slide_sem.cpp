@@ -26,4 +26,9 @@ void ShowSlideSem::add_path(const std::string& opt,const std::string& arg)
     _args[opt] = arg;
 }
 
+Atributes ShowSlideSem::get_args()
+{
+    return _args;
+}
+
 

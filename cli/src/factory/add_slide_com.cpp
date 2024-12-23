@@ -11,18 +11,18 @@
 using namespace cli;
 
 AddSlideCom::AddSlideCom(const CommandInfo& com) :
-             AddSlideSem()
+            _sem_analizer()
 {
-    process_args(com._arguments);
+    _sem_analizer.process_args(com._arguments);
 };
 
 void AddSlideCom::execute()
 {
     int index;
-    std::string name = std::get<std::string>(_args["-n"]);
+    std::string name = std::get<std::string>(_sem_analizer.get_args()["-n"]);
 
-    if (_args.find("-i") != _args.end())
-        index = std::get<int>(_args["-i"]);
+    if (_sem_analizer.get_args().find("-i") != _sem_analizer.get_args().end())
+        index = std::get<int>(_sem_analizer.get_args()["-i"]);
     else 
         index = -1;
 

@@ -7,12 +7,14 @@
 
 namespace cli 
 {
-class RemoveItemCom : public ICommand, public RemoveItemSem
+class RemoveItemCom : public ICommand
 {
 public:
     RemoveItemCom(const CommandInfo& com);
     ~RemoveItemCom() = default;
     void execute() override; 
+    
+    RemoveItemSem _sem_analizer;
 };
 }
 #endif // !REMOVE_ITEM_COM_HPP

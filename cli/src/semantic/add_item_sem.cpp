@@ -17,6 +17,16 @@ AddItemSem::AddItemSem()
     _options["-content"] = [this](const std::string& option, const std::string& value){add_content(option, value);};
 };
 
+cli::Atributes AddItemSem::get_atributes()
+{
+    return _atributes; 
+} 
+
+cli::Atributes AddItemSem::get_geometery()
+{
+    return _geometery; 
+} 
+
 void AddItemSem::add_x(const std::string& opt, const std::string& value)
 {
     int x = Parser::str_to_int(value);
@@ -62,7 +72,7 @@ void AddItemSem::add_color(const std::string& opt, const std::string& arg)
         int r = Parser::str_to_int(str_colors[0]);
         int b = Parser::str_to_int(str_colors[1]);
         int g = Parser::str_to_int(str_colors[2]);
-        model::RGB color(r, b, g);
+        cli::RGB color(r, b, g);
         _atributes[opt] = color;
     }
 };
@@ -84,7 +94,7 @@ void AddItemSem::add_radius(const std::string& opt, const std::string& args)
     _atributes[opt] = radius;
 };
 
-bool AddItemSem::if_not_contain(std::vector<std::string> valid_options, model::Atributes current_options)
+bool AddItemSem::if_not_contain(std::vector<std::string> valid_options, cli::Atributes current_options)
 {
     if (
         std::any_of(

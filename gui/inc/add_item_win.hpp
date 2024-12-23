@@ -15,7 +15,7 @@
 namespace gui 
 {
 
-class AddItemWin : public QMainWindow , cli::AddItemSem
+class AddItemWin : public QMainWindow
 {
 Q_OBJECT
 public:
@@ -24,7 +24,8 @@ private:
     void setup_layout();
     void setup_widgets();
     void shape_item(); 
-
+    
+    cli::AddItemSem _sem_analizer;
     QHBoxLayout*    _atribute_layout;  
     QHBoxLayout*    _geometery_layout;  
     QVBoxLayout*    _main_layout;  

@@ -6,17 +6,17 @@
 using namespace cli;
 
 UndoCom::UndoCom(const CommandInfo& com) : 
-         UndoSem()
+         _sem_analizer()
 {
-    process_args(com._arguments);
+    _sem_analizer.process_args(com._arguments);
 }
 
 void UndoCom::execute()
 {
     int count;
-    if (_args.find("-n") != _args.end())
+    if (_sem_analizer.get_args().find("-n") != _sem_analizer.get_args().end())
     {
-        count = std::get<int>(_args["-n"]);
+        count = std::get<int>(_sem_analizer.get_args()["-n"]);
     }
     else 
         count = 1;

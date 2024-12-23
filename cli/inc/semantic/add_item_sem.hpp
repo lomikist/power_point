@@ -8,14 +8,15 @@ namespace cli
 class AddItemSem : public ASemAn
 {
 public:
-    static bool if_not_contain(std::vector<std::string> valid_options, model::Atributes current_options);
-
-protected:
+    static bool if_not_contain(std::vector<std::string> valid_options, Atributes current_options);
     AddItemSem();
+    Atributes get_atributes(); 
+    Atributes get_geometery(); 
 
-    model::Atributes    _atributes;
-    model::Atributes    _geometery;
 private:
+    Atributes _atributes;
+    Atributes _geometery;
+
     void add_radius(const std::string& option, const std::string& args);
     void add_type(const std::string& option, const std::string& args);
     void add_y(const std::string& option, const std::string& args);

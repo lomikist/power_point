@@ -11,13 +11,13 @@ public:
     OstreamWrapper(std::ostream& device);
     virtual ~OstreamWrapper() = default;
     virtual void draw_line(int x, int y, int w, int h,
-                           model::RGB brush_color, model::RGB line_color) override;
+                           cli::RGB brush_color, cli::RGB line_color) override;
     virtual void draw_elipse(int x, int y, int w, int h,
-                           model::RGB brush_color, model::RGB line_color) override;
+                           cli::RGB brush_color, cli::RGB line_color) override;
     virtual void draw_rect(int x, int y, int w, int h, 
-                           model::RGB brush_color, model::RGB line_color) override;
+                           cli::RGB brush_color, cli::RGB line_color) override;
     virtual void draw_text(int x, int y, int w, int h,
-                           model::RGB brush_color, model::RGB line_color,
+                           cli::RGB brush_color, cli::RGB line_color,
                            const std::string& content) override;private:
     std::ostream* _device;
 };

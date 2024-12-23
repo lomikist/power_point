@@ -1,24 +1,10 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include <iostream>
-#include <memory>
-#include <unordered_map>
-#include <variant>
+#include "type.hpp"
 
 namespace model
 {
-
-struct RGB
-{
-    RGB(int r, int g, int b);
-    int _r;
-    int _g;
-    int _b;
-}; 
-
-using Var_SID = std::variant<std::string, int, double, RGB>;
-using Atributes = std::unordered_map<std::string, Var_SID>;
 
 struct Geometry
 {
@@ -40,17 +26,17 @@ private:
 class Item
 {
 public:
-    Item(int x, int y, int w, int h, const Atributes& atributes);
+    Item(int x, int y, int w, int h, const cli::Atributes& atributes);
     Geometry get_geometery() const;
-    const Atributes& get_atributes() const;
-    Atributes& get_atributes();
+    const cli::Atributes& get_atributes() const;
+    cli::Atributes& get_atributes();
     void set_geometer(Geometry);
-    void set_atributes(const Atributes& other);
+    void set_atributes(const cli::Atributes& other);
     int get_id();
 private:
     inline static int s_id = 0;
     Geometry _geometry;
-    Atributes _atributes;
+    cli::Atributes _atributes;
     int _id;
 };
 

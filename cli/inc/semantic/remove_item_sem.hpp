@@ -7,11 +7,13 @@ namespace cli
 {
 class RemoveItemSem : public ASemAn
 {
-protected:
+public:
     RemoveItemSem();
-
-    std::unordered_map<std::string, Var_SID> _args;
+    
+    Atributes get_args();
 private:
+    Atributes _args;
+
     void add_id(const std::string& opt, const std::string& args);
     void add_index(const std::string& opt, const std::string& args);
 };

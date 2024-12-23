@@ -18,3 +18,9 @@ void RemoveItemSem::add_index(const std::string& opt, const std::string& args)
     _args[opt] = index;
 };
 
+Atributes RemoveItemSem::get_args()
+{
+    return _args;
+}
+
+

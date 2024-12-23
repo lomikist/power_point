@@ -7,7 +7,7 @@ using namespace core;
 
 void CircleShape::draw(std::shared_ptr<ICanvas> canvas) 
 {
-    model::RGB color = std::get<model::RGB>(_item->get_atributes().at("-c"));
+    cli::RGB color = std::get<cli::RGB>(_item->get_atributes().at("-c"));
     QBrush brush(QColor(color._r, color._g, color._b));
  
     canvas->draw_elipse(_item->get_geometery().getX(), _item->get_geometery().getY(),

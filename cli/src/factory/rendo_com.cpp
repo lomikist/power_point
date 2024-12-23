@@ -4,16 +4,16 @@
 using namespace cli;
 
 RendoCom::RendoCom(const CommandInfo& com):
-          RendoSem()
+          _sem_analizer()
 {
-    process_args(com._arguments);
+    _sem_analizer.process_args(com._arguments);
 };
 
 void RendoCom::execute()
 {
     int count;
-    if (_args.find("-n") != _args.end())
-        count = std::get<int>(_args["-n"]);
+    if (_sem_analizer.get_args().find("-n") != _sem_analizer.get_args().end())
+        count = std::get<int>(_sem_analizer.get_args()["-n"]);
     else 
         count = 1;
     while (count > 0)

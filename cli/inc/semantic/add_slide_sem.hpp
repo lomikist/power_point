@@ -7,11 +7,13 @@ namespace cli
 {
 class AddSlideSem : public ASemAn
 {
-protected:
+public:
     AddSlideSem();
+    Atributes get_args(); 
 
-    std::unordered_map<std::string, Var_SID> _args;
 private:
+    Atributes _args;
+
     void add_title(const std::string& opt, const std::string& args);
     void add_index(const std::string& opt, const std::string& args);
 };

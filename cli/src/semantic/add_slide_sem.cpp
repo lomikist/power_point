@@ -9,6 +9,11 @@ AddSlideSem::AddSlideSem()
     _options["-i"] = [this](const std::string& opt, const std::string& args){ add_index(opt, args); };
 };
 
+Atributes AddSlideSem::get_args()
+{
+    return _args;
+}
+
 void AddSlideSem::add_title(const std::string& opt, const std::string& args)
 {
     _args[opt] = args;

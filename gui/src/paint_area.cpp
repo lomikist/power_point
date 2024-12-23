@@ -57,8 +57,8 @@ void PaintArea::mousePressEvent(QMouseEvent* event)
             {
                 if (item->isChecked() == true)
                 {
-                    model::Atributes atributes;
-                    model::RGB color(12, 123,12);
+                    cli::Atributes atributes;
+                    cli::RGB color(12, 123,12);
 
                     atributes["-t"] = item->property("item_type").toString().toStdString();
                     atributes["-c"] = color;

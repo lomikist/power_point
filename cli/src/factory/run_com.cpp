@@ -11,18 +11,18 @@
 using namespace cli;
 
 RunCom::RunCom(const CommandInfo& com):
-        RunSem()
+        _sem_analizer()
 {
-    process_args(com._arguments);
+    _sem_analizer.process_args(com._arguments);
 }
 
 void RunCom::execute()
 {
-    if (_args.find("-p") == _args.end())
+    if (_sem_analizer.get_args().find("-p") == _sem_analizer.get_args().end())
         throw std::runtime_error("CLI: Enter a valid path with -p");
 
     std::ifstream myfile;
-    myfile.open (std::get<std::string>(_args["-p"]), std::ios::in);
+    myfile.open (std::get<std::string>(_sem_analizer.get_args()["-p"]), std::ios::in);
     if (myfile.is_open())
     {
         while (myfile.good()) 
