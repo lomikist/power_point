@@ -24,8 +24,6 @@ std::shared_ptr<model::Model> Controller::get_model()
     return _model;
 };
 
-Controller* Controller::s_app = nullptr;
-
 Controller::Controller(int &argc, char *argv[]) :
             QApplication(argc, argv)
 {
@@ -44,7 +42,6 @@ Controller::Controller(int &argc, char *argv[]) :
 
     _logger->add_logger(std::make_shared<OsLogger>(&std::cout));
     _logger->add_logger(std::make_shared<GuiLogger>(_gui_controller->get_screen()->get_text_browser()));
-    s_app = this;
 };
 
 std::shared_ptr<core::Editor>   Controller::get_editor()
@@ -61,11 +58,9 @@ std::shared_ptr<core::Logger>   Controller::get_logger()
 };
 
 Controller *Controller::instance(){
-    return s_app;
+    return static_cast<Controller*>(QApplication::instance());
 }
 
 Controller::~Controller()
-{
-};
-
+{};
 

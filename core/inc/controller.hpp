@@ -31,8 +31,6 @@ public:
     std::shared_ptr<core::Vizualizer>   get_vizualizer();
     std::shared_ptr<core::Logger>       get_logger();
 private:
-    static Controller*                  s_app;
-
     std::shared_ptr<gui::GuiController> _gui_controller;
     std::shared_ptr<model::Model>       _model;
     std::unique_ptr<cli::Parser>        _parser;
