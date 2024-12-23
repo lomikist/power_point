@@ -2,7 +2,6 @@
 #define ISHAPE_HPP
 
 #include "icanvas.hpp"
-#include "item.hpp"
 #include <memory>
 
 namespace core

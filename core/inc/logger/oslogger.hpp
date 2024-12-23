@@ -1,7 +1,7 @@
 #ifndef OSLOGGER_HPP
 #define OSLOGGER_HPP 
+
 #include "ilogger.hpp"
-#include <memory>
 #include <ostream>
 
 namespace core

@@ -1,7 +1,5 @@
 #include "remove_slide_com.hpp"
 #include "controller.hpp"
-#include "parser.hpp"
-#include "editor.hpp"
 #include "remove_slide_action.hpp"
 #include <memory>
 

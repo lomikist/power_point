@@ -1,7 +1,7 @@
 #ifndef ICANVAS_HPP
 #define ICANVAS_HPP
 
-#include "item.hpp"
+#include "type.hpp"
 #include <string>
 
 namespace core 

@@ -1,5 +1,4 @@
 #include "add_slide_action.hpp"
-#include <ostream>
 #include "remove_slide_action.hpp"
 
 using namespace core;

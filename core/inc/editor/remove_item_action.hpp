@@ -2,7 +2,6 @@
 #define REMOVEITEM_ACTION_HPP
 
 #include "iaction.hpp"
-#include "slide.hpp"
 #include <memory>
 namespace core 
 {

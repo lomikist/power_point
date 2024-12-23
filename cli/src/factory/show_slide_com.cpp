@@ -1,15 +1,11 @@
 #include "show_slide_com.hpp"
 #include "controller.hpp"
-#include "gui_wrapper.hpp"
 #include "ostream_wrapper.hpp"
-#include "vizualize.hpp"
 #include "icanvas.hpp"
-#include "parser.hpp"
 #include <iostream>
 #include <memory>
 #include <stdexcept>
 #include <string>
-#include <vector>
 #include <fstream>
 
 using namespace cli;

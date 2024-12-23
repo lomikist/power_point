@@ -5,6 +5,7 @@
 #include "iobserver.hpp"
 #include "view.hpp"
 #include <memory>
+
 namespace gui 
 {
 

@@ -1,6 +1,5 @@
 #include "oslogger.hpp"
 #include <iostream>
-#include <memory>
 #include <ostream>
 
 using namespace core;

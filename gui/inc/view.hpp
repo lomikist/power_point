@@ -2,8 +2,6 @@
 #define VIEW_HPP
 
 #include "qboxlayout.h"
-#include "qmainwindow.h"
-#include "qpushbutton.h"
 #include "qwidget.h"
 #include <QGraphicsItem>
 #include <QMainWindow>

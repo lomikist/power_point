@@ -1,11 +1,8 @@
 #include "run_com.hpp"
 #include <stdexcept>
 #include <string>
-#include <vector>
 #include <iostream>
 #include "controller.hpp"
-#include "editor.hpp"
-#include "logger.hpp"
 #include <fstream>
 
 using namespace cli;

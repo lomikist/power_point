@@ -1,7 +1,5 @@
 #include "undo_com.hpp"
 #include "controller.hpp"
-#include "editor.hpp"
-#include "parser.hpp"
 
 using namespace cli;
 

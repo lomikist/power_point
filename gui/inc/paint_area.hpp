@@ -7,9 +7,7 @@
 #include "qpoint.h"
 #include "qpushbutton.h"
 #include "qwidget.h"
-#include <iostream>
 #include <memory>
-#include <vector>
 
 namespace gui
 {

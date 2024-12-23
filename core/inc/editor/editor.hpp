@@ -1,13 +1,9 @@
 #ifndef EDITOR_HPP
 #define EDITOR_HPP
 #include "iaction.hpp"
-#include "icommand.hpp"
 #include "iobserver.hpp"
 #include "isubject.hpp"
-#include "item.hpp"
 #include "model.hpp"
-#include "slide.hpp"
-#include <cstddef>
 #include <memory>
 #include <stack>
 

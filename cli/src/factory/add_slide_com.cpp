@@ -1,12 +1,8 @@
 #include "add_slide_com.hpp"
 #include "add_slide_action.hpp"
 #include "controller.hpp"
-#include "editor.hpp"
-#include "parser.hpp"
 #include <memory>
-#include <stdexcept>
 #include <string>
-#include <vector>
 
 using namespace cli;
 

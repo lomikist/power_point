@@ -1,10 +1,7 @@
 #include "remove_item_com.hpp"
 #include "controller.hpp"
-#include "parser.hpp"
-#include "editor.hpp"
 #include "remove_item_action.hpp"
 #include <memory>
-#include <stdexcept>
 
 using namespace cli;
 

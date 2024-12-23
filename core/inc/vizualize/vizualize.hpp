@@ -1,11 +1,9 @@
 #ifndef VIZUALIZER_HPP
 #define VIZUALIZER_HPP
 #include <memory>
-#include <ostream>
 #include "icanvas.hpp"
 #include "model.hpp"
 #include "shape_factory.hpp"
-#include "slide.hpp"
 
 namespace core 
 {

@@ -1,5 +1,6 @@
 #ifndef GUILOGGER_HPP
 #define GUILOGGER_HPP 
+
 #include "ilogger.hpp"
 #include "qtextbrowser.h"
 #include <string>

@@ -58,11 +58,11 @@ void PaintArea::mousePressEvent(QMouseEvent* event)
                 if (item->isChecked() == true)
                 {
                     cli::Atributes atributes;
-                    cli::RGB color(12, 123,12);
+                    cli::RGB color(111,123,111);
 
                     atributes["-t"] = item->property("item_type").toString().toStdString();
                     atributes["-c"] = color;
-                    atributes["-content"] = "hello darkness";
+                    atributes["-content"] = "Default text.";
                     atributes["-i"] = 0; // change to current slide 
 
                     _new_item = std::make_shared<model::Item>(_press_pos.x(), _press_pos.y(),
@@ -108,6 +108,7 @@ void PaintArea::mouseMoveEvent(QMouseEvent *event)
                                      relateive_pos.y() - _press_pos.y());
             _new_item->set_geometer(geometry);
             auto shape = createor.create_shape(std::get<std::string>(_new_item->get_atributes().at("-t")), *_new_item);
+            _image->fill(Qt::white);
             shape->draw(canvas);
         }
         update();

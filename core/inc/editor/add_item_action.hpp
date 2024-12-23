@@ -5,6 +5,7 @@
 #include "model.hpp"
 #include "slide.hpp"
 #include <memory>
+
 namespace core 
 {
 class AddItemAction : public Iaction

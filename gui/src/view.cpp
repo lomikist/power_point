@@ -15,8 +15,6 @@
 #include "add_item_com.hpp"
 #include "add_item_win.hpp"
 #include "controller.hpp"
-#include "editor.hpp"
-#include "logger.hpp"
 #include "qboxlayout.h"
 #include "qlabel.h"
 #include "qlineedit.h"

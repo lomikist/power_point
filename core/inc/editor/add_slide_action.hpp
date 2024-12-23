@@ -3,7 +3,6 @@
 
 #include "iaction.hpp"
 #include "model.hpp"
-#include "slide.hpp"
 #include <memory>
 namespace core 
 {
