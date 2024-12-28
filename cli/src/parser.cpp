@@ -2,6 +2,7 @@
 #include "add_slide_com.hpp"
 #include "add_item_com.hpp"
 #include "exit_com.hpp"
+#include "remove_item_com.hpp"
 #include "remove_slide_com.hpp"
 #include "rendo_com.hpp"
 #include "type.hpp"
@@ -41,6 +42,9 @@ void Parser::command_init()
     });
     _command_creator.register_func("remove", "<slide>", [](const CommandInfo& com){
         return std::make_shared<RemoveSlideCom>(com);
+    });
+    _command_creator.register_func("remove", "<shape>", [](const CommandInfo& com){
+        return std::make_shared<RemoveItemCom>(com);
     });
     _command_creator.register_func("run", "", [](const CommandInfo& com){
         return std::make_shared<RunCom>(com);
